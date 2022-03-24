@@ -1,0 +1,91 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+.checkbox {
+  vertical-align: text-bottom;
+ 
+}
+
+h1 {
+  margin: 32px 0;
+  font-size: 24px;
+  padding-top: 7%;
+}
+
+.complete {
+  text-decoration: line-through;
+  opacity: 0.4;
+}
+
+.todo-form {
+  margin-bottom: 32px;
+}
+
+.todo-input {
+  padding: 14px 32px 14px 16px;
+  border-radius: 4px 0 0 4px;
+  border: 2px solid black;
+  outline: none;
+  width: 320px;
+  background: transparent;
+}
+
+.todo-btn {
+  padding: 16px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  outline: none;
+  color: darkgray;
+  text-transform: capitalize;
+  margin-top: 10%;
+  margin-left: 50%;
+}
+
+.logout-btn {
+  padding: 16px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  outline: none;
+  text-transform: capitalize;
+  margin-left: 50%;
+}
+
+.todo-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.todo-row {
+  top: -150px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4px auto;
+  background: lightgray;
+  padding: 16px;
+  border-radius: 5px;
+  width: 25%;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.delete-icon {
+  margin-right: 5px;
+  color: #fff;
+}
+
+.edit-icon {
+  color: #fff;
+}

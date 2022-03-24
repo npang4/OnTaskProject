@@ -1,0 +1,21 @@
+.mydes {
+    background-color: rgb(236, 233, 222);
+  }
+  
+  .img {
+    padding-top: 30px;
+    width: 80%;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  
+  .myinfo {
+    padding-left: 20%;
+    padding-right: 20%;
+  }
+  
+  p {
+    padding-top: 5%;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+  }
+  

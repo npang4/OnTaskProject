@@ -1,0 +1,81 @@
+.nelson-about {
+  background-color: #008080;
+  display:grid;
+  justify-items:center;
+  grid-gap: 1em; 
+  height: 100vh;
+}
+
+.header-3 {
+  font-size:1.5em;
+  font-weight:600;
+}
+
+.nelson-about::before {
+  content:'';
+  padding-top:2em;
+}
+
+.nelson-about::after {
+  content:'';
+  padding-bottom:4em;
+}
+
+
+.info {
+  margin-top:3em;
+  display:grid;
+  justify-items:center;
+}
+
+.description {
+  color: black;
+  line-height: 3em;
+  padding:3em;
+  padding-top: 1em;
+  text-align: center;
+}
+
+.about-head {
+  color:black;
+  text-align: center;
+  padding-top:2em;
+}
+
+.nelson-img{
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
+}
+
+@media (min-width:600px) {
+  .button-group {
+      grid-template-columns: 1fr 1fr;
+      grid-gap:5em
+  }
+
+  .about-head {
+      padding-top: 0;
+      text-align: left;
+      padding-left:2em;
+  }
+
+  .description {
+      width:40em;
+      text-align: left;
+  }
+
+  .info {
+      grid-template-columns: 1fr 1fr;
+      width:50em;
+      
+  }
+
+  .pro-tech {
+      grid-template-columns: 1fr 1fr;
+      width:50em;
+      padding:0;
+      
+  }
+  .heading {
+      text-align: left;
+  }
+}
