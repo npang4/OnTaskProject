@@ -4,19 +4,36 @@
   "private": true,
   "proxy": "http://localhost:4000",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.0",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.26.1",
+    "body-parser": "^1.19.2",
+    "bootstrap": "^5.1.3",
+    "express": "^4.17.3",
+    "mongodb": "^4.3.1",
+    "mongoose": "^6.2.8",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
+    "react-redux": "^7.2.6",
+    "react-router-dom": "^6.2.2",
     "react-scripts": "5.0.0",
+    "redux-thunk": "^2.4.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build-frontend": "docker build -f devops/frontend.Dockerfile -t csc648-frontend . && docker tag csc648-frontend chrisquinn/csc648-frontend && docker push chrisquinn/csc648-frontend",
+    "build-gateway": "docker build -f devops/gateway.Dockerfile -t csc648-gate . && docker tag csc648-gate chrisquinn/csc648-gate && docker push chrisquinn/csc648-gate",
+    "build-todo": "docker build -f devops/todo.Dockerfile -t csc648-todo . && docker tag csc648-todo chrisquinn/csc648-todo && docker push chrisquinn/csc648-todo",
+    "build-all-docker": "",
+    "deploy": "docker-compose -f devops/docker-compose.yml pull && docker stack deploy -c devops/docker-compose.yml csc648",
+    "stop": "docker stack remove csc648"
   },
   "eslintConfig": {
     "extends": [

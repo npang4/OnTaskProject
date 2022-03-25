@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   gateway:
-    image: chrisquinn/gate
+    image: chrisquinn/csc648-gate
     ports:
       - "4000:4000"
     deploy:
@@ -11,7 +11,7 @@ services:
     environment:
       - FRONT_END_HOST=http://frontend:3000
   frontend:
-    image : chrisquinn/frontend
+    image : chrisquinn/csc648-frontend
     ports:
       - "3000:3000"
     deploy:
@@ -21,7 +21,7 @@ services:
     networks:
       - webnet
   todo:
-    image : chrisquinn/todo
+    image : chrisquinn/csc648-todo
     ports:
       - "4001:4001"
     deploy:
