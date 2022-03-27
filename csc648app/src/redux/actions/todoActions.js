@@ -7,14 +7,27 @@ const setTodoList = () => async dispatch => {
 
         // call backend
         const res = await axios.get(`/api/todo/getTodoList`)
-        console.log("THIS WORKED")
-        console.log(res.data)
 
-        // call the reducer
+        console.log("SET_TODO_LIST ACTION: " + res.data);
+        
+        // call the reducer to set the todolist
         dispatch({
             type: "SET_TODOLIST",
-            payload: res.data
+            payload: Array.from(res.data)
         })
+        // res.data.forEach(task => {
+        //     dispatch({
+        //         type: "SET_TODOLIST",
+        //         payload: task
+        //     })
+        // })
+     
+
+        // // call the reducer
+        // dispatch({
+        //     type: "SET_TODOLIST",
+        //     payload: res.data
+        // })
     }
     catch (e) {
         console.log("THERE WAS AN ERROR")

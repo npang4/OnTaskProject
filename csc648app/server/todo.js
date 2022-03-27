@@ -6,13 +6,19 @@ const { MongoClient } = require('mongodb');
 const uri = "mongodb+srv://chris:hello123@cluster0.t2ipb.mongodb.net/todo-list?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
+
 // start of the todo backend
 client.connect(err => {
     const db = client.db('todo-list')
 
     const port = process.env.PORT || 4001;
     const express = require('express');
+    const path = require('path');
+
     const app = express();
+    // express is not good for production static files, use cdn, or dedicated file server like ngnix, appache
+    app.use(express.static(path.join(__dirname, '..', 'build')));
+
 
     app.use(express.json());
     // api call to get the todolist

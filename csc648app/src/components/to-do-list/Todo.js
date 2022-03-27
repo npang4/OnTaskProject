@@ -24,11 +24,10 @@ const Todo = ({ todos, completeTodo, removeTodo, updateTodo }) => {
     }
 
     // Displays the tasks with a checkbox and delete icon
-    return todos.map((todo, index) => (
-        <div className={todo.isComplete ? 'todo-row complete' : 'todo-row'} key={index}>
-
-
-            {  todo.title}
+    // return todos.map((todo, index) => (
+        return (
+        <div className={!todos ? 'todo-row complete' : 'todo-row'}>
+            { todos}
             
             {/* <div key={todo.id} onClick={() => completeTodo(todo.id)}>
                 {todo.title}
@@ -38,7 +37,7 @@ const Todo = ({ todos, completeTodo, removeTodo, updateTodo }) => {
                 <RiCloseCircleLine onClick={() => removeTodo(todo.id)} className="delete-icon" />
             </div> */}
         </div>
-    ))
+    )
 
 
 }
