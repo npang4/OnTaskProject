@@ -13,14 +13,16 @@ client.connect(err => {
 
     const port = process.env.PORT || 4001;
     const express = require('express');
-    const path = require('path');
+    // const path = require('path');
+    
 
     const app = express();
     // express is not good for production static files, use cdn, or dedicated file server like ngnix, appache
-    app.use(express.static(path.join(__dirname, '..', 'build')));
+    // app.use(express.static(path.join(__dirname, '..', 'build')));
 
 
     app.use(express.json());
+    
     // api call to get the todolist
     app.get('/api/todo/getTodoList', (req, res) => {
         console.log("BACKEND getTodoList: ")
@@ -36,6 +38,12 @@ client.connect(err => {
             })
         })
     })
+
+    // app.use((req, res, next) => {
+    //     res.status(404).json({ message: "Route not found" });
+    //   })
+
+
     app.listen(port);
     console.log(`Listening on port ${port}`);
 })

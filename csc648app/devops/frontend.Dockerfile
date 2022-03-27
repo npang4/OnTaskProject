@@ -8,8 +8,7 @@ COPY ./package-lock.json /main
 COPY ./server/frontend.js /main/server/frontend.js
 
 RUN npm install
-# RUN npm install react-redux
-# RUN npm install @reduxjs/toolkit
+
 RUN npm run build
 
 EXPOSE 3000

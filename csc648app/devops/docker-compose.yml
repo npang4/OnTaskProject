@@ -10,6 +10,7 @@ services:
       - webnet
     environment:
       - FRONT_END_HOST=http://frontend:3000
+      - TODO_HOST=http://todo:4001
   frontend:
     image : chrisquinn/csc648-frontend
     ports:
