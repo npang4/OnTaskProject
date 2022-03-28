@@ -72,7 +72,7 @@ const TodoList = (props) => {
             {/* if the todolist is null, show loading to prevent mapping through a null       */}
             {/* filter through the search options */}
             {props.todolist == null  ? "LOADING" 
-                : search ? props.todolist.filter(todo => todo.title.includes(search)).map(task => <Todo todos={task.title} />) 
+                : search ? props.todolist.filter(todo => todo.title.includes(search)).map(task => <Todo todos={task.title} key={task._id} />) 
                 : props.todolist.map(task => <Todo todos={task.title} /> )}
         </div>
     )

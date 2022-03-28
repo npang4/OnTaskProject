@@ -58,24 +58,20 @@ client.connect(err => {
     app.get('/api/login/login', (req, res, next) => {
         let email = req.query.email;
         let password = req.query.password;
-        console.log(email);
-        console.log(password);
+        console.log("email: " +  req.query.email);
+        console.log("password: " + password);
         db.collection('user-list')
         .find({email:email})
         .toArray()
         .then((docs) => {
             console.log(docs);
-            res.send("ACCEPT");
-            // if(docs && docs[0].password == password) {
-            //     console.log("SCUCESS")
-            //     return([password === docs[0].password,docs[0].name]);
-            // }
-            // else {
-                
-            //     return Promise.resolve(-1);
-            // }
+            if(docs.length==0) {
+                console.log("FAILURE TO LOG IN")
+                res.send(false);
+            } else {
+                res.send(true);
+            }
         })
-        
         
         // findOne({$or: [{email: email}]})
         // .then(user=> {

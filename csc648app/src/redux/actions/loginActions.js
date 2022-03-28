@@ -30,4 +30,13 @@ const validateLogin = (email, password) => async dispatch => {
     }
 }
 
-export {validateLogin}
+// action for calling logOut 
+// ****************************************************************************
+// This should be later implemented to call AXIOS to log out in back end as well
+const logOut = () => {
+    return {
+        type: "LOG_OUT"
+    }    
+}
+
+export {validateLogin, logOut}

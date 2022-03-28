@@ -1,16 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { logout } from "../../features/userSlice";
 import './List.css';
 
 const List = (props) => {
 
     // Returns a reference to dispatch function from Redux
-    const dispatch = useDispatch();
-    const handleLogout = (e) => {
-        e.preventDefault();
-        dispatch(logout());
-    }
 
     const [input, setInput] = useState('');
 
@@ -40,10 +34,6 @@ const List = (props) => {
     return (
 
         <form className="todo-form" onSubmit={handleSubmit}>
-            <button className="logout-btn" type="submit" onClick={(e) => handleLogout(e)}>
-                Logout
-            </button>
-
             <input type="text" placeholder="Add a task" value={input} name="text" className="todo-input" onChange={handleChange} ref={inputRef}></input>
             <button className="todo-btn">Add task</button>
         </form>

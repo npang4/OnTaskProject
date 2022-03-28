@@ -12,18 +12,18 @@ apiProxy.on('error', (err, req, res) => {
 });
 
 // for todo!! http://3.17.72.162/process.env.TODO_HOST ||  http://localhost:4001
-const todoHost = 'http://3.17.72.162:4001';    
+const todoHost = process.env.TODO_HOST ||  'http://localhost:4001';
 console.log(`todo end proxies to: ${todoHost}`);  
 app.all('/api/todo*', (req, res) => {         
   apiProxy.web(req, res, { target: todoHost });  
 });
 
 // commented for prototype
-// const usersHost = process.env.USERS_HOST || 'http://localhost:4003';    
-// console.log(`login end proxies to: ${usersHost}`);  
-// app.all('/api/login*', (req, res) => {         
-//   apiProxy.web(req, res, { target: usersHost });  
-// });
+const usersHost = process.env.USERS_HOST || 'http://localhost:4003';    
+console.log(`login end proxies to: ${usersHost}`);  
+app.all('/api/login*', (req, res) => {         
+  apiProxy.web(req, res, { target: usersHost });  
+});
 
 // const taskHost = process.env.TASK_HOST || 'http://localhost:4002';    
 // console.log(`task end proxies to: ${taskHost}`);  

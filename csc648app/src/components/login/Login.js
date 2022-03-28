@@ -12,10 +12,13 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        dispatch(validateLogin({
-            email: username,
-            password: password,
-        }));
+
+        console.log("DISPATCH: " + username)
+        console.log("DISPATCH: " + password)
+
+        dispatch(validateLogin(username, password));
+        setUsername("");
+        setPassword("");
     }
     return (
         <div className="container">

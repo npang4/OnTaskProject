@@ -10,10 +10,10 @@ import Michael from './components/Team/michael/michael';
 import Kim from './components/Team/kim/Kim';
 import Login from './components/login/Login';
 import { useSelector } from "react-redux";
-import { selectUser } from "./features/userSlice";
 import TodoList from "./components/to-do-list/TodoList";
 import Navbar from "./components/navbar/Navbar";
 import { connect } from 'react-redux'
+import LandingPage from "./components/LandingPage";
 
 
 
@@ -21,9 +21,7 @@ import { connect } from 'react-redux'
 
   // ^^ IMPORTANT READDDDDDD
 
-function App() {
-
-  const user = useSelector(selectUser);
+function App(props) {
 
   return (
     <div className="App">
@@ -31,7 +29,6 @@ function App() {
       <Navbar />
       
       <Routes>
-
         {/* About Page Route */}
         <Route path="/about" element={<Homepage />} />
 
@@ -43,8 +40,8 @@ function App() {
         <Route path='/michael' element={<Michael />} />
         <Route path='/kim' element={<Kim />} />
 
-        {/* Todolist Route */}
-        <Route path='/' element={<TodoList />} />
+        {/* Landing page Route */}
+        <Route path='/' element={<LandingPage/>} />
         
 
       </Routes>
@@ -56,5 +53,7 @@ function App() {
 }
 
 
-
-export default App;
+const mapStateToProps = (state) => {
+  return { logIn: state.login.loggedIn }
+}
+export default connect(mapStateToProps)(App);
