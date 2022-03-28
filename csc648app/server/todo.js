@@ -11,7 +11,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 client.connect(err => {
     const db = client.db('todo-list')
 
-    const port = process.env.PORT || 4001;
+    // const port = process.env.PORT || 4001;
     const express = require('express');
     // const path = require('path');
     
@@ -44,6 +44,6 @@ client.connect(err => {
     //   })
 
 
-    app.listen(port);
-    console.log(`Listening on port ${port}`);
+    app.listen(4001);
+    console.log(`Listening on port ${4001}`);
 })
