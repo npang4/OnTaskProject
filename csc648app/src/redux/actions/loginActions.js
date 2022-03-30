@@ -8,7 +8,7 @@ const validateLogin = (email, password) => async dispatch => {
     try {
 
         // call backend
-        const res = await axios.get(`/api/login/login?email=${email}&password=${password}`);
+        const res = await axios.get(`/api/login?email=${email}&password=${password}`);
         console.log("LOGIN WORKED");
         
         console.log(res.data)

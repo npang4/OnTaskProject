@@ -9,7 +9,7 @@ const LandingPage = (props) => {
   return (
     <div>
 
-        {/* if loggedx in, show the todolist, if not show the login page */}
+        {/* if logged in, show the todolist, if not show the login page */}
         {props.logIn ? <TodoList /> : <Login/>}
     </div>
   )

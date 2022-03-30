@@ -6,7 +6,7 @@ const setTodoList = () => async dispatch => {
     try {
 
         // call backend
-        const res = await axios.get(`/api/todo/getTodoList`)
+        const res = await axios.get(`/api/getAllTasks`)
 
         console.log("SET_TODO_LIST ACTION: " + res.data);
         
