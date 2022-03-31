@@ -6,12 +6,10 @@ import ProfileIcon from "./profileicon.png";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../redux/actions/loginActions";
 import addIcon from "./addusericon.png";
-import collab from "./collab.js";
-import { useState } from "react";
+import Collab from "./Collab.js";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="nav">
       <div>
@@ -26,14 +24,9 @@ const Navbar = () => {
           <Link to="/about">About</Link>
         </li>
       </ul>
-
       <div className="collabButton">
         {/*On Click, this will generate a lightbox popup*/}
-        <button onClick={() => setIsOpen(true)} className="collab">
-          <img src={addIcon} className="addicon" />
-        </button>
-        {/*Once button is clicked, the collab pop up page will show*/}
-        <collab open={isOpen} onClose={() => setIsOpen(false)}></collab>
+        <Collab />
       </div>
       <div>
         {/* On Click, this will log out the user */}

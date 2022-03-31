@@ -1,12 +1,12 @@
 import React from "react";
+import addIcon from "./addusericon.png";
+import "./collab.css";
 
-function collab({ open, children, onClose }) {
-  if (!open) return null;
+function Collab() {
   return (
-    <div>
-      <button onClick={onClose}>Close Button</button>
-      Hello World
-    </div>
+    <button onClick={alert} className="collab">
+      <img src={addIcon} className="addicon" alt="addicon" />
+    </button>
   );
 }
-export default collab;
+export default Collab;
