@@ -25,20 +25,26 @@ client.connect(err => {
     
     // ************************************************
     // ADD SESSION HERE
-
-
+    const session = require('express-session');
+    const oneDay = 1000 * 60 * 60 * 24;
+    app.use(session({
+        secret: "csc648secretkey",
+        saveUninitialized: true,
+        cookie: {maxAge: oneDay},
+        resave: false
+    }))
 
     // ************************************************
     // START OF THE LOGIN APIS --> RJ PART!
     // ************************************************
 
-    // not sure what this does? 
-    app.get('/api/login/register', (req, res) => {
-        db.collection('user-list').find({}, {projection: {_id: 1, name: 1, email: 1, password: 1}}).toArray(function(err, result) {
-            console.log(result)
-            res.send(result)
-        })
-    })
+    // not sure what this does? -- ignore! was just a test.
+    // app.get('/api/login/register', (req, res) => {
+    //     db.collection('user-list').find({}, {projection: {_id: 1, name: 1, email: 1, password: 1}}).toArray(function(err, result) {
+    //         console.log(result)
+    //         res.send(result)
+    //     })
+    // })
 
     // API call for registering a user 
     // REQUIRED QUERIES: name, email, password
@@ -47,17 +53,16 @@ client.connect(err => {
     app.post('/api/register', (req, res) => {
         bcrypt.hash(req.body.password, 10, function(err, hashedPass) {
             if (err) {
+                console.log("error")
                 res.json({
                     error: err
                 })
             } 
             const user = db.collection('user-list').insertOne({
-                _id: new ObjectId(req.body._id),
                 name: req.body.name,
                 email: req.body.email,
                 password: hashedPass,
-                userid: req.body.userid,
-                friends: req.body.friends
+                userid: Math.floor(Math.random() * 100) + 1,
             });
             user.then(data=>{
                 res.json({message:'successful'})
@@ -79,40 +84,29 @@ client.connect(err => {
         let password = req.query.password;
         console.log("email: " +  req.query.email);
         console.log("password: " + password);
+        var sessions; //var to save session
         db.collection('user-list')
-        .find({email:email})
-        .toArray()
-        .then((docs) => {
-            console.log(docs);
-            if(docs.length==0) {
-                console.log("FAILURE TO LOG IN")
-                res.send(false);
+        .findOne({$or: [{email: email}]})
+        .then((user) => {
+            if (user) {
+                bcrypt.compare(password, user.password, function(err, result) {
+                    if (!result) {
+                        console.log("passwords don't match");
+                        // res.json({message: "password doesn't match"})
+                        res.send(false);
+                    } else {
+                        console.log("LOGIN WORKS");
+                        // res.json({message: "you're logged in!"})
+                        sessions = req.session;
+                        sessions.userid = req.query.email;
+                        console.log(req.session);
+                        res.send(true);
+                    }
+                 })
             } else {
-                res.send(true);
+                console.log(("Not a user"));
             }
         })
-        
-        // findOne({$or: [{email: email}]})
-        // .then(user=> {
-        //     if (user) {
-        //         bcrypt.compare(password, user.password, function(err, result) {
-        //             if (err) {
-        //                 res.json({error: err})
-        //             }
-        //             if (result) {
-        //                 console.log("LOGIN SUCCESS");
-        //                 res.json({message:'login works'})
-        //                 // res.redirect('/')
-        //             } else {
-        //                 res.json({message: 'Password does not match'})
-        //                 // res.redirect('/api/login') //this should be the path to login
-        //             }
-        //         })
-        //     } else {
-        //         console.log(user);
-        //         res.json({message: 'no user found'})
-        //     }
-        // })
     })
 
     // API call for logging out
@@ -121,7 +115,13 @@ client.connect(err => {
     // Backend todo: implement, destory session variable
     app.get('/api/logout',(req,res) => {
         // implement
-        
+        req.session.destroy((err) => {
+            if (err) {
+                console.log("session couldn't be destroyed");
+            } else {
+                console.log("session was destroyed");
+            }
+        })
     })
 
     // ************************************************
@@ -200,3 +200,4 @@ client.connect(err => {
     app.listen(4001);
     console.log(`Listening on port ${4001}`);
 })
+
