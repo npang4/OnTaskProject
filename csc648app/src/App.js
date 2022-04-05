@@ -14,6 +14,7 @@ import TodoList from "./components/to-do-list/TodoList";
 import Navbar from "./components/navbar/Navbar";
 import { connect } from 'react-redux'
 import LandingPage from "./components/LandingPage";
+import WorkIntervals from "./components/work-intervals/work-intervals"
 
 
 
@@ -42,7 +43,9 @@ function App(props) {
 
         {/* Landing page Route */}
         <Route path='/' element={<LandingPage/>} />
-        
+
+        {/* Route for Work-Study Intervals */}
+        <Route path='/work-intervals' element={<WorkIntervals/>}/>
 
       </Routes>
 
