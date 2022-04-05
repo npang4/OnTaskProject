@@ -5,8 +5,7 @@ import OnTask from "./OnTask-Logo.png";
 import ProfileIcon from "./profileicon.png";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../redux/actions/loginActions";
-import addIcon from "./addusericon.png";
-import Collab from "./Collab.js";
+import Collab from "./collab/Collab.js";
 
 const Navbar = () => {
   const dispatch = useDispatch();
