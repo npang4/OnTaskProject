@@ -5,7 +5,6 @@ import OnTask from "./OnTask-Logo.png";
 import ProfileIcon from "./profileicon.png";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../redux/actions/loginActions";
-import Collab from "./collab/Collab.js";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -23,10 +22,6 @@ const Navbar = () => {
           <Link to="/about">About</Link>
         </li>
       </ul>
-      <div className="collabButton">
-        {/*On Click, this will generate a lightbox popup*/}
-        <Collab />
-      </div>
       <div>
         {/* On Click, this will log out the user */}
         <img

@@ -22,20 +22,16 @@ function Collab() {
           content: {
             width: "400px",
             height: "200px",
-            margin: "auto",
+            marginLeft: "auto",
+            marginRight: "auto",
+            marginTop: "auto",
+            marginBottom: "auto",
           },
         }}
       >
         <h2>Share with people and groups</h2>
         <div>
-          <input
-            type="text"
-            placeholder="Add people and groups"
-            onChange={(event) => {
-              event.preventDefault();
-              setSearch(event.target.value);
-            }}
-          />
+          <input type="text" placeholder="Add people and groups" alt="search" />
         </div>
         <div>
           <button onClick={() => setModalIsOpen(false)}>Done</button>
