@@ -98,7 +98,7 @@ client.connect(err => {
                         console.log("LOGIN WORKS");
                         // res.json({message: "you're logged in!"})
                         sessions = req.session;
-                        sessions.userid = req.query.email;
+                        sessions.userid = req.query.userid;
                         console.log(req.session);
                         res.send(true);
                     }
