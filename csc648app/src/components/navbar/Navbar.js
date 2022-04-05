@@ -25,6 +25,11 @@ const Navbar = () => {
           <Link to="/about">About</Link>
         </li>
       </ul>
+      <ul>
+        <li>
+          <Link to="/register">Sign-up</Link>
+        </li>
+      </ul>
       <div>
         
           {/* On Click, this will log out the user */}
