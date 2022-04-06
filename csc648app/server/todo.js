@@ -51,25 +51,29 @@ client.connect(err => {
     // Recieving: Boolean (whether it worked or not) 
     // Backend todo: replace body w/ query, error check to make sure it works, send back a boolean
     app.post('/api/register', (req, res) => {
-        bcrypt.hash(req.body.password, 10, function(err, hashedPass) {
+        bcrypt.hash(req.query.password, 10, function(err, hashedPass) {
             if (err) {
                 console.log("error")
-                res.json({
-                    error: err
-                })
+                // res.json({
+                //     error: err
+                // })
+                res.send(false);
             } 
             const user = db.collection('user-list').insertOne({
-                name: req.body.name,
-                email: req.body.email,
+                name: req.query.name,
+                email: req.query.email,
                 password: hashedPass,
                 userid: Math.floor(Math.random() * 100) + 1,
             });
             user.then(data=>{
-                res.json({message:'successful'})
+                // res.json({message:'successful'})
+                console.log(user);
+                console.log("success");
+                res.send(true);
             })
             .catch(err=>{
-                res.json({message: err}) //send message if data is not saved
-        
+                // res.json({message: err}) //send message if data is not saved
+                console.log("error");
             })
         })
 
