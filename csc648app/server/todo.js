@@ -153,14 +153,61 @@ client.connect(err => {
     // Backend todo: implement
     app.get('/api/getUserTodo', (req,res) => {
         // return ALL todolists belonging to the user, use session variable to query the todolist in mongodb for user id
+        console.log("BACKEND getUserTodoId: ");
+
+        // CHANGE 0 TO SESSION VARIABLE
+        db.collection('user-list').aggregate([{ $match: { "userid": 0 }}]).toArray(function (err, result) {
+            if(result.length > 0) {
+                console.log(result[0].todolistId);
+            
+                // send back the arraylist of ids
+                res.send(result[0].todolistId);
+            } else {
+                res.send(false);
+            }
+        })
     })
 
     // API call for adding person to todolist
-    // REQUIRED QUERIES: email
+    // REQUIRED QUERIES: email, todolistId
     // Recieving: Boolean (Whether it worked or not)
     // Backend todo: implement
-    app.post('/api/addUser',(req,res) => {
+    app.get('/api/addUser',(req,res) => {
         // implement by verifying user input, then adding the id to the todolist
+        console.log("BACKEND addUser: ");
+
+        // confirm user input
+        console.log(req.query.email);
+        console.log(req.query.todolistId);
+        // find the email match to id
+        db.collection('user-list').aggregate([{ $match: { "email": req.query.email }}]).toArray(function (err, result) {
+            // check if email exists is correct
+            if(result.length > 0) {
+                const newState = result[0].todolistId;
+
+                // checking if email is already in the todolist
+                let found = false;
+                newState.forEach((x) => {
+                    if(x == req.query.todolistId) {
+                        found = true
+                    }
+                })
+                if(found) {
+                    console.log("ALREADY FOUND");
+                } else {
+                    newState.push(req.query.todolistId);
+                }
+
+                // add it to the list
+                db.collection('user-list').updateOne({"email": req.query.email},{$set : {todolistId:newState}}).then((response) => {
+                    console.log('Done')
+                })
+                res.send(true);
+            } else {
+                console.log(result);
+                res.send(false);
+            }   
+        })
         
     })
 
