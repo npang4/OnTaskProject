@@ -47,6 +47,7 @@ function App(props) {
         {/* Route for Work-Study Intervals */}
         <Route path='/work-intervals' element={<WorkIntervals/>}/>
 
+        {/* Registration page Route */}
         <Route path="/register" element={<Register/>} />
       </Routes>
 

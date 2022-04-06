@@ -12,11 +12,14 @@ const validateRegister = (name, email, password) => async dispatch => {
         const res = await axios.post(`/api/register?name=${name}&email=${email}&password=${password}`);
         console.log("REGISTER WORKED");
         console.log(res.data);
+        
+        return true;
 
     }
     catch(e){
         console.log("REGISTER ERROR");
         console.log(e);
+       
     }
 
 }

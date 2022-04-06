@@ -1,3 +1,33 @@
-.register-input{
-    width: 15%;
+.sign-up {
+  font-size: 32px;
+
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+}
+
+.registration-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-items: start;
+}
+
+.register-label {
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+}
+
+.register-input {
+  line-height: 30px;
+  box-shadow: 2px 10px 5px lightgray;
+  font-family: "Roboto", sans-serif;
+}
+
+.submit-btn {
+  border: none;
+  width: 75%;
+  padding: 10px;
+  background: #7adfb5;
 }

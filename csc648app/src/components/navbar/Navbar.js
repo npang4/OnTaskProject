@@ -14,8 +14,8 @@ const Navbar = () => {
     <div className="nav">
       <div>
         <Link to="/">
+          {" "}<img src={OnTask} className="logo" />
           {" "}
-          <img src={OnTask} className="logo" />{" "}
         </Link>
       </div>
       <div className="search_bar">

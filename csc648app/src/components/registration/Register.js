@@ -25,25 +25,25 @@ const Register = () => {
 
 
     return (
-        <div>
-            <div className="form">
-                <h1>Registration </h1>
-            </div>
-            <form onSubmit={(e) => handleSubmit(e)}>
-                <label className="label">Name</label>
+        <div className="container">
+            <form className="registration-form" onSubmit={(e) => handleSubmit(e)}>
+
+                <h1 className="sign-up">Sign-up </h1>
+
+                <label className="register-label">Name</label>
                 <input className="register-input" value={name} type="text" onChange={(e) => setName(e.target.value)} />
 
-                <label className="label">Email</label>
+                <label className="register-label">Email</label>
                 <input className="register-input" value={email} type="email" onChange={(e) => setEmail(e.target.value)} />
 
-                <label className="label">Password</label>
+                <label className="register-label">Password</label>
                 <input className="register-input" value={password} type="password" onChange={(e) => setPassword(e.target.value)} />
 
-                <label className="label">Confirm Password</label>
+                <label className="register-label">Confirm Password</label>
                 <input className="register-input" value={confirmPassword} type="password" onChange={(e) => setConfirmPassword(e.target.value)} />
 
-              {/* Password validation: checks if password is min length and matches */}
-                <PasswordCheckList 
+                {/* Password validation: checks if password is min length and matches */}
+                <PasswordCheckList
                     rules={["minLength", "match"]}
                     minLength={8}
                     value={password}
@@ -53,7 +53,6 @@ const Register = () => {
                         match: "Passwords match"
                     }}
                 />
-
                 <button className="submit-btn" type="submit">Submit</button>
             </form>
         </div>
