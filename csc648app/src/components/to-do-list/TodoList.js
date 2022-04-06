@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { setTodoList } from "../../redux/actions/todoActions";
+import Collab from "./collab/Collab.js";
 
 import List from "./List";
 import Todo from "./Todo";
@@ -56,6 +57,11 @@ const TodoList = (props) => {
 
   return (
     <div>
+      {/* collaborative */}
+      <div>
+        <Collab />
+      </div>
+
       <h1> Todo List</h1>
 
       {/* search bar that sets search *local state* */}

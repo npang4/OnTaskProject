@@ -45,7 +45,7 @@ function Collab() {
             alt="search"
             onChange={handleChange}
           />
-          <button onClick={handleAdd}>Search</button>
+          <button onClick={handleAdd}>Add</button>
         </div>
         <div>
           <p>{searchEmail}</p>
