@@ -1,0 +1,12 @@
+.addicon {
+  height: 50px;
+  padding-top: 14px;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+button.collab {
+  text-decoration: none;
+  border: none;
+  background-color: transparent;
+}
