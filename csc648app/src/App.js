@@ -3,6 +3,7 @@ import Chris from "./components/Team/chris/Chris";
 import Rhoanna from "./components/Team/rhoanna/Rhoanna";
 import "./App.css";
 import Homepage from "./components/Team/Homepage";
+import Home from "./components/home/Home";
 import { Routes, Route } from "react-router-dom";
 import Nelson from "./components/Team/nelson/Nelson";
 import Jia from "./components/Team/jia/jia";
@@ -15,7 +16,7 @@ import Navbar from "./components/navbar/Navbar";
 import { connect } from 'react-redux'
 import LandingPage from "./components/LandingPage";
 import WorkIntervals from "./components/work-intervals/work-intervals"
-
+import React,{useState} from "react";
 
 
   // "proxy": "http://localhost:4000",
@@ -27,12 +28,14 @@ function App(props) {
   return (
     <div className="App">
       {/* Add your path to your component here */}
-      <Navbar />
+
+     <Navbar />
       
       <Routes>
         {/* About Page Route */}
         <Route path="/about" element={<Homepage />} />
-
+         {/* Home Page Route */}
+        <Route path="/" element={<Home />} />
         {/* Team Info Routes */}
         <Route path="/chris" element={<Chris />} />
         <Route path="/nelson" element={<Nelson />} />
@@ -42,7 +45,7 @@ function App(props) {
         <Route path='/kim' element={<Kim />} />
 
         {/* Landing page Route */}
-        <Route path='/' element={<LandingPage/>} />
+        <Route path='/login' element={<LandingPage/>} />
 
         {/* Route for Work-Study Intervals */}
         <Route path='/work-intervals' element={<WorkIntervals/>}/>

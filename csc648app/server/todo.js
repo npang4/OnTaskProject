@@ -224,15 +224,63 @@ client.connect(err => {
         // if todolistId is not null, make sure you also add a task for everyone that is included on the todolist => viewers array in db 
         // make sure you include when pushing to the db: date, userid (u get this from session variable), completed (set as false)   
 
+        //if todolistId is not null
+        if(db.collection('tasks').find({todolistId: {$exists: true}})){
+            const post = db.collection('tasks').insertOne({
+                title: req.body.title,
+                complete: req.body.complete,
+                todolistId: req.body.todolistId,
+                date: req.body.date,
+                userId: req.body.userId,
+                priority: req.body.priority
+            });
+            post.then(data=>{
+                res.json(data.insertedId + " is created")
+                console.log(data.insertedId+" data is created")
+            })
+            .catch(err=>{
+                res.json({message: err}) //send message if data is not saved
+        
+            })
+        }
     })
 
     // API call for deleting a task
     // REQUIRED QUERIES: title
     // Recieving: Boolean (Whether it worked or not)
     // Backend todo: implement
-    app.post('/api/deleteTask', (req,res) => {
+    app.get('/api/deleteTask', (req,res) => {
         // delete task by title
+        console.log(req.query.title)
+        db.collection('tasks').aggregate([{ $match: { title: req.query.title }}]).toArray(function (err, result) {
+            console.log(result.length)
+        if(result.length > 0){
+            const deleteTask = db.collection('tasks').deleteOne({"title": req.query.title});
+            deleteTask.then(data=>{
+            console.log(data)
+            console.log("delete task successfully");
+            res.json({message:'successful'})
+        })
+        res.send(true)}
+        else{
+            console.log(result);
+                res.send(false);
+        }
+            // console.log(req.query.title)
+        // const deleteTask = db.collection('tasks').deleteOne({title: req.query.title});
         
+        // deleteTask.then(data=>{
+        //     console.log(data)
+        //     console.log("delete task successfully");
+        //     res.json({message:'successful'})
+            
+        // })
+        // .catch(err=>{
+        //     res.json({message: err}) //send message if data is not saved
+        //     res.send(false);
+    
+        // })
+        })
     })
 
     // API call for adding person to todolist
@@ -242,7 +290,16 @@ client.connect(err => {
     app.post('/api/completeTask', (req,res) => {
         // change complete status of the task!
         // basically just change true or false
-    })
+        db.collection('tasks').updateOne({complete: false}, {$set:{complete: true}})
+        .then(()=>{
+            
+            console.log(" uncompleted task to completed task");
+            res.send(true);
+        }).catch(err=>{
+            console.log(err);
+            res.send(false);
+        });
+    });
 
     app.listen(4001);
     console.log(`Listening on port ${4001}`);
