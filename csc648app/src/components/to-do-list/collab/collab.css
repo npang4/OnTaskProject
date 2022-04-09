@@ -9,4 +9,11 @@ button.collab {
   text-decoration: none;
   border: none;
   background-color: transparent;
+  width: 50px;
 }
+
+.done {
+  position: absolute;
+  right: 50px;
+}
+3

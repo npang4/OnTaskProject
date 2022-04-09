@@ -30,8 +30,8 @@ function Collab() {
         style={{
           overlay: {},
           content: {
-            width: "400px",
-            height: "200px",
+            width: "470px",
+            height: "280px",
             margin: "auto",
           },
         }}
@@ -55,7 +55,7 @@ function Collab() {
           <UserInfo />
         </div>
         {/*exit modal button*/}
-        <div>
+        <div className="done">
           <button onClick={() => setModalIsOpen(false)}>Done</button>
         </div>
       </Modal>
