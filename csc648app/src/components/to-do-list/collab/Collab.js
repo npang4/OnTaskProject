@@ -38,7 +38,7 @@ function Collab() {
       >
         <h2>Share with people and groups</h2>
         {/* email search bar */}
-        <div>
+        <div className="searchEmail">
           <input
             type="text"
             placeholder="Add people and groups"

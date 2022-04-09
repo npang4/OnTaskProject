@@ -11,12 +11,16 @@
 
 .userImage {
   margin: auto;
+  width: 10%;
 }
 
 .userNameAndEmail {
   margin: auto;
+  width: 60%;
+  padding-left: 30px;
 }
 
 .typeOfAccess {
   margin: auto;
+  width: 30%;
 }

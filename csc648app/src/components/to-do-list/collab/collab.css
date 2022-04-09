@@ -12,8 +12,11 @@ button.collab {
   width: 50px;
 }
 
+.searchEmail {
+  padding-left: 10px;
+}
+
 .done {
   position: absolute;
   right: 50px;
 }
-3
