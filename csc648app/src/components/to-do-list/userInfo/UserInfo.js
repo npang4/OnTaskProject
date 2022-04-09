@@ -9,10 +9,10 @@ function UserInfo(props) {
       </div>
       <div className="userNameAndEmail">
         <div className="userName">
-          <h6>Jia Li</h6>
+          <h6>{props.name}</h6>
         </div>
         <div className="userEmail">
-          <h7>jli89@mail.sfsu.edu</h7>
+          <h7>{props.email}</h7>
         </div>
       </div>
       <div className="typeOfAccess">

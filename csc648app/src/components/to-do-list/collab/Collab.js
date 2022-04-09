@@ -3,17 +3,32 @@ import Modal from "react-modal";
 import addIcon from "./addusericon.png";
 import "./collab.css";
 import UserInfo from "../userInfo/UserInfo";
+import email from "../email";
 
 /*to define app element on our Modal import*/
 Modal.setAppElement("#root");
 
 function Collab() {
+  function createUserInfo(userProfile) {
+    return (
+      <UserInfo
+        key={userProfile.id}
+        name={userProfile.name}
+        email={userProfile.email}
+      />
+    );
+  }
   function handleChange(event) {
+    var error = document.getElementById("error");
     console.log(event.target.value);
     setSearchEmail(event.target.value);
+    error.textContent = "";
   }
   function handleAdd(event) {
     console.log("Submitted", searchEmail);
+    var error = document.getElementById("error");
+    error.textContent = "User not found";
+    error.style.color = "red";
   }
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [searchEmail, setSearchEmail] = useState("");
@@ -41,19 +56,15 @@ function Collab() {
         <div className="searchEmail">
           <input
             type="text"
-            placeholder="Add people and groups"
+            placeholder="Enter email"
             alt="search"
             onChange={handleChange}
           />
           <button onClick={handleAdd}>Add</button>
         </div>
-        <div>
-          <p>{searchEmail}</p>
-        </div>
+        <span id="error"></span>
         {/* User Profile */}
-        <div>
-          <UserInfo />
-        </div>
+        <div>{email.map(createUserInfo)}</div>
         {/*exit modal button*/}
         <div className="done">
           <button onClick={() => setModalIsOpen(false)}>Done</button>
