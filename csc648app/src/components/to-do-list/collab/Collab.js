@@ -9,6 +9,9 @@ import email from "../email";
 Modal.setAppElement("#root");
 
 function Collab() {
+  {
+    /*Function for mapping out data from .js file*/
+  }
   function createUserInfo(userProfile) {
     return (
       <UserInfo
@@ -18,11 +21,17 @@ function Collab() {
       />
     );
   }
+  {
+    /* This function stores the email that is input by the user */
+  }
   function handleChange(event) {
     var error = document.getElementById("error");
     console.log(event.target.value);
     setSearchEmail(event.target.value);
     error.textContent = "";
+  }
+  {
+    /*The function handles whether user is added or user is not found */
   }
   function handleAdd(event) {
     console.log("Submitted", searchEmail);
