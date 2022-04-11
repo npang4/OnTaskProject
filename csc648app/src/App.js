@@ -15,6 +15,7 @@ import Navbar from "./components/navbar/Navbar";
 import { connect } from 'react-redux'
 import LandingPage from "./components/LandingPage";
 import WorkIntervals from "./components/work-intervals/work-intervals"
+import MyTimer from "./components/work-intervals/work-test"
 
 
 
@@ -46,6 +47,8 @@ function App(props) {
 
         {/* Route for Work-Study Intervals */}
         <Route path='/work-intervals' element={<WorkIntervals/>}/>
+
+        <Route path='/work-test' element={<MyTimer/>}/>
 
       </Routes>
 
