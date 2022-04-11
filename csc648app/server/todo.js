@@ -277,15 +277,15 @@ client.connect(err => {
     })
 
     // API call for adding person to todolist
-    // REQUIRED QUERIES: title    // can be chaged as id>> id?
+    // REQUIRED QUERIES: title   
     // Recieving: Boolean (Whether it worked or not)
     // Backend todo: implement
     app.post('/api/completeTask', (req,res) => {
         // change complete status of the task!
         // basically just change true or false
-        db.collection('tasks').aggregate([{ $match: { title:req.query.title }}]).toArray(function(err,result){
+        db.collection('tasks').aggregate([{ $match: { id:req.query.id }}]).toArray(function(err,result){
             if(result.length > 0){
-            db.collection('tasks').updateOne({title:req.query.title,complete: false}, {$set:{complete: true}})
+            db.collection('tasks').updateOne({id:req.query.id,complete: false}, {$set:{complete: true}})
             .then(()=>{               
                 console.log(" uncompleted task to completed task");
                 res.send(true);
