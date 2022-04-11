@@ -245,6 +245,18 @@ client.connect(err => {
         }
     })
 
+//test
+app.get('/api/deleteTask/:id', (req,res) => {
+    const id = req.params.id;
+    console.log(id)
+    const deleteTask = db.collection('tasks').findOne({id: req.params.id});
+    deleteTask.then(data=>{
+        console.log(data)
+    })
+});
+
+
+
     // API call for deleting a task
     // REQUIRED QUERIES: title
     // Recieving: Boolean (Whether it worked or not)
@@ -252,7 +264,7 @@ client.connect(err => {
     app.get('/api/deleteTask', (req,res) => {
         // delete task by title
         console.log(req.query.title)
-        db.collection('tasks').aggregate([{ $match: { title: req.query.title }}]).toArray(function (err, result) {
+        db.collection('tasks').aggregate([{ $match: { title:req.query.title }}]).toArray(function (err, result) {
             console.log(result.length)
         if(result.length > 0){
             const deleteTask = db.collection('tasks').deleteOne({"title": req.query.title});
@@ -260,45 +272,36 @@ client.connect(err => {
             console.log(data)
             console.log("delete task successfully");
             res.json({message:'successful'})
-        })
+            
         res.send(true)}
+            )}
         else{
             console.log(result);
                 res.send(false);
         }
-            // console.log(req.query.title)
-        // const deleteTask = db.collection('tasks').deleteOne({title: req.query.title});
-        
-        // deleteTask.then(data=>{
-        //     console.log(data)
-        //     console.log("delete task successfully");
-        //     res.json({message:'successful'})
-            
-        // })
-        // .catch(err=>{
-        //     res.json({message: err}) //send message if data is not saved
-        //     res.send(false);
-    
-        // })
         })
     })
 
     // API call for adding person to todolist
-    // REQUIRED QUERIES: title
+    // REQUIRED QUERIES: title    // can be chaged as id>> id?
     // Recieving: Boolean (Whether it worked or not)
     // Backend todo: implement
     app.post('/api/completeTask', (req,res) => {
         // change complete status of the task!
         // basically just change true or false
-        db.collection('tasks').updateOne({complete: false}, {$set:{complete: true}})
-        .then(()=>{
-            
-            console.log(" uncompleted task to completed task");
-            res.send(true);
-        }).catch(err=>{
-            console.log(err);
-            res.send(false);
-        });
+        db.collection('tasks').aggregate([{ $match: { title:req.query.title }}]).toArray(function(err,result){
+            if(result.length > 0){
+            db.collection('tasks').updateOne({title:req.query.title,complete: false}, {$set:{complete: true}})
+            .then(()=>{               
+                console.log(" uncompleted task to completed task");
+                res.send(true);
+            }).catch(err=>{
+                console.log(err);
+                res.send(false);
+            });
+        }
+        })
+
     });
 
     app.listen(4001);
