@@ -232,10 +232,12 @@ client.connect(err => {
     db.collection('tasks').aggregate([{ $match: { "todolistId": result[0].id }}]).toArray(function (err, result) {
     const post = db.collection('tasks').insertOne({
         title: req.body.title,
+        
         complete: false,
         todolistId: result[0].todolistId,
-        date: req.body.date,
+        
         userId: req.session.userId,
+        date: req.body.date,
         priority: req.body.priority
     });
     post.then(data=>{
@@ -290,6 +292,23 @@ client.connect(err => {
             db.collection('tasks').updateOne({id:req.query.id,complete: false}, {$set:{complete: true}})
             .then(()=>{               
                 console.log(" uncompleted task to completed task");
+                res.send(true);
+            }).catch(err=>{
+                console.log(err);
+                res.send(false);
+            });
+        }
+        })
+
+    });
+    app.post('/api/unCompleteTask', (req,res) => {
+        // change complete status of the task!
+        // basically just change true to false
+        db.collection('tasks').aggregate([{ $match: { id:req.query.id }}]).toArray(function(err,result){
+            if(result.length > 0){
+            db.collection('tasks').updateOne({id:req.query.id,complete: true}, {$set:{complete: false}})
+            .then(()=>{               
+                console.log(" completed task to uncompleted task");
                 res.send(true);
             }).catch(err=>{
                 console.log(err);
