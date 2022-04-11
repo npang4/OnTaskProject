@@ -224,18 +224,18 @@ client.connect(err => {
         // if todolistId is not null, make sure you also add a task for everyone that is included on the todolist => viewers array in db 
         // make sure you include when pushing to the db: date, userid (u get this from session variable), completed (set as false)   
 
-        //if todolistId is not null
 
+//check todolist id
  db.collection('todolist').aggregate([{ $match: { "id":0 }}]).toArray(function (err, result) {
-    console.log(result.length)
+// if todolist id is not null, add task on the todolist
     if(result.length > 0){
     db.collection('tasks').aggregate([{ $match: { "todolistId": result[0].id }}]).toArray(function (err, result) {
     const post = db.collection('tasks').insertOne({
         title: req.body.title,
         complete: false,
-        todolistId: req.body.todolistId,
+        todolistId: result[0].todolistId,
         date: req.body.date,
-        userId: req.body.userId,
+        userId: req.session.userId,
         priority: req.body.priority
     });
     post.then(data=>{
