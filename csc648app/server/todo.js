@@ -226,15 +226,17 @@ client.connect(err => {
 
         //if todolistId is not null
 
- db.collection('tasks').aggregate([{ $match: { todolistId:req.query.todolistId }}]).toArray(function (err, result) {
+ db.collection('todolist').aggregate([{ $match: { "id":0 }}]).toArray(function (err, result) {
+    console.log(result.length)
     if(result.length > 0){
+    db.collection('tasks').aggregate([{ $match: { "todolistId": result[0].id }}]).toArray(function (err, result) {
     const post = db.collection('tasks').insertOne({
-        title: req.query.title,
+        title: req.body.title,
         complete: false,
-        todolistId: req.query.todolistId,
-        date: req.query.date,
-        userId: req.query.userId,
-        priority: req.query.priority
+        todolistId: req.body.todolistId,
+        date: req.body.date,
+        userId: req.body.userId,
+        priority: req.body.priority
     });
     post.then(data=>{
         res.json(data.insertedId + " is created")
@@ -245,10 +247,10 @@ client.connect(err => {
         res.json({message: err}) //send message if data is not saved
         res.send(false);
     }) 
+})
 }
 })
-
-        
+   
     })
 
     // API call for deleting a task
