@@ -225,37 +225,31 @@ client.connect(err => {
         // make sure you include when pushing to the db: date, userid (u get this from session variable), completed (set as false)   
 
         //if todolistId is not null
-        if(db.collection('tasks').find({todolistId: {$exists: true}})){
-            const post = db.collection('tasks').insertOne({
-                title: req.body.title,
-                complete: req.body.complete,
-                todolistId: req.body.todolistId,
-                date: req.body.date,
-                userId: req.body.userId,
-                priority: req.body.priority
-            });
-            post.then(data=>{
-                res.json(data.insertedId + " is created")
-                console.log(data.insertedId+" data is created")
-            })
-            .catch(err=>{
-                res.json({message: err}) //send message if data is not saved
+
+ db.collection('tasks').aggregate([{ $match: { todolistId:req.query.todolistId }}]).toArray(function (err, result) {
+    if(result.length > 0){
+    const post = db.collection('tasks').insertOne({
+        title: req.query.title,
+        complete: false,
+        todolistId: req.query.todolistId,
+        date: req.query.date,
+        userId: req.query.userId,
+        priority: req.query.priority
+    });
+    post.then(data=>{
+        res.json(data.insertedId + " is created")
+        console.log(data.insertedId+" data is created")
+        res.send(true)
+    })
+    .catch(err=>{
+        res.json({message: err}) //send message if data is not saved
+        res.send(false);
+    }) 
+}
+})
+
         
-            })
-        }
     })
-
-//test
-app.get('/api/deleteTask/:id', (req,res) => {
-    const id = req.params.id;
-    console.log(id)
-    const deleteTask = db.collection('tasks').findOne({id: req.params.id});
-    deleteTask.then(data=>{
-        console.log(data)
-    })
-});
-
-
 
     // API call for deleting a task
     // REQUIRED QUERIES: title
