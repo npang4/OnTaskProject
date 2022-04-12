@@ -26,7 +26,6 @@ function Collab() {
   }
   function handleChange(event) {
     var error = document.getElementById("error");
-    console.log(event.target.value);
     setSearchEmail(event.target.value);
     error.textContent = "";
   }
@@ -34,7 +33,6 @@ function Collab() {
     /*The function handles whether user is added or user is not found */
   }
   function handleAdd(event) {
-    console.log("Submitted", searchEmail);
     var error = document.getElementById("error");
     error.textContent = "User not found";
     error.style.color = "red";
