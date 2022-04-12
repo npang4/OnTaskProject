@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import addIcon from "./addusericon.png";
 import "./collab.css";
-import UserInfo from "../userInfo/UserInfo";
-import email from "../email";
+import UserInfo from "./userInfo/UserInfo";
+import email from "./userInfo/email";
 
 /*to define app element on our Modal import*/
 Modal.setAppElement("#root");
