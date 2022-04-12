@@ -67,13 +67,13 @@ const setTodoTitle = () => async dispatch => {
 }
 
 // add a new todolist
-const addTodolist = () => async dispatch => {
+const addTodolist = (text) => async dispatch => {
     console.log("ACTION: RESETTING TO DEFAULT LIST")
     try {
 
         // call backend
-        const res = await axios.post(`/api/addTodolist`)
-
+        const res = await axios.post(`/api/addTodolist?title=${text}`)
+        console.log("TEXT: " + text)
         console.log("ADD TODO ACTION: " + res.data);
         
         // recall all of these 

@@ -187,7 +187,7 @@ client.connect(err => {
         console.log("BACKEND addtodolist: ");
         const id = Math.floor(Math.random() * 100) + 1;
         // adding the todolist
-        db.collection('todolist').insertOne({"id":id,title:"CHANGE THIS","userId":0}).then((result)=>{
+        db.collection('todolist').insertOne({"id":id,title:req.query.title,"userId":0}).then((result)=>{
             // adding the todolist id to the user
             db.collection('user-list').aggregate([{ $match: { "userid": 0 }}]).toArray(function (err, result) {
                 // send back to the frontend
