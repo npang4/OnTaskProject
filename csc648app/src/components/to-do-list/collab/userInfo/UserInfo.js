@@ -8,11 +8,11 @@ function UserInfo(props) {
         <img src={UserPhoto} className="userPhoto" />
       </div>
       <div className="userNameAndEmail">
-        <div className="userName">
-          <h6>{props.name}</h6>
+        <div className="user-name">
+          <h6 className="userName">{props.name}</h6>
         </div>
-        <div className="userEmail">
-          <h7>{props.email}</h7>
+        <div className="user-email">
+          <h7 className="userEmail">{props.email}</h7>
         </div>
       </div>
       <div className="typeOfAccess">

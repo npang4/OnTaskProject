@@ -52,29 +52,38 @@ function Collab() {
         style={{
           overlay: {},
           content: {
-            width: "470px",
+            width: "500px",
             height: "280px",
             margin: "auto",
+            borderRadius: "12px",
           },
         }}
       >
-        <h2>Share with people and groups</h2>
+        <div className="modal-collab-title">
+          <img src={addIcon} className="addicon1" />
+          <h3 className="modal-title">Share with people and groups</h3>
+        </div>
         {/* email search bar */}
         <div className="searchEmail">
           <input
+            className="search-email-box"
             type="text"
             placeholder="Enter email"
             alt="search"
             onChange={handleChange}
           />
-          <button onClick={handleAdd}>Add</button>
+          <button className="submit-email" onClick={handleAdd}>
+            Search
+          </button>
         </div>
-        <span id="error"></span>
+        <span id="error" className="error-msg"></span>
         {/* User Profile */}
         <div>{email.map(createUserInfo)}</div>
         {/*exit modal button*/}
         <div className="done">
-          <button onClick={() => setModalIsOpen(false)}>Done</button>
+          <button onClick={() => setModalIsOpen(false)} className="modal-done">
+            Done
+          </button>
         </div>
       </Modal>
     </div>

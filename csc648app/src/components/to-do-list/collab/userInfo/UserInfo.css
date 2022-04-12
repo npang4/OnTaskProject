@@ -15,12 +15,33 @@
 }
 
 .userNameAndEmail {
-  margin: auto;
   width: 60%;
   padding-left: 30px;
+  margin: auto;
+}
+
+.user-name {
+  padding: none;
+}
+.userName {
+  font-weight: bold;
+  padding: none;
+  margin-bottom: 0;
+}
+
+.user-email {
+  padding: none;
+}
+.userEmail {
+  color: grey;
 }
 
 .typeOfAccess {
   margin: auto;
   width: 30%;
+}
+
+.accessDropDown {
+  border: 1px solid transparent;
+  color: rgb(179, 179, 179);
 }
