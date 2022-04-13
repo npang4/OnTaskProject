@@ -224,18 +224,15 @@ client.connect(err => {
         // if todolistId is not null, make sure you also add a task for everyone that is included on the todolist => viewers array in db 
         // make sure you include when pushing to the db: date, userid (u get this from session variable), completed (set as false)   
 
-
 //check todolist id
  db.collection('todolist').aggregate([{ $match: { "id":0 }}]).toArray(function (err, result) {
 // if todolist id is not null, add task on the todolist
     if(result.length > 0){
     db.collection('tasks').aggregate([{ $match: { "todolistId": result[0].id }}]).toArray(function (err, result) {
     const post = db.collection('tasks').insertOne({
-        title: req.body.title,
-        
+        title: req.body.title,   
         complete: false,
-        todolistId: result[0].todolistId,
-        
+        todolistId: 0,
         userId: req.session.userId,
         date: req.body.date,
         priority: req.body.priority
@@ -243,7 +240,7 @@ client.connect(err => {
     post.then(data=>{
         res.json(data.insertedId + " is created")
         console.log(data.insertedId+" data is created")
-        res.send(true)
+
     })
     .catch(err=>{
         res.json({message: err}) //send message if data is not saved
@@ -269,9 +266,8 @@ client.connect(err => {
             deleteTask.then(data=>{
             console.log(data)
             console.log("delete task successfully");
-            res.json({message:'successful'})
-            
-        res.send(true)}
+            res.json({message:'successful'});
+            }
             )}
         else{
             console.log(result);
@@ -299,7 +295,6 @@ client.connect(err => {
             });
         }
         })
-
     });
     app.post('/api/unCompleteTask', (req,res) => {
         // change complete status of the task!
