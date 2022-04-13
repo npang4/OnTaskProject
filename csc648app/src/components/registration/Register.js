@@ -3,7 +3,6 @@ import PasswordCheckList from "react-password-checklist"
 import { useDispatch } from "react-redux";
 import { validateRegister } from "../../redux/actions/registerActions";
 import { useNavigate } from "react-router-dom";
-import SimpleReactValidator from 'simple-react-validator';
 import './Register.css';
 
 
