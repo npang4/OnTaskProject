@@ -55,7 +55,19 @@
 
 .work-button {
     margin-top: 40px;
-    width: 45%;
+    width: 225px;
+    height: 40px;
+    border-radius: 10px;
+    border-style: none;
+    background-color: #7ADFB5;
+    color: white;
+    font-weight: 900 !important;
+    margin: 10px;
+}
+
+.work-button-2 {
+    margin-top: 40px !important;
+    width: 225px;
     height: 40px;
     border-radius: 10px;
     border-style: none;
@@ -92,22 +104,11 @@
     font-weight: 900 !important;
 }
 
-/* .without_ampm::-webkit-datetime-edit-ampm-field {
-    display: none;
-  }
-  input[type=time]::-webkit-clear-button {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -o-appearance: none;
-    -ms-appearance:none;
-    appearance: none;
-    margin: -10px; 
-} */
-
 .form-inline {
     display: flex;
     flex-flow: row wrap;
     align-items: center;
+    margin-left:50px;
 }
 
 .form-inline select {
@@ -137,4 +138,12 @@
 
 .link:hover {
     color: black;
+}
+
+.question {
+    color: black;
+}
+
+.question:hover {
+    color: black !important;
 }

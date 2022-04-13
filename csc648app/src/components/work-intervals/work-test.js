@@ -2,12 +2,13 @@ import React, {useState} from 'react';
 import { useTimer } from 'react-timer-hook';
 import './work-intervals.css'
 
-function MyTimer({ expiryTimestamp }) {
+function DraftTimer({ expiryTimestamp }) {
 
     const [workMinutes, setWorkMinutes] = useState("");
     const [workSeconds, setWorkSeconds] = useState("");
     const [breakMinutes, setBreakMinutes] = useState("");
     const [breakSeconds, setBreakSeconds] = useState("");
+    const [timerName, setTimerName] = useState(false);
 
     const handleSubmit = (e) => {
         // e.preventDefault();
@@ -26,12 +27,6 @@ function MyTimer({ expiryTimestamp }) {
                 <h1 class="fonts bold timer">${workMin}:${workSec}</h1>
                 <button class="work-button">PAUSE</button>
         </div>`
-
-        return (
-            <div>
-                <h1>hello</h1>
-            </div>
-        )
     }
 
   const {
@@ -48,22 +43,6 @@ function MyTimer({ expiryTimestamp }) {
 
 
   return (
-    // <div style={{textAlign: 'center'}} className="fonts">
-    //   <p className="fonts">Timer Demo</p>
-    //   <div style={{fontSize: '100px'}} className="fonts bold">
-    //     <span>{minutes}</span>:<span>{seconds}</span>
-    //   </div>
-    //   {/* <p>{isRunning ? 'Running' : 'Not running'}</p> */}
-    //   <button onClick={start}>Start</button>
-    //   <button onClick={pause}>Pause</button>
-    //   <button onClick={resume}>Resume</button>
-    //   <button onClick={() => {
-    //     // Restarts to 5 minutes timer
-    //     const time = new Date();
-    //     time.setSeconds(time.getSeconds() + 300);
-    //     restart(time)
-    //   }}>Restart</button>
-    // </div>
     <div>
             <div className="container-title">
                 <h4 className="fonts bold white">Work Interval Timer</h4>
@@ -109,30 +88,29 @@ function MyTimer({ expiryTimestamp }) {
                         <option>45</option>
                     </select>
                 </div>
-                <h2 class="fonts bold bool">WORK TIME</h2>
+                <h2 class="fonts bold bool">{isRunning ? (timerName ? "WORK TIME" : "BREAK TIME") : ""}</h2>
                 <div>
                     <h1 class="fonts bold timer">{minutes}:{seconds}</h1>
                 </div>
+                <a style={{textDecoration: "none"}} className="fonts question"> {isRunning ? "" : (timerName ? "Ready for the next break?" : "Ready to start working?") } </a>
                 <div className="form-inline center">
                     <button className="work-button font" onClick={() => {
-                        let firstRun;
                         let workMin = document.getElementById("work-min").value;
                         let workSec = document.getElementById("work-sec").value;
-                        let breakMin = document.getElementById("break-min").value;
-                        let breakSec = document.getElementById("break-sec").value;
                         const time = new Date();
                         time.setSeconds(time.getSeconds() + (workSec/1) + (workMin * 60));
                         restart(time)
+                        setTimerName(true)
 
                     }}>START WORK</button>
                     <button className="break-button font" onClick={() => {
-                        let firstRun;
+
                         let breakMin = document.getElementById("break-min").value;
                         let breakSec = document.getElementById("break-sec").value;
                         const time = new Date();
                         time.setSeconds(time.getSeconds() + (breakSec/1) + (breakMin * 60));
                         restart(time)
-
+                        setTimerName(false)
                     }}>START BREAK</button>
                 </div>
     
@@ -148,4 +126,4 @@ function MyTimer({ expiryTimestamp }) {
   );
 }
 
-export default MyTimer;
+export default DraftTimer;
