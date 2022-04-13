@@ -13,7 +13,16 @@ const validateRegister = (name, email, password) => async dispatch => {
         console.log("REGISTER WORKED");
         console.log(res.data);
         
-        return true;
+       if(res.data){
+           dispatch({
+               type: "true"
+           })
+       }
+       else{
+           dispatch({
+               type: "false"
+           })
+       }
 
     }
     catch(e){

@@ -7,9 +7,7 @@ import { useDispatch } from "react-redux";
 import { logOut } from "../../redux/actions/loginActions";
 
 const Navbar = () => {
-
   const dispatch = useDispatch();
-
   return (
     <div className="nav">
       <div>
@@ -18,8 +16,7 @@ const Navbar = () => {
           {" "}
         </Link>
       </div>
-      <div className="search_bar">
-      </div>
+      <div className="search_bar"></div>
       <ul>
         <li>
           <Link to="/about">About</Link>
@@ -31,11 +28,14 @@ const Navbar = () => {
         </li>
       </ul>
       <div>
-        
-          {/* On Click, this will log out the user */}
-          <img src={ProfileIcon} className="profileicon" onClick={()=> {
-            dispatch(logOut())
-          }}/>
+        {/* On Click, this will log out the user */}
+        <img
+          src={ProfileIcon}
+          className="profileicon"
+          onClick={() => {
+            dispatch(logOut());
+          }}
+        />
       </div>
     </div>
   );

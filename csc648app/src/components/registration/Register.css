@@ -1,3 +1,16 @@
+.register-container {
+  width: 50% !important;
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: lightgray;
+  align-items: center;
+  margin-top: 10%;
+  
+}
 .sign-up {
   font-size: 32px;
 
@@ -17,6 +30,7 @@
 .register-label {
   font-family: "Roboto", sans-serif;
   font-weight: bold;
+  padding-top: 15px;
 }
 
 .register-input {
