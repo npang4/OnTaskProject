@@ -15,7 +15,8 @@ const taskReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state, title: newState
             };
-        case "deleteid": 
+            //change deleteid to deleteTitle
+        case "deleteTitle": 
         newState = action.payload;
         return{
             ...state, items: newState

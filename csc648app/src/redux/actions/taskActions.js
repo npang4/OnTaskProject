@@ -7,8 +7,8 @@ const setTask = (title/*, complete, _id, date,priority, todolistId*/) => async d
     console.log (title)
     try {
 
-        // call backend
-        const res = await axios.get(`/api/getTasks/add?title=${title}`)
+        // call backend     -> note that ?title=${title} means query parameters
+        const res = await axios.get(`/api/addTask?title=${title}`)
         console.log("THIS WORKED")
         console.log(res.data)
 
@@ -41,17 +41,18 @@ const setTask = (title/*, complete, _id, date,priority, todolistId*/) => async d
 const deleteTask = () => async dispatch => {
     console.log("ACTION: RESETTING TO DEFAULT LIST")
     try {
-
-        const res = await axios.get(`/api/getTask/delete/:_id`)
+        //CALL Backend when we want to delete task by title
+        const res = await axios.get(`/api/deleteTask?title=${title}`)
         console.log("THIS WORKED")
         console.log(res.data)
 
         console.log(res.data)
         if(res.data){
             dispatch({
-                type: 'deleteid',
+                // I changed delete deleteid to DeleteTitle since we are going to delete task by title
+                // also, please check taskReducer.js
+                type: 'deleteTitle',
                 payload: res.data
-            
             })
         }
         else{
