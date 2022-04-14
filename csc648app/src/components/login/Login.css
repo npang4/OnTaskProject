@@ -16,16 +16,16 @@
     color: black;
     font-size: 50px;
   }
-  label {
+  .login-label {
     color: black;
   }
-  form {
+  .login-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
-  input {
+  .login-input {
     width: 80%;
     margin: 10px;
     padding: 5px;
