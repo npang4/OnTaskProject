@@ -15,8 +15,9 @@ import Navbar from "./components/navbar/Navbar";
 import { connect } from 'react-redux'
 import LandingPage from "./components/LandingPage";
 import WorkIntervals from "./components/work-intervals/work-intervals"
-import MyTimer from "./components/work-intervals/work-test"
-
+import WorkIntervals2 from "./components/work-intervals/WorkTimer"
+import DraftTimer from "./components/work-intervals/work-test"
+import Test from "./components/work-intervals/work-home"
 
 
   // "proxy": "http://localhost:4000",
@@ -46,9 +47,11 @@ function App(props) {
         <Route path='/' element={<LandingPage/>} />
 
         {/* Route for Work-Study Intervals */}
-        <Route path='/work-intervals' element={<WorkIntervals/>}/>
+        {/* <Route path='/work-intervals' element={<WorkIntervals/>}/> */}
 
-        <Route path='/work-test' element={<MyTimer/>}/>
+        <Route path='/work-intervals' element={<DraftTimer/>}/>
+
+        <Route path='/work-test' element={<Test/>}/>
 
       </Routes>
 

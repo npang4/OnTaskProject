@@ -1,46 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import './work-intervals.css';
-import { useTimer } from 'react-timer-hook';
 
-const WorkIntervals = (props) => {
+const WorkIntervals2 = (props) => {
 
     const [workMinutes, setWorkMinutes] = useState("");
     const [workSeconds, setWorkSeconds] = useState("");
     const [breakMinutes, setBreakMinutes] = useState("");
     const [breakSeconds, setBreakSeconds] = useState("");
 
-
-    const {
-          seconds,
-          minutes,
-          hours,
-          days,
-          isRunning,
-          start,
-          pause,
-          resume,
-          restart,
-        } = useTimer({onExpire: () => console.warn('onExpire called') });
-
-
-    
-
-    const handleSubmit = (e) => {
+    const handleSubmit = () => {
         props.onClick();
-        // e.preventDefault();
         let workMin = document.getElementById("work-min").value;
         let workSec = document.getElementById("work-sec").value;
         let breakMin = document.getElementById("break-min").value;
         let breakSec = document.getElementById("break-sec").value;
 
-        console.log(workMin + ":" + workSec);
-        console.log(breakMin + ":" + breakSec);
-        console.log("clicked")
+        const workTime = {
+            workMin: workMin,
+            workSec: workSec,
+            breakMin: breakMin,
+            breakSec: breakSec
+        };
 
-        const time = new Date();
-        time.setSeconds(time.getSeconds() + (workSec/1) + (workMin * 60));
-        restart(time)
 
+        props.onChange(workTime);
     }
 
     return (
@@ -69,15 +52,8 @@ const WorkIntervals = (props) => {
                     <select id="work-sec" className="input-width" type="number" value={workSeconds} onChange={(e) => setWorkSeconds(e.target.value)}>
                         <option>00</option>
                         <option>15</option>
-                        <option>20</option>
-                        <option>25</option>
                         <option>30</option>
-                        <option>35</option>
-                        <option>40</option>
                         <option>45</option>
-                        <option>50</option>
-                        <option>55</option>
-                        <option>60</option>
                     </select>
                 </div>
                 <p className="fonts bold title">Set a break time</p>
@@ -94,18 +70,11 @@ const WorkIntervals = (props) => {
                     <select id="break-sec" className="input-width" type="number" value={breakSeconds} onChange={(e) => setBreakSeconds(e.target.value)}>
                         <option>00</option>
                         <option>15</option>
-                        <option>20</option>
-                        <option>25</option>
                         <option>30</option>
-                        <option>35</option>
-                        <option>40</option>
                         <option>45</option>
-                        <option>50</option>
-                        <option>55</option>
-                        <option>60</option>
                     </select>
                 </div>
-                <button onClick={(e) => handleSubmit(e)}className="work-button">START</button>
+                <button onClick={(e) => handleSubmit(e)}className="work-button-2">START</button>
             </div>
             </div>
         </div>
@@ -113,4 +82,4 @@ const WorkIntervals = (props) => {
     )
 }
 
-export default WorkIntervals;
+export default WorkIntervals2;
