@@ -56,7 +56,7 @@ client.connect(err => {
         .findOne({email: email}).then(user => {
             if (user) {
                 res.send(false);
-                console.log("Has an account made already.")
+                console.log(email + " has an account made already.")
             } else {
                 bcrypt.hash(req.query.password, 10, function(err, hashedPass) {
                     if (err) {

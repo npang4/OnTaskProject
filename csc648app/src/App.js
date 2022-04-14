@@ -3,7 +3,7 @@ import Chris from "./components/Team/chris/Chris";
 import Rhoanna from "./components/Team/rhoanna/Rhoanna";
 import "./App.css";
 import Homepage from "./components/Team/Homepage";
-import Home from "./components/home/Home";
+// import Home from "./components/home/Home";
 import { Routes, Route } from "react-router-dom";
 import Nelson from "./components/Team/nelson/Nelson";
 import Jia from "./components/Team/jia/jia";
@@ -40,7 +40,7 @@ function App(props) {
         {/* About Page Route */}
         <Route path="/about" element={<Homepage />} />
          {/* Home Page Route */}
-        <Route path="/" element={<Home />} />
+        {/* <Route path="/" element={<Home />} /> */}
         {/* Team Info Routes */}
         <Route path="/chris" element={<Chris />} />
         <Route path="/nelson" element={<Nelson />} />
