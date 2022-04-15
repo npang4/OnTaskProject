@@ -55,9 +55,11 @@ function App(props) {
         {/* Route for Work-Study Intervals */}
         {/* <Route path='/work-intervals' element={<WorkIntervals/>}/> */}
 
+
         <Route path='/work-intervals' element={<DraftTimer/>}/>
 
-        <Route path='/work-test' element={<Test/>}/>
+        {/* RJ is still working on this one. This one should be used for final development */}
+        {/* <Route path='/work-test' element={<Test/>}/> */}
 
         {/* Registration page Route */}
         <Route path="/register" element={<Register/>} />
