@@ -18,8 +18,11 @@ const HomeNav = () => {
       <ul>
         <li>
           <Link to="/login">Log in</Link>
+
           {/* needs to be change -> Link to = "registration page" */}
           <Link to="/register">Sign up</Link>
+
+  
         </li>
       </ul>
       

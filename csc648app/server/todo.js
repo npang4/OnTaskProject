@@ -136,14 +136,14 @@ client.connect(err => {
 
         // currently the search is hardcoded to match id 0, but should later be changed get the userid session variable
         // should also just send back ALL tasks matching user id
-        db.collection('todolist').aggregate([{ $match: { "id": 0 }}]).toArray(function (err, result) {
-            // get the todolist id, then search the tasks for the todolist
-            db.collection('tasks').aggregate([{ $match: { "todolistId": result[0].id }}]).toArray(function (err, result) {
+        // db.collection('todolist').aggregate([{ $match: { "id": 0 }}]).toArray(function (err, result) {
+        //     // get the todolist id, then search the tasks for the todolist
+            db.collection('tasks').aggregate([{ $match: { "userId": 0 }}]).toArray(function (err, result) {
                 // send back to the frontend
                 console.log(result)
                 res.send(result)
             })
-        })
+        // })
     })
 
     // API call for getting specific user todolist
@@ -167,6 +167,44 @@ client.connect(err => {
         })
     })
 
+    // get the todolist titles
+    app.get('/api/getTodoTitle', (req,res) => {
+        // return ALL todolists belonging to the user, use session variable to query the todolist in mongodb for user id
+        console.log("BACKEND getUserTodoTitle: ");
+
+        // CHANGE 0 TO SESSION VARIABLE
+        db.collection('todolist').aggregate([{ $match: { "userId": 0 }}]).toArray(function (err, result) {
+            // send back to the frontend
+            console.log(result)
+            res.send(result)
+        })
+    })
+
+    // add a todolist
+    app.post('/api/addTodolist', (req,res) => {
+        // return ALL todolists belonging to the user, use session variable to query the todolist in mongodb for user id
+        console.log("BACKEND addtodolist: ");
+        const id = Math.floor(Math.random() * 100) + 1;
+        // adding the todolist
+        db.collection('todolist').insertOne({"id":id,title:req.query.title,"userId":0}).then((result)=>{
+            // adding the todolist id to the user
+            db.collection('user-list').aggregate([{ $match: { "userid": 0 }}]).toArray(function (err, result) {
+                // send back to the frontend
+                console.log(result[0].todolistId);
+                const temp = result[0].todolistId;
+                temp.push(id);
+                console.log(temp);
+                db.collection('user-list').updateOne( {"userid": 0 },{$set: {todolistId:temp}}).then((result)=> {
+                    // send back to the frontend
+                    
+                    res.send(result)
+                })
+                
+            })
+            
+        })
+    })
+    
     // API call for adding person to todolist
     // REQUIRED QUERIES: email, todolistId
     // Recieving: Boolean (Whether it worked or not)
@@ -223,25 +261,32 @@ client.connect(err => {
         // if todolistId is not null, make sure you also add a task for everyone that is included on the todolist => viewers array in db 
         // make sure you include when pushing to the db: date, userid (u get this from session variable), completed (set as false)   
 
-        //if todolistId is not null
-        if(db.collection('tasks').find({todolistId: {$exists: true}})){
-            const post = db.collection('tasks').insertOne({
-                title: req.body.title,
-                complete: req.body.complete,
-                todolistId: req.body.todolistId,
-                date: req.body.date,
-                userId: req.body.userId,
-                priority: req.body.priority
-            });
-            post.then(data=>{
-                res.json(data.insertedId + " is created")
-                console.log(data.insertedId+" data is created")
-            })
-            .catch(err=>{
-                res.json({message: err}) //send message if data is not saved
-        
-            })
-        }
+//check todolist id
+ db.collection('todolist').aggregate([{ $match: { "id":0 }}]).toArray(function (err, result) {
+// if todolist id is not null, add task on the todolist
+    if(result.length > 0){
+    db.collection('tasks').aggregate([{ $match: { "todolistId": result[0].id }}]).toArray(function (err, result) {
+    const post = db.collection('tasks').insertOne({
+        title: req.body.title,   
+        complete: false,
+        todolistId: 0,
+        userId: req.session.userId,
+        date: req.body.date,
+        priority: req.body.priority
+    });
+    post.then(data=>{
+        res.json(data.insertedId + " is created")
+        console.log(data.insertedId+" data is created")
+
+    })
+    .catch(err=>{
+        res.json({message: err}) //send message if data is not saved
+        res.send(false);
+    }) 
+})
+}
+})
+   
     })
 
     // API call for deleting a task
@@ -251,53 +296,59 @@ client.connect(err => {
     app.get('/api/deleteTask', (req,res) => {
         // delete task by title
         console.log(req.query.title)
-        db.collection('tasks').aggregate([{ $match: { title: req.query.title }}]).toArray(function (err, result) {
+        db.collection('tasks').aggregate([{ $match: { title:req.query.title }}]).toArray(function (err, result) {
             console.log(result.length)
         if(result.length > 0){
             const deleteTask = db.collection('tasks').deleteOne({"title": req.query.title});
             deleteTask.then(data=>{
             console.log(data)
             console.log("delete task successfully");
-            res.json({message:'successful'})
-        })
-        res.send(true)}
+            res.json({message:'successful'});
+            }
+            )}
         else{
             console.log(result);
                 res.send(false);
         }
-            // console.log(req.query.title)
-        // const deleteTask = db.collection('tasks').deleteOne({title: req.query.title});
-        
-        // deleteTask.then(data=>{
-        //     console.log(data)
-        //     console.log("delete task successfully");
-        //     res.json({message:'successful'})
-            
-        // })
-        // .catch(err=>{
-        //     res.json({message: err}) //send message if data is not saved
-        //     res.send(false);
-    
-        // })
         })
     })
 
     // API call for adding person to todolist
-    // REQUIRED QUERIES: title
+    // REQUIRED QUERIES: title   
     // Recieving: Boolean (Whether it worked or not)
     // Backend todo: implement
     app.post('/api/completeTask', (req,res) => {
         // change complete status of the task!
         // basically just change true or false
-        db.collection('tasks').updateOne({complete: false}, {$set:{complete: true}})
-        .then(()=>{
-            
-            console.log(" uncompleted task to completed task");
-            res.send(true);
-        }).catch(err=>{
-            console.log(err);
-            res.send(false);
-        });
+        db.collection('tasks').aggregate([{ $match: { id:req.query.id }}]).toArray(function(err,result){
+            if(result.length > 0){
+            db.collection('tasks').updateOne({id:req.query.id,complete: false}, {$set:{complete: true}})
+            .then(()=>{               
+                console.log(" uncompleted task to completed task");
+                res.send(true);
+            }).catch(err=>{
+                console.log(err);
+                res.send(false);
+            });
+        }
+        })
+    });
+    app.post('/api/unCompleteTask', (req,res) => {
+        // change complete status of the task!
+        // basically just change true to false
+        db.collection('tasks').aggregate([{ $match: { id:req.query.id }}]).toArray(function(err,result){
+            if(result.length > 0){
+            db.collection('tasks').updateOne({id:req.query.id,complete: true}, {$set:{complete: false}})
+            .then(()=>{               
+                console.log(" completed task to uncompleted task");
+                res.send(true);
+            }).catch(err=>{
+                console.log(err);
+                res.send(false);
+            });
+        }
+        })
+
     });
 
     app.listen(4001);

@@ -11,8 +11,10 @@ const Navbar = () => {
   return (
     <div className="nav">
       <div>
+
         <Link to="/">
           {" "}<img src={OnTask} className="logo" />
+
           {" "}
         </Link>
       </div>
@@ -20,6 +22,7 @@ const Navbar = () => {
       <ul>
         <li>
           <Link to="/about">About</Link>
+          
         </li>
       </ul>
       <ul>

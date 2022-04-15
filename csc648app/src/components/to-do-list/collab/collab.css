@@ -5,8 +5,64 @@
   cursor: pointer;
 }
 
+.addicon1 {
+  height: 45px;
+  padding-right: 10px;
+}
+
+.modal-collab-title {
+  padding-bottom: 15px;
+}
+
+.modal-title {
+  display: inline;
+}
+
 button.collab {
   text-decoration: none;
   border: none;
   background-color: transparent;
+  width: 50px;
+}
+
+.searchEmail {
+  margin: auto;
+  padding-left: 10px;
+}
+
+.submit-email {
+  height: 35px;
+  width: 60px;
+  border-radius: 0px 5px 5px 0px;
+  background-color: #7adfb5;
+  color: white;
+  border: none;
+}
+
+.search-email-box {
+  width: 350px;
+  height: 35px;
+  border-radius: 5px 0px 0px 5px;
+  border: none;
+  background-color: rgb(241, 241, 241);
+}
+
+.done {
+  position: absolute;
+  right: 50px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.modal-done {
+  background-color: #7adfb5;
+  border: none;
+  color: white;
+  width: 70px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.error-msg {
+  padding-left: 11px;
 }

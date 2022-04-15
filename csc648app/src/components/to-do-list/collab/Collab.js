@@ -2,18 +2,40 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import addIcon from "./addusericon.png";
 import "./collab.css";
-import UserInfo from "../userInfo/UserInfo";
+import UserInfo from "./userInfo/UserInfo";
+import email from "./userInfo/email";
 
 /*to define app element on our Modal import*/
 Modal.setAppElement("#root");
 
 function Collab() {
+  {
+    /*Function for mapping out data from .js file*/
+  }
+  function createUserInfo(userProfile) {
+    return (
+      <UserInfo
+        key={userProfile.id}
+        name={userProfile.name}
+        email={userProfile.email}
+      />
+    );
+  }
+  {
+    /* This function stores the email that is input by the user */
+  }
   function handleChange(event) {
-    console.log(event.target.value);
+    var error = document.getElementById("error");
     setSearchEmail(event.target.value);
+    error.textContent = "";
+  }
+  {
+    /*The function handles whether user is added or user is not found */
   }
   function handleAdd(event) {
-    console.log("Submitted", searchEmail);
+    var error = document.getElementById("error");
+    error.textContent = "User not found";
+    error.style.color = "red";
   }
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [searchEmail, setSearchEmail] = useState("");
@@ -30,33 +52,38 @@ function Collab() {
         style={{
           overlay: {},
           content: {
-            width: "400px",
-            height: "200px",
+            width: "500px",
+            height: "280px",
             margin: "auto",
+            borderRadius: "12px",
           },
         }}
       >
-        <h2>Share with people and groups</h2>
+        <div className="modal-collab-title">
+          <img src={addIcon} className="addicon1" />
+          <h3 className="modal-title">Share with people and groups</h3>
+        </div>
         {/* email search bar */}
-        <div>
+        <div className="searchEmail">
           <input
+            className="search-email-box"
             type="text"
-            placeholder="Add people and groups"
+            placeholder="Enter email"
             alt="search"
             onChange={handleChange}
           />
-          <button onClick={handleAdd}>Add</button>
+          <button className="submit-email" onClick={handleAdd}>
+            Search
+          </button>
         </div>
-        <div>
-          <p>{searchEmail}</p>
-        </div>
+        <span id="error" className="error-msg"></span>
         {/* User Profile */}
-        <div>
-          <UserInfo />
-        </div>
+        <div>{email.map(createUserInfo)}</div>
         {/*exit modal button*/}
-        <div>
-          <button onClick={() => setModalIsOpen(false)}>Done</button>
+        <div className="done">
+          <button onClick={() => setModalIsOpen(false)} className="modal-done">
+            Done
+          </button>
         </div>
       </Modal>
     </div>
