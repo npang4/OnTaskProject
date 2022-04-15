@@ -137,14 +137,14 @@ client.connect(err => {
 
         // currently the search is hardcoded to match id 0, but should later be changed get the userid session variable
         // should also just send back ALL tasks matching user id
-        db.collection('todolist').aggregate([{ $match: { "id": 0 }}]).toArray(function (err, result) {
-            // get the todolist id, then search the tasks for the todolist
-            db.collection('tasks').aggregate([{ $match: { "todolistId": result[0].id }}]).toArray(function (err, result) {
+        // db.collection('todolist').aggregate([{ $match: { "id": 0 }}]).toArray(function (err, result) {
+        //     // get the todolist id, then search the tasks for the todolist
+            db.collection('tasks').aggregate([{ $match: { "userId": 0 }}]).toArray(function (err, result) {
                 // send back to the frontend
                 console.log(result)
                 res.send(result)
             })
-        })
+        // })
     })
 
     // API call for getting specific user todolist
@@ -168,6 +168,44 @@ client.connect(err => {
         })
     })
 
+    // get the todolist titles
+    app.get('/api/getTodoTitle', (req,res) => {
+        // return ALL todolists belonging to the user, use session variable to query the todolist in mongodb for user id
+        console.log("BACKEND getUserTodoTitle: ");
+
+        // CHANGE 0 TO SESSION VARIABLE
+        db.collection('todolist').aggregate([{ $match: { "userId": 0 }}]).toArray(function (err, result) {
+            // send back to the frontend
+            console.log(result)
+            res.send(result)
+        })
+    })
+
+    // add a todolist
+    app.post('/api/addTodolist', (req,res) => {
+        // return ALL todolists belonging to the user, use session variable to query the todolist in mongodb for user id
+        console.log("BACKEND addtodolist: ");
+        const id = Math.floor(Math.random() * 100) + 1;
+        // adding the todolist
+        db.collection('todolist').insertOne({"id":id,title:req.query.title,"userId":0}).then((result)=>{
+            // adding the todolist id to the user
+            db.collection('user-list').aggregate([{ $match: { "userid": 0 }}]).toArray(function (err, result) {
+                // send back to the frontend
+                console.log(result[0].todolistId);
+                const temp = result[0].todolistId;
+                temp.push(id);
+                console.log(temp);
+                db.collection('user-list').updateOne( {"userid": 0 },{$set: {todolistId:temp}}).then((result)=> {
+                    // send back to the frontend
+                    
+                    res.send(result)
+                })
+                
+            })
+            
+        })
+    })
+    
     // API call for adding person to todolist
     // REQUIRED QUERIES: email, todolistId
     // Recieving: Boolean (Whether it worked or not)

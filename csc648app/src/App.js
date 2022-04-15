@@ -17,6 +17,8 @@ import { connect } from 'react-redux'
 import LandingPage from "./components/LandingPage";
 import WorkIntervals from "./components/work-intervals/work-intervals"
 import React,{useState} from "react";
+import DraftTimer from "./components/work-intervals/work-intervals";
+
 
 
   // "proxy": "http://localhost:4000",
@@ -48,7 +50,10 @@ function App(props) {
         <Route path='/login' element={<LandingPage/>} />
 
         {/* Route for Work-Study Intervals */}
-        <Route path='/work-intervals' element={<WorkIntervals/>}/>
+        {/* <Route path='/work-intervals' element={<WorkIntervals/>}/> */}
+
+        {/* Path for work */}
+        <Route path='/work-intervals' element={<DraftTimer/>}/>
 
       </Routes>
 
