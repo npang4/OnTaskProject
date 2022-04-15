@@ -16,8 +16,10 @@ import Navbar from "./components/navbar/Navbar";
 import { connect } from 'react-redux'
 import LandingPage from "./components/LandingPage";
 import WorkIntervals from "./components/work-intervals/work-intervals"
+import Register from "./components/registration/Register";
 import React,{useState} from "react";
 import DraftTimer from "./components/work-intervals/work-intervals";
+
 
 
 
@@ -55,6 +57,8 @@ function App(props) {
         {/* Path for work */}
         <Route path='/work-intervals' element={<DraftTimer/>}/>
 
+        {/* Registration page Route */}
+        <Route path="/register" element={<Register/>} />
       </Routes>
 
 
