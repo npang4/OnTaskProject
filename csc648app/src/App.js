@@ -19,10 +19,7 @@ import WorkSwitch from "./components/work-intervals/WorkSwitch"
 import DraftTimer from "./components/work-intervals/work-test"
 import Register from "./components/registration/Register";
 import React,{useState} from "react";
-import DraftTimer from "./components/work-intervals/work-intervals";
-
-
-
+import Home from "./components/home/Home"
 
   // "proxy": "http://localhost:4000",
 
@@ -40,7 +37,7 @@ function App(props) {
         {/* About Page Route */}
         <Route path="/about" element={<Homepage />} />
          {/* Home Page Route */}
-        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/" element={<Home />} />
         {/* Team Info Routes */}
         <Route path="/chris" element={<Chris />} />
         <Route path="/nelson" element={<Nelson />} />
