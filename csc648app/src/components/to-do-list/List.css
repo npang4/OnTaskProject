@@ -8,7 +8,6 @@
 
 .checkbox {
   vertical-align: text-bottom;
- 
 }
 
 h1 {
@@ -23,12 +22,13 @@ h1 {
 }
 
 .todo-form {
-  margin-bottom: 32px;
+  margin: auto;
+  flex-direction: row;
 }
 
 .todo-input {
   padding: 14px 32px 14px 16px;
-  border-radius: 4px 0 0 4px;
+  border-radius: 4px;
   border: 2px solid black;
   outline: none;
   width: 320px;
@@ -38,13 +38,17 @@ h1 {
 .todo-btn {
   padding: 16px;
   border: none;
-  border-radius: 25px;
+  border-radius: 0 14px 14px 0;
   cursor: pointer;
   outline: none;
-  color: darkgray;
+  background-color: #7adfb5;
+  color: black;
   text-transform: capitalize;
-  margin-top: 10%;
-  margin-left: 50%;
+}
+
+.todo-btn:hover {
+  color: white;
+  background-color: #8ce7c1;
 }
 
 .logout-btn {
@@ -88,4 +92,16 @@ h1 {
 
 .edit-icon {
   color: #fff;
+}
+
+.add-task-btn1 {
+  padding-top: 10px;
+  padding-right: 20%;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  outline: none;
+  background-color: transparent;
+  color: black;
+  text-transform: capitalize;
 }

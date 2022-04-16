@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { setTodoList } from "../../redux/actions/todoActions";
 import Collab from "./collab/Collab.js";
-
+import greenAddIcon from "./greenAddIcon.png";
 import List from "./List";
 import Todo from "./Todo";
 
@@ -62,6 +62,14 @@ const TodoList = (props) => {
     });
   }, []);
 
+  const [showForm, setShowForm] = useState(false);
+  const addClicked = () => {
+    if (showForm) {
+      setShowForm(false);
+    } else setShowForm(true);
+  };
+  console.log(showForm);
+
   return (
     <div>
       {/* collaborative */}
@@ -96,7 +104,11 @@ const TodoList = (props) => {
         : props.todolist
             .filter((todo) => todo.todolistId == props.id)
             .map((task) => <Todo todos={task.title} />)}
-      <List id={props.id} />
+      <button onClick={addClicked} className="add-task-btn1">
+        <img src={greenAddIcon} />
+        Add Task
+      </button>
+      {showForm ? <List id={props.id} /> : null}
     </div>
   );
 };

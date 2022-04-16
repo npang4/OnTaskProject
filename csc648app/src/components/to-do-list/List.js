@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import "./List.css";
 import { addTask } from "../../redux/actions/taskActions";
+
 const List = (props) => {
   // Returns a reference to dispatch function from Redux
 
@@ -27,18 +28,20 @@ const List = (props) => {
   };
 
   return (
-    <form className="todo-form" onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Add a task"
-        value={input}
-        name="text"
-        className="todo-input"
-        onChange={handleChange}
-        ref={inputRef}
-      ></input>
-      <button className="todo-btn">Add task</button>
-    </form>
+    <div>
+      <form className="todo-form" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Add a task"
+          value={input}
+          name="text"
+          className="todo-input"
+          onChange={handleChange}
+          ref={inputRef}
+        ></input>
+        <button className="todo-btn">Add task</button>
+      </form>
+    </div>
   );
 };
 
