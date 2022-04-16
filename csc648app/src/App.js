@@ -19,6 +19,8 @@ import WorkSwitch from "./components/work-intervals/WorkSwitch"
 import DraftTimer from "./components/work-intervals/work-test"
 import Register from "./components/registration/Register";
 import React,{useState} from "react";
+import DraftTimer from "./components/work-intervals/work-intervals";
+
 
 
 
@@ -50,14 +52,11 @@ function App(props) {
         {/* Landing page Route */}
         <Route path='/login' element={<LandingPage/>} />
 
-        {/* Route for Work-Study Intervals */}
-        {/* <Route path='/work-intervals' element={<WorkIntervals/>}/> */}
+        {/* Work intervals route */}
+        <Route path='/work-intervals' element={<WorkSwitch/>}/>
 
-
-        <Route path='/work-intervals' element={<DraftTimer/>}/>
-
-        {/* RJ is still working on this one. This one should be used for final development */}
-        <Route path='/work-test' element={<WorkSwitch/>}/>
+        {/* Work interval test in case final development doesn't work */}
+        <Route path='/work-test' element={<DraftTimer/>}/>
 
         {/* Registration page Route */}
         <Route path="/register" element={<Register/>} />
