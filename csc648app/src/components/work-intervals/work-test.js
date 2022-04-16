@@ -1,70 +1,15 @@
-<<<<<<< HEAD
-import React, { useState, useEffect } from "react";
-import './work-intervals.css';
-import { useTimer } from 'react-timer-hook';
-
-const WorkIntervals = (props) => {
-=======
 import React, {useState} from 'react';
 import { useTimer } from 'react-timer-hook';
 import './work-intervals.css'
 
+// Test page, this was used purely for plan B
 function DraftTimer({ expiryTimestamp }) {
->>>>>>> master
 
     const [workMinutes, setWorkMinutes] = useState("");
     const [workSeconds, setWorkSeconds] = useState("");
     const [breakMinutes, setBreakMinutes] = useState("");
     const [breakSeconds, setBreakSeconds] = useState("");
-<<<<<<< HEAD
-
-
-    const {
-          seconds,
-          minutes,
-          hours,
-          days,
-          isRunning,
-          start,
-          pause,
-          resume,
-          restart,
-        } = useTimer({onExpire: () => console.warn('onExpire called') });
-
-
-    
-
-    const handleSubmit = (e) => {
-        props.onClick();
-=======
     const [timerName, setTimerName] = useState(false);
-
-    const handleSubmit = (e) => {
->>>>>>> master
-        // e.preventDefault();
-        let workMin = document.getElementById("work-min").value;
-        let workSec = document.getElementById("work-sec").value;
-        let breakMin = document.getElementById("break-min").value;
-        let breakSec = document.getElementById("break-sec").value;
-
-        console.log(workMin + ":" + workSec);
-        console.log(breakMin + ":" + breakSec);
-        console.log("clicked")
-
-<<<<<<< HEAD
-        const time = new Date();
-        time.setSeconds(time.getSeconds() + (workSec/1) + (workMin * 60));
-        restart(time)
-
-=======
-        document.getElementById("change").innerHTML = 
-        `<div>
-                <h2 class="fonts bold">WORK TIME</h2>
-                <h1 class="fonts bold timer">${workMin}:${workSec}</h1>
-                <button class="work-button">PAUSE</button>
-        </div>`
->>>>>>> master
-    }
 
   const {
     seconds,
@@ -86,10 +31,6 @@ function DraftTimer({ expiryTimestamp }) {
             </div>
             <div className="container-work">
             <div id="change">
-<<<<<<< HEAD
-                <p className="fonts bold title">Set a work time</p>
-=======
->>>>>>> master
                 <div className="form-inline">
                 <p className="fonts bold title">Work time</p>
                     <select id="work-min" className="input-width" type="number" value={workMinutes} onChange={(e) => setWorkMinutes(e.target.value)}>
@@ -161,7 +102,6 @@ function DraftTimer({ expiryTimestamp }) {
                 <a style={{textDecoration: "none"}}> | </a>
                 <a className="fonts link" onClick={resume}>CONTINUE</a>
                 </div>
-            </div>
             </div>
             </div>
         </div>

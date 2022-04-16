@@ -152,3 +152,11 @@
 .question:hover {
     color: black !important;
 }
+
+.question2 {
+    color: black;
+}
+
+.question2:hover {
+    color: #46c38f;
+}
