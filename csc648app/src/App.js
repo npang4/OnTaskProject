@@ -15,10 +15,8 @@ import TodoList from "./components/to-do-list/TodoList";
 import Navbar from "./components/navbar/Navbar";
 import { connect } from 'react-redux'
 import LandingPage from "./components/LandingPage";
-import WorkIntervals from "./components/work-intervals/work-intervals"
-import WorkIntervals2 from "./components/work-intervals/WorkTimer"
+import WorkSwitch from "./components/work-intervals/WorkSwitch"
 import DraftTimer from "./components/work-intervals/work-test"
-import Test from "./components/work-intervals/work-home"
 import Register from "./components/registration/Register";
 import React,{useState} from "react";
 
@@ -59,7 +57,7 @@ function App(props) {
         <Route path='/work-intervals' element={<DraftTimer/>}/>
 
         {/* RJ is still working on this one. This one should be used for final development */}
-        {/* <Route path='/work-test' element={<Test/>}/> */}
+        <Route path='/work-test' element={<WorkSwitch/>}/>
 
         {/* Registration page Route */}
         <Route path="/register" element={<Register/>} />

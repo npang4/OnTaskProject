@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import './work-intervals.css';
 
-const WorkIntervals2 = (props) => {
+const SetTimers = (props) => {
 
     const [workMinutes, setWorkMinutes] = useState("");
     const [workSeconds, setWorkSeconds] = useState("");
@@ -82,4 +82,4 @@ const WorkIntervals2 = (props) => {
     )
 }
 
-export default WorkIntervals2;
+export default SetTimers;
