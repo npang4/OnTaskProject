@@ -12,11 +12,12 @@ const TodoList = (props) => {
   // this is for the search for local state!
   const [search, setSearch] = useState([]);
 
-  // this is the title of the list 
-  const [titleOfList,setTitleOfList] = useState("");
+  // this is the title of the list
+  const [titleOfList, setTitleOfList] = useState("");
 
   // Function to add a task
-  const addTodo = (todo) => {
+  {
+    /*const addTodo = (todo) => {
     console.log("CHICKED");
     // Allows user to continue entering text if enter key is pressed in add task field
     if (!todo.text || /^\s*$/.test(todo.text)) {
@@ -30,7 +31,8 @@ const TodoList = (props) => {
     const newTodos = [obj, ...todos];
 
     setTodos(newTodos);
-  };
+  };*/
+  }
 
   // Function to complete to task after clicking on it.
   const completeTodo = (id) => {
@@ -52,13 +54,12 @@ const TodoList = (props) => {
 
   // on page load
   useEffect(() => {
-    
     // this is setting the title
-    props.title.forEach((titleCard)=> {
-      if(props.id == titleCard.id) {
+    props.title.forEach((titleCard) => {
+      if (props.id == titleCard.id) {
         setTitleOfList(titleCard.title);
       }
-    })
+    });
   }, []);
 
   return (
@@ -88,10 +89,14 @@ const TodoList = (props) => {
       {props.todolist == null
         ? "LOADING"
         : search
-        ? props.todolist.filter((todo) => todo.todolistId == props.id)
+        ? props.todolist
+            .filter((todo) => todo.todolistId == props.id)
             .filter((todo) => todo.title.includes(search))
             .map((task) => <Todo todos={task.title} key={task._id} />)
-        : props.todolist.filter((todo) => todo.todolistId == props.id).map((task) => <Todo todos={task.title} />)}
+        : props.todolist
+            .filter((todo) => todo.todolistId == props.id)
+            .map((task) => <Todo todos={task.title} />)}
+      <List id={props.id} />
     </div>
   );
 };
