@@ -35,11 +35,12 @@ const List = (props) => {
           placeholder="Add a task"
           value={input}
           name="text"
+          id="input"
           className="todo-input"
           onChange={handleChange}
           ref={inputRef}
         ></input>
-        <button className="todo-btn">Add task</button>
+        <button id="submit" className="todo-btn">Add task</button>
       </form>
     </div>
   );
