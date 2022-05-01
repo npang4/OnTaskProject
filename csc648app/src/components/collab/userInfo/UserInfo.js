@@ -3,7 +3,7 @@ import UserPhoto from "./userPhoto.png";
 import "./UserInfo.css";
 function UserInfo(props) {
   return (
-    <div className="userInfo">
+    <div className="userInfo" data-testid="user-info">
       <div className="userImage">
         <img src={UserPhoto} className="userPhoto" />
       </div>
