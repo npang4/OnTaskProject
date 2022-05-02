@@ -7,6 +7,7 @@ import { setTodoList,setTodoId, setTodoTitle } from "../redux/actions/todoAction
 import { addTodolist } from '../redux/actions/todoActions';
 import { Button } from 'bootstrap';
 import Modal from "react-modal"
+import UpcomingList from './to-do-list/UpcomingList';
 
 
 
@@ -58,6 +59,8 @@ const TodoTemp = (props) => {
         </Modal>
 
          {/* this is rendering the todolists */}
+
+        <UpcomingList title={props.title} id={1000}/>
         {props.title.length != 0 ? props.id.map((id) => <TodoList title={props.title} id={id} />) : "LOADING" }
     </div>
   )
