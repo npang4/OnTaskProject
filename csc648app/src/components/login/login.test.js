@@ -10,8 +10,6 @@ import user from"@testing-library/user-event";
 import UserInfo from '../to-do-list/collab/userInfo/UserInfo';
 //axios
 jest.mock('axios');
-const mockFn = jest.fn();
-mockFn.mockResolvedValue({email : "test6@mail.com"});
 describe('<Check Login form>', () => {
   it('renders Login', () => {
     const store = createStore(rootReducer, applyMiddleware(thunk));
