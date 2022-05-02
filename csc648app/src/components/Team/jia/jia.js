@@ -46,5 +46,4 @@ function Jia() {
   );
 }
 
-ReactDom.render(<Jia />, document.getElementById("root"));
 export default Jia;

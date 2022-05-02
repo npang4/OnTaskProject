@@ -43,50 +43,26 @@ expect(onSubmit).toHaveBeenCalledTimes(0);
 
 });
 
-test('check login function',async ()=>{
+test('set user name', ()=>{
   const store = createStore(rootReducer, applyMiddleware(thunk));
 const username = "test6@mail.com";
-const password = "test6@mail.com";
-const mockLogin = jest.fn();
 render(<Provider store={store}>
-  <Login mockLogin={mockLogin(username, password)} />
+  <Login />
    </Provider>  );
-  const usernameInput = screen.getByTestId('username');
-  userEvent.type(usernameInput, 'test6@mail.com');
-  const passwordInput = screen.getByLabelText('Password');
-  userEvent.type(passwordInput, 'test6@mail.com');
-  const loginButton = screen.getByRole('button', { name: /^Login$/i });
-  expect(loginButton).not.toBeDisabled();
+  const usernameInput = document.getElementById('user-email');
+  fireEvent.change(usernameInput, {target: {value:username}});
+  expect(document.getElementById("user-email").value).toEqual("test6@mail.com");
 
-  // ACT
-  userEvent.click(loginButton);
-
-  // ASSERT
-  await expect(mockLogin).toHaveBeenCalled();
-  await expect(mockLogin).toHaveBeenCalledTimes(1);
-  await expect(mockLogin).toHaveBeenCalledWith("username", "test6@mail.com");
 });
-// test('submits username and password', async () => {
 
-//   // ARRANGE
-  // const username = "myusername";
-  // const password = "pass1234";
-  // const mockLogin = jest.fn();
+test('set user password', ()=>{
+  const store = createStore(rootReducer, applyMiddleware(thunk));
+const password = "test6@mail.com";
+render(<Provider store={store}>
+  <Login />
+   </Provider>  );
+  const passwordInput = document.getElementById('password');
+  fireEvent.change(passwordInput, {target: {value: password}});
+  expect(document.getElementById("password").value).toEqual("test6@mail.com");
 
-  // render(<Login onSubmit={mockLogin(username, password)} />);
-
-  // const usernameInput = screen.getByRole('Username', { name: /Username/i });
-  // userEvent.type(usernameInput, 'myusername');
-  // const passwordInput = screen.getByLabelText('Password');
-  // userEvent.type(passwordInput, 'pass1234');
-  // const loginButton = screen.getByRole('button', { name: /^Log in$/i });
-  // expect(loginButton).not.toBeDisabled();
-
-  // // ACT
-  // userEvent.click(loginButton);
-
-  // // ASSERT
-  // await expect(mockLogin).toHaveBeenCalled();
-  // await expect(mockLogin).toHaveBeenCalledTimes(1);
-  // await expect(mockLogin).toHaveBeenCalledWith("myusername", "pass1234");
-// });
+});
