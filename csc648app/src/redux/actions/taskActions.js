@@ -1,15 +1,16 @@
 import axios from "axios";
 import { setTodoList } from "./todoActions";
 const addTask =
-  (title, todolistId /*, complete, _id, date,priority, todolistId*/) =>
+  (title, todolistId, date /*, complete, _id ,priority, todolistId*/) =>
   async (dispatch) => {
     console.log("ACTION: ADDING TASK");
     console.log(title);
     console.log(todolistId);
+    console.log(date);
     try {
       // call backend     -> note that ?title=${title} means query parameters
       const res = await axios.post(
-        `/api/addTask?title=${title}&todolistId=${todolistId}`
+        `/api/addTask?title=${title}&todolistId=${todolistId}&date=${date}`
       );
       console.log("THIS WORKED");
       console.log(res.data);

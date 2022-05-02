@@ -8,7 +8,6 @@ import "react-datepicker/dist/react-datepicker.css";
 const List = (props) => {
   //usestate for calendar
   const [selectedDate, setSelectedDate] = useState(null);
-  console.log(selectedDate);
   // Returns a reference to dispatch function from Redux
   const dispatch = useDispatch();
 
@@ -28,6 +27,7 @@ const List = (props) => {
     e.preventDefault();
     dispatch(addTask(input, props.id));
     console.log(props.id);
+    console.log(props.selectedDate);
     setInput("");
   };
 

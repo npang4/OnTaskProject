@@ -297,8 +297,8 @@ client.connect((err) => {
                 complete: false,
                 todolistId: todolistId,
                 userId: 0,
-                date: req.body.date,
-                priority: req.body.priority,
+                date: req.query.date,
+                priority: req.query.priority,
               });
               post
                 .then((data) => {
