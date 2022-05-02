@@ -32,6 +32,7 @@ function Collab() {
   {
     /*The function handles whether user is added or user is not found */
   }
+  const errorMsg = "Hello?";
   function handleAdd(event) {
     var error = document.getElementById("error");
     error.textContent = "User not found";
@@ -42,11 +43,16 @@ function Collab() {
   return (
     <div>
       {/* Collab Button */}
-      <button onClick={() => setModalIsOpen(true)} className="collab">
+      <button
+        data-testid="mainbuttonT"
+        onClick={() => setModalIsOpen(true)}
+        className="collab"
+      >
         <img src={addIcon} className="addicon" alt="addicon" />
       </button>
       {/* Beginning of Modal */}
       <Modal
+        data-testId="modalT"
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}
         style={{
@@ -72,11 +78,15 @@ function Collab() {
             alt="search"
             onChange={handleChange}
           />
-          <button className="submit-email" onClick={handleAdd}>
+          <button
+            className="submit-email"
+            data-testid="buttonT2"
+            onClick={handleAdd}
+          >
             Search
           </button>
         </div>
-        <span id="error" className="error-msg"></span>
+        <div data-testid="validEmailT" id="error" className="error-msg"></div>
         {/* User Profile */}
         <div>{email.map(createUserInfo)}</div>
         {/*exit modal button*/}
