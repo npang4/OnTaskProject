@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { setTodoList } from "../../redux/actions/todoActions";
-import Collab from "../collab/Collab";
+import Collab from "./collab/Collab.js";
 import greenAddIcon from "./greenAddIcon.png";
 import List from "./List";
 import Todo from "./Todo";
-import UpcomingList from "./UpcomingList";
 
-const TodoList = (props) => {
+const UpcomingList = (props) => {
   const [todos, setTodos] = useState([]);
 
   // this is for the search for local state!
@@ -77,9 +76,8 @@ const TodoList = (props) => {
   return (
     <div>
       {/* collaborative */}
-      <div>
-        <Collab />
-      </div>
+
+      
 
       <h1> {titleOfList}</h1>
 
@@ -102,17 +100,17 @@ const TodoList = (props) => {
         ? "LOADING"
         : search
         ? props.todolist
-            .filter((todo) => todo.todolistId == props.id)
+            .filter((todo) => todo.date == props.date)
             .filter((todo) => todo.title.includes(search))
             .map((task) => <Todo todos={task.title} key={task._id} />)
         : props.todolist
             .filter((todo) => todo.todolistId == props.id)
             .map((task) => <Todo todos={task.title} />)}
-      <button onClick={addClicked} className="add-task-btn1">
+      {/* <button onClick={addClicked} className="add-task-btn1">
         <img src={greenAddIcon} />
         Add Task
       </button>
-      {showForm ? <List id={props.id} /> : null}
+      {showForm ? <List id={props.id} /> : null} */}
     </div>
   );
 };
@@ -129,4 +127,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
+export default connect(mapStateToProps, mapDispatchToProps)(UpcomingList);
