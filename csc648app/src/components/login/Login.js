@@ -24,11 +24,19 @@ const Login = () => {
     return (
         <div className="container">
             <h1> Login</h1>
+
             <form onSubmit={(e) => handleSubmit(e)}>
                 <label> Username</label>
                 <input id = "user-email" type="text" name="id" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
                 <label htmlFor="password">Password</label>
                 <input type="password" name="password" id="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+
+            <form className="login-form" onSubmit={(e) => handleSubmit(e)}>
+                <label className="login-label"> Username</label>
+                <input className="login-input" type="text" name="id" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                <label className="login-label" htmlFor="password">Password</label>
+                <input className="login-input" type="password" name="password" id="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+
                 <button className="login-btn" type="submit">
                     Login
                 </button>

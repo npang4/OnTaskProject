@@ -104,6 +104,7 @@ client.connect((err) => {
               sessions.userid = req.query.userid;
               console.log(req.session);
               res.send(true);
+
             }
           });
         } else {
@@ -245,6 +246,149 @@ client.connect((err) => {
               found = true;
             }
           });
+
+            }
+          });
+        } else {
+          console.log("Not a user");
+        }
+      });
+  });
+
+  // API call for logging out
+  // REQUIRED QUERIES: NONE
+  // Recieving: NONE
+  // Backend todo: implement, destory session variable
+  app.get("/api/logout", (req, res) => {
+    // implement
+    req.session.destroy((err) => {
+      if (err) {
+        console.log("session couldn't be destroyed");
+      } else {
+        console.log("session was destroyed");
+      }
+    });
+  });
+
+  // ************************************************
+  // START OF THE TODO APIS --> Chris PART!
+  // ************************************************
+
+  // API call for getting ALL user tasks
+  // REQUIRED QUERIES: NONE (should only be called if user is logged in!!!! or will cause error)
+  // Recieving: Array of ALL tasks that belong to the user
+  // Backend todo: implement usage of session variable!
+  app.get("/api/getAllTasks", (req, res) => {
+    console.log("BACKEND getAllTasks: ");
+
+    // currently the search is hardcoded to match id 0, but should later be changed get the userid session variable
+    // should also just send back ALL tasks matching user id
+    // db.collection('todolist').aggregate([{ $match: { "id": 0 }}]).toArray(function (err, result) {
+    //     // get the todolist id, then search the tasks for the todolist
+    db.collection("tasks")
+      .aggregate([{ $match: { userId: 0 } }])
+      .toArray(function (err, result) {
+        // send back to the frontend
+        console.log(result);
+        res.send(result);
+      });
+    // })
+  });
+
+  // API call for getting specific user todolist
+  // REQUIRED QUERIES: NONE (should only be called if user is logged in!!!! or will cause error)
+  // Recieving: Array of ALL todolist ids belonging to users, (you should then use this to filter through the tasks (from getalltasks) for the specific tasks per todolist)
+  // Backend todo: implement
+  app.get("/api/getUserTodo", (req, res) => {
+    // return ALL todolists belonging to the user, use session variable to query the todolist in mongodb for user id
+    console.log("BACKEND getUserTodoId: ");
+
+    // CHANGE 0 TO SESSION VARIABLE
+    db.collection("user-list")
+      .aggregate([{ $match: { userid: 0 } }])
+      .toArray(function (err, result) {
+        if (result.length > 0) {
+          console.log(result[0].todolistId);
+
+          // send back the arraylist of ids
+          res.send(result[0].todolistId);
+        } else {
+          res.send(false);
+        }
+      });
+  });
+
+  // get the todolist titles
+  app.get("/api/getTodoTitle", (req, res) => {
+    // return ALL todolists belonging to the user, use session variable to query the todolist in mongodb for user id
+    console.log("BACKEND getUserTodoTitle: ");
+
+    // CHANGE 0 TO SESSION VARIABLE
+    db.collection("todolist")
+      .aggregate([{ $match: { userId: 0 } }])
+      .toArray(function (err, result) {
+        // send back to the frontend
+        console.log(result);
+        res.send(result);
+      });
+  });
+
+  // add a todolist
+  app.post("/api/addTodolist", (req, res) => {
+    // return ALL todolists belonging to the user, use session variable to query the todolist in mongodb for user id
+    console.log("BACKEND addtodolist: ");
+    const id = Math.floor(Math.random() * 100) + 1;
+    // adding the todolist
+    db.collection("todolist")
+      .insertOne({ id: id, title: req.query.title, userId: 0 })
+      .then((result) => {
+        // adding the todolist id to the user
+        db.collection("user-list")
+          .aggregate([{ $match: { userid: 0 } }])
+          .toArray(function (err, result) {
+            // send back to the frontend
+            console.log(result[0].todolistId);
+            const temp = result[0].todolistId;
+            temp.push(id);
+            console.log(temp);
+            db.collection("user-list")
+              .updateOne({ userid: 0 }, { $set: { todolistId: temp } })
+              .then((result) => {
+                // send back to the frontend
+
+                res.send(result);
+              });
+          });
+      });
+  });
+
+  // API call for adding person to todolist
+  // REQUIRED QUERIES: email, todolistId
+  // Recieving: Boolean (Whether it worked or not)
+  // Backend todo: implement
+  app.get("/api/addUser", (req, res) => {
+    // implement by verifying user input, then adding the id to the todolist
+    console.log("BACKEND addUser: ");
+
+    // confirm user input
+    console.log(req.query.email);
+    console.log(req.query.todolistId);
+    // find the email match to id
+    db.collection("user-list")
+      .aggregate([{ $match: { email: req.query.email } }])
+      .toArray(function (err, result) {
+        // check if email exists is correct
+        if (result.length > 0) {
+          const newState = result[0].todolistId;
+
+          // checking if email is already in the todolist
+          let found = false;
+          newState.forEach((x) => {
+            if (x == req.query.todolistId) {
+              found = true;
+            }
+          });
+
           if (found) {
             console.log("ALREADY FOUND");
           } else {
@@ -297,8 +441,13 @@ client.connect((err) => {
                 complete: false,
                 todolistId: todolistId,
                 userId: 0,
+
                 date: req.query.date,
                 priority: req.query.priority,
+
+                date: req.body.date,
+                priority: req.body.priority,
+
               });
               post
                 .then((data) => {
@@ -392,7 +541,12 @@ client.connect((err) => {
       });
   });
 
+
   app.listen(4001);
   console.log(`Listening on port ${4001}`);
 });
 
+
+  app.listen(4001);
+  console.log(`Listening on port ${4001}`);
+});

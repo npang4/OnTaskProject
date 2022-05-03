@@ -11,9 +11,11 @@ const Navbar = () => {
   return (
     <div className="nav">
       <div>
-        <Link to="/login">
+
+        <Link to="/">
+          {" "}<img src={OnTask} className="logo" />
+
           {" "}
-          <img src={OnTask} className="logo" />{" "}
         </Link>
       </div>
       <div className="search_bar"></div>
@@ -21,6 +23,11 @@ const Navbar = () => {
         <li>
           <Link to="/about">About</Link>
           
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <Link to="/register">Sign-up</Link>
         </li>
       </ul>
       <div>

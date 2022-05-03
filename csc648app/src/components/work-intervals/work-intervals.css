@@ -9,6 +9,7 @@
     background-color: #dff4eb;
     align-items: center;
     margin-top: 40px;
+    border-radius: 10px;
 }
 
 .container-title {
@@ -151,4 +152,12 @@
 
 .question:hover {
     color: black !important;
+}
+
+.question2 {
+    color: black;
+}
+
+.question2:hover {
+    color: #46c38f;
 }

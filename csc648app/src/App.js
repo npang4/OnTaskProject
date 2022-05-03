@@ -3,7 +3,7 @@ import Chris from "./components/Team/chris/Chris";
 import Rhoanna from "./components/Team/rhoanna/Rhoanna";
 import "./App.css";
 import Homepage from "./components/Team/Homepage";
-import Home from "./components/home/Home";
+// import Home from "./components/home/Home";
 import { Routes, Route } from "react-router-dom";
 import Nelson from "./components/Team/nelson/Nelson";
 import Jia from "./components/Team/jia/jia";
@@ -15,11 +15,11 @@ import TodoList from "./components/to-do-list/TodoList";
 import Navbar from "./components/navbar/Navbar";
 import { connect } from 'react-redux'
 import LandingPage from "./components/LandingPage";
-import WorkIntervals from "./components/work-intervals/work-intervals"
+import WorkSwitch from "./components/work-intervals/WorkSwitch"
+import DraftTimer from "./components/work-intervals/work-test"
+import Register from "./components/registration/Register";
 import React,{useState} from "react";
-import DraftTimer from "./components/work-intervals/work-intervals";
-
-
+import Home from "./components/home/Home"
 
   // "proxy": "http://localhost:4000",
 
@@ -49,12 +49,14 @@ function App(props) {
         {/* Landing page Route */}
         <Route path='/login' element={<LandingPage/>} />
 
-        {/* Route for Work-Study Intervals */}
-        {/* <Route path='/work-intervals' element={<WorkIntervals/>}/> */}
+        {/* Work intervals route */}
+        <Route path='/work-intervals' element={<WorkSwitch/>}/>
 
-        {/* Path for work */}
-        <Route path='/work-intervals' element={<DraftTimer/>}/>
+        {/* Work interval test in case final development doesn't work */}
+        <Route path='/work-test' element={<DraftTimer/>}/>
 
+        {/* Registration page Route */}
+        <Route path="/register" element={<Register/>} />
       </Routes>
 
 

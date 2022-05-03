@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { setTodoList } from "../../redux/actions/todoActions";
-import Collab from "./collab/Collab.js";
-
+import Collab from "../collab/Collab";
+import greenAddIcon from "./greenAddIcon.png";
 import List from "./List";
 import Todo from "./Todo";
+import UpcomingList from "./UpcomingList";
 
 const TodoList = (props) => {
   const [todos, setTodos] = useState([]);
@@ -12,11 +13,12 @@ const TodoList = (props) => {
   // this is for the search for local state!
   const [search, setSearch] = useState([]);
 
-  // this is the title of the list 
-  const [titleOfList,setTitleOfList] = useState("");
+  // this is the title of the list
+  const [titleOfList, setTitleOfList] = useState("");
 
   // Function to add a task
-  const addTodo = (todo) => {
+  {
+    /*const addTodo = (todo) => {
     console.log("CHICKED");
     // Allows user to continue entering text if enter key is pressed in add task field
     if (!todo.text || /^\s*$/.test(todo.text)) {
@@ -30,7 +32,8 @@ const TodoList = (props) => {
     const newTodos = [obj, ...todos];
 
     setTodos(newTodos);
-  };
+  };*/
+  }
 
   // Function to complete to task after clicking on it.
   const completeTodo = (id) => {
@@ -52,14 +55,24 @@ const TodoList = (props) => {
 
   // on page load
   useEffect(() => {
-    
     // this is setting the title
-    props.title.forEach((titleCard)=> {
-      if(props.id == titleCard.id) {
+    props.title.forEach((titleCard) => {
+      if (props.id == titleCard.id) {
         setTitleOfList(titleCard.title);
       }
-    })
+      if (props.id == 1000) {
+        setTitleOfList("Upcoming List");
+      }
+    });
   }, []);
+
+  const [showForm, setShowForm] = useState(false);
+  const addClicked = () => {
+    if (showForm) {
+      setShowForm(false);
+    } else setShowForm(true);
+  };
+  console.log(showForm);
 
   return (
     <div>
@@ -88,10 +101,18 @@ const TodoList = (props) => {
       {props.todolist == null
         ? "LOADING"
         : search
-        ? props.todolist.filter((todo) => todo.todolistId == props.id)
+        ? props.todolist
+            .filter((todo) => todo.todolistId == props.id)
             .filter((todo) => todo.title.includes(search))
             .map((task) => <Todo todos={task.title} key={task._id} />)
-        : props.todolist.filter((todo) => todo.todolistId == props.id).map((task) => <Todo todos={task.title} />)}
+        : props.todolist
+            .filter((todo) => todo.todolistId == props.id)
+            .map((task) => <Todo todos={task.title} />)}
+      <button onClick={addClicked} className="add-task-btn1">
+        <img src={greenAddIcon} />
+        Add Task
+      </button>
+      {showForm ? <List id={props.id} /> : null}
     </div>
   );
 };
