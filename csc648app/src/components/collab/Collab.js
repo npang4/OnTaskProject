@@ -80,6 +80,7 @@ function Collab() {
           />
           <button
             className="submit-email"
+            id="submitEmail"
             data-testid="buttonT2"
             onClick={handleAdd}
           >
@@ -91,7 +92,11 @@ function Collab() {
         <div>{email.map(createUserInfo)}</div>
         {/*exit modal button*/}
         <div className="done">
-          <button onClick={() => setModalIsOpen(false)} className="modal-done">
+          <button
+            data-testid="buttonT3"
+            onClick={() => setModalIsOpen(false)}
+            className="modal-done"
+          >
             Done
           </button>
         </div>

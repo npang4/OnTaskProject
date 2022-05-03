@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Collab from "../Collab";
-import Modal from "react-modal";
 import {
   cleanup,
   fireEvent,
@@ -9,7 +8,6 @@ import {
   screen,
   waitFor,
 } from "@testing-library/react";
-import { act } from "react-dom/test-utils";
 
 afterEach(() => {
   cleanup();
@@ -32,17 +30,37 @@ describe("Collab Button Component", () => {
     );
   });
 
-  //test if onsubmit, output is correct.
+  //test if error msg is hidden
   it("error msg displayed correctly", () => {
     const { queryByTestId } = render(<Collab />);
     const errorMsg = queryByTestId("validEmailT");
     expect(errorMsg).toBeNull();
   });
-});
 
-/*
-const errorMsg = getByTestId("validEmailT");
-const button = getByTestId("buttonT2");
+  //test if onsubmit displays correct error msg
+  it("submit button displaying correct error msg", async () => {
+    const { getByTestId, queryByText } = render(<Collab />);
+    const button = getByTestId("mainbuttonT");
+    const submit = queryByText("Search", { selector: "button" });
     fireEvent.click(button);
-    expect(error.innerHTML).toBe("");
-*/
+    await waitFor(() => {
+      const button2 = screen.queryByTestId("buttonT2");
+      const errorMsg = screen.queryByTestId("validEmailT");
+      fireEvent.click(button2);
+      expect(errorMsg.textContent).toBe("User not found");
+    });
+  });
+
+  it("on click done button, modal is closed", async () => {
+    const { getByTestId, queryByText } = render(<Collab />);
+    const button = getByTestId("mainbuttonT");
+    fireEvent.click(button);
+    await waitFor(() => {
+      const button3 = screen.queryByTestId("buttonT3");
+      fireEvent.click(button3);
+      expect(
+        queryByText("Share with people and groups")
+      ).not.toBeInTheDocument();
+    });
+  });
+});
