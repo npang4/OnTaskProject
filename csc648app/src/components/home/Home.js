@@ -34,6 +34,7 @@ const Home = (props) => {
     )
     };
 
+    
     const mapStateToProps = (state) => {
       return { logIn: state.login.loggedIn }
   }

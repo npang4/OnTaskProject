@@ -12,6 +12,7 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        
 
         console.log("DISPATCH: " + username)
         console.log("DISPATCH: " + password)
