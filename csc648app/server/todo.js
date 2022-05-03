@@ -469,15 +469,19 @@ client.connect((err) => {
   // Backend todo: implement
   app.get("/api/deleteTask", (req, res) => {
     // delete task by title
-    console.log(req.query.title);
+    console.log(req.query.id);
+    var ObjectId = require('mongodb').ObjectId; 
+    var id = req.query.id       
+    var o_id = new ObjectId(id);
+
     db.collection("tasks")
-      .aggregate([{ $match: { title: req.query.title } }])
+      .aggregate([{ $match: { _id: o_id } }])
       .toArray(function (err, result) {
-        console.log(result.length);
+        console.log(result);
         if (result.length > 0) {
           const deleteTask = db
             .collection("tasks")
-            .deleteOne({ title: req.query.title });
+            .deleteOne({ _id: o_id });
           deleteTask.then((data) => {
             console.log(data);
             console.log("delete task successfully");

@@ -7,8 +7,9 @@ const INITIAL_STATE = {
 const todoReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case "SET_TODOLIST":
-            console.log(action.payload)
+            console.log("TODOLIST REDUCER: " + action.payload)
             const newState = action.payload;
+            console.log(newState);
             return {
                 ...state, items: newState
             };
