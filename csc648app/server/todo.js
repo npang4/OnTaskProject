@@ -282,6 +282,7 @@ client.connect((err) => {
     // make sure you include when pushing to the db: date, userid (u get this from session variable), completed (set as false)
     console.log(req.query.title);
     console.log(req.query.todolistId);
+    console.log(req.query.date);
     const todolistId = parseInt(req.query.todolistId);
     //check todolist id
     db.collection("todolist")

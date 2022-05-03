@@ -25,9 +25,9 @@ const List = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addTask(input, props.id));
+    dispatch(addTask(input, props.id, selectedDate));
     console.log(props.id);
-    console.log(props.selectedDate);
+    console.log(selectedDate);
     setInput("");
   };
 
