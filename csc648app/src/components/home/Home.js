@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch,connect } from "react-redux";
 import {createStore} from "redux";
 import {combineReducers} from "../../redux/reducers/rootReducer";
 import { Link } from "react-router-dom";
@@ -7,7 +7,8 @@ import OnTask from "../navbar/OnTask-Logo.png";
 import './Home.css';
 import HomeNav from "./HomeNav";
 import Navbar from "../navbar/Navbar";
-const Home = () => {
+import Login from '../login/Login'
+const Home = (props) => {
     const homeNavbar = (<HomeNav />);
     const loggedIn = useDispatch(state => state.loggedIn);
     return(
@@ -16,7 +17,7 @@ const Home = () => {
 <div className="background-container">
 {/* {if logged in ? <header> : <otherheader> */}
 {/* <h1>is {loggedIn ?<HomeNav/> :<Navbar />}</h1> */}
-{homeNavbar}
+{props.logIn ? <Navbar/> : <HomeNav/>}
     <div className="inside-container">
 
         <h1> Start getting productive with OnTask </h1>
@@ -33,4 +34,9 @@ const Home = () => {
     )
     };
 
-export default Home;
+    
+    const mapStateToProps = (state) => {
+      return { logIn: state.login.loggedIn }
+  }
+
+export default connect(mapStateToProps)(Home);
