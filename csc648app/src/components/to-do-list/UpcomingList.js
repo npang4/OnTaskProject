@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { setTodoList } from "../../redux/actions/todoActions";
-import Collab from "./collab/Collab.js";
+import Collab from "../collab/Collab.js";
 import greenAddIcon from "./greenAddIcon.png";
 import List from "./List";
 import Todo from "./Todo";
