@@ -55,11 +55,7 @@ const TodoList = (props) => {
   // on page load
   useEffect(() => {
     // this is setting the title
-    props.title.forEach((titleCard) => {
-      if (props.id == titleCard.id) {
-        setTitleOfList(titleCard.title);
-      }
-    });
+    
   }, []);
 
   const [showForm, setShowForm] = useState(false);
@@ -77,7 +73,7 @@ const TodoList = (props) => {
         <Collab />
       </div>
 
-      <h1> {titleOfList}</h1>
+      <h1> {props.title}</h1>
 
       {/* search bar that sets search *local state* */}
       <input
