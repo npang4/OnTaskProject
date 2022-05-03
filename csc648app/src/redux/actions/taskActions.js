@@ -1,5 +1,6 @@
 import axios from "axios";
-import { setTodoList } from "./todoActions";
+
+import { setTodoList,setTodoId, setTodoTitle } from "./todoActions"
 const addTask =
   (title, todolistId /*, complete, _id, date,priority, todolistId*/) =>
   async (dispatch) => {
@@ -20,23 +21,21 @@ const addTask =
     }
   };
 
-const deleteTask = (title) => async (dispatch) => {
-  console.log("ACTION: RESETTING TO DEFAULT LIST");
+const deleteTask = (id) => async (dispatch) => {
+  console.log("ACTION: deleteTask");
   try {
-    //CALL Backend when we want to delete task by title
-    const res = await axios.get(`/api/deleteTask?title=${title}`);
-    console.log("THIS WORKED");
-    console.log(res.data);
-
+    //CALL Backend when we want to delete task by id
+    const res = await axios.get(`/api/deleteTask?id=${id}`);
     console.log(res.data);
     if (res.data) {
-      dispatch({
-        // I changed delete deleteid to DeleteTitle since we are going to delete task by title
-        // also, please check taskReducer.js
-        type: "deleteTitle",
-        payload: res.data,
-      });
+      console.log("SUCCESSFUL DELETE")
+      // recall all of these 
+      // await dispatch(setTodoTitle());
+      // await dispatch(setTodoId());
+      await dispatch(setTodoList());
+
     } else {
+      console.log("INSUCCESSFUL")
       dispatch({
         type: "false",
       });

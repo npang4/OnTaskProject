@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { setTodoList } from "../../redux/actions/todoActions";
 import Collab from "./collab/Collab.js";
 import greenAddIcon from "./greenAddIcon.png";
 import List from "./List";
 import Todo from "./Todo";
+import { deleteTask } from "../../redux/actions/taskActions";
 
 const TodoList = (props) => {
   const [todos, setTodos] = useState([]);
@@ -66,6 +67,14 @@ const TodoList = (props) => {
   };
   console.log(showForm);
 
+  const dispatch = useDispatch();
+
+  const onClick = (e) => {
+    console.log("CLICK: REMOVE")
+    console.log("E: " + e)
+    dispatch(deleteTask(e));
+  }
+
   return (
     <div>
       {/* collaborative */}
@@ -96,10 +105,10 @@ const TodoList = (props) => {
         ? props.todolist
             .filter((todo) => todo.todolistId == props.id)
             .filter((todo) => todo.title.includes(search))
-            .map((task) => <Todo todos={task.title} key={task._id} />)
+            .map((task) => <Todo todos={task.title} id={task._id} onClickParent={onClick}/>)
         : props.todolist
             .filter((todo) => todo.todolistId == props.id)
-            .map((task) => <Todo todos={task.title} />)}
+            .map((task) => <Todo todos={task.title} id={task._id} onClickParent={onClick}/>)}
       <button onClick={addClicked} className="add-task-btn1">
         <img src={greenAddIcon} />
         Add Task
