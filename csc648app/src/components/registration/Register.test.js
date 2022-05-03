@@ -94,7 +94,7 @@ test("Checking registration function", async () => {
   user.type(usernameInput, username);
   user.type(emailInput, email);
   user.type(passwordInput, password);
-  const submitButton = screen.getByRole('button', { name: /^Submit$/i });
+  const submitButton = screen.getByRole('button', { name: /^Sign-up$/i });
   user.click(submitButton);
   await expect(onSubmit).toHaveBeenCalledTimes(0);
 
