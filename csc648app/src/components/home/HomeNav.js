@@ -6,6 +6,7 @@ import './Home.css';
 
 const HomeNav = () => {
 
+  
     return( 
         <div className="nav-container">
         <div>
