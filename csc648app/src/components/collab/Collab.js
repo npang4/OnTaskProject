@@ -6,7 +6,7 @@ import UserInfo from "./userInfo/UserInfo";
 import email from "./userInfo/email";
 
 /*to define app element on our Modal import*/
-Modal.setAppElement("#root");
+//Modal.setAppElement("#root");
 
 function Collab() {
   {

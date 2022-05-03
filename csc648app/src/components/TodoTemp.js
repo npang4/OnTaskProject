@@ -7,7 +7,11 @@ import { setTodoList,setTodoId, setTodoTitle } from "../redux/actions/todoAction
 import { addTodolist } from '../redux/actions/todoActions';
 import { Button } from 'bootstrap';
 import Modal from "react-modal"
+
 import Sidebar from './navbar/Sidebar';
+
+import UpcomingList from './to-do-list/UpcomingList';
+
 
 
 
@@ -90,6 +94,7 @@ const TodoTemp = (props) => {
             
         </Modal>
 
+
         {/* this is rendering the todolists */}
          <div />
 
@@ -97,6 +102,10 @@ const TodoTemp = (props) => {
 
 
         {props.title.length != 0 ? onFocus === undefined ? <div style={{paddingTop:"5em"}}>CHOOSE A TODOLIST</div> : props.id.filter(id => id == onFocus).map((id) => <TodoList title={currentTitle} id={id} />) : "LOADING" }
+
+
+        <UpcomingList title={props.title} id={1000}/>
+
     </div>
   )
 }

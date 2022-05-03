@@ -2,10 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import "./List.css";
 import { addTask } from "../../redux/actions/taskActions";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const List = (props) => {
+  //usestate for calendar
+  const [selectedDate, setSelectedDate] = useState(null);
+  console.log(selectedDate);
   // Returns a reference to dispatch function from Redux
-
   const dispatch = useDispatch();
 
   const [input, setInput] = useState("");
@@ -40,7 +44,18 @@ const List = (props) => {
           onChange={handleChange}
           ref={inputRef}
         ></input>
-        <button id="submit" className="todo-btn">Add task</button>
+        <DatePicker
+          selected={selectedDate}
+          onChange={(date) => setSelectedDate(date)}
+          showTimeSelect
+          dateFormat="yyyy/MM/dd hh:mm:ss"
+          placeholderText="Due Date"
+          timeIntervals={5}
+          format
+        />
+        <button id="submit" className="todo-btn">
+          Add task
+        </button>
       </form>
     </div>
   );
