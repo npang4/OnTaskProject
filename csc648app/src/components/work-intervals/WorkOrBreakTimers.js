@@ -54,7 +54,7 @@ const WorkOrBreak = (props) => {
                     <button onClick={resume} className="work-button-2">CONTINUE</button>
                     <button onClick={pause} className="work-button-2">PAUSE</button>
                     <br/>
-                    <a style={{textDecoration: "none"}} onClick={onBreak ? clickOnBreak : clickOnWork} className="fonts bold question2">{isRunning ? "" : onBreak ? "Click here to start working!" : "Click here to start our break!"}</a>
+                    <a style={{textDecoration: "none"}} onClick={onBreak ? clickOnBreak : clickOnWork} className="fonts bold question2">{isRunning ? "" : onBreak ? "Click here to start working!" : "Click here to start your break!"}</a>
                   </div>
 
               </div>

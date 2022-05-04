@@ -8,20 +8,43 @@ import { addTodolist } from '../redux/actions/todoActions';
 import { Button } from 'bootstrap';
 import Modal from "react-modal"
 
+import Sidebar from './navbar/Sidebar';
+
+import UpcomingList from './to-do-list/UpcomingList';
+
+
 
 
 const TodoTemp = (props) => {
-
     // local states
     const [text,setText] = useState("")
+
+    // this is used for todolist setting
+    const [onFocus, setOnFocus] = useState("");
+    const [currentTitle, setCurrentTitle] = useState("");
+
     const [modalState,setModalIsOpen] = useState(false)
     // setting all the default things
     useEffect(() => {
+      if (process.env.NODE_ENV !== 'test') Modal.setAppElement('#root');
+
+      var appElement = document.getElementById("app");
+      Modal.setAppElement(appElement);
+
         if (props.todolist.length === 0) {
           console.log("GETTING TASKS");
           props.defaultTasks();
           props.defaultId();
           props.defaultTitle();
+
+          setOnFocus(props.id[0])
+          props.title.forEach((todolist) => {
+            if(todolist.id == props.id[0]) {
+              console.log("Title CHECK " + todolist.title);
+              setCurrentTitle(todolist.title)
+            }
+          })
+          
         }
       }, []);    
     
@@ -40,11 +63,25 @@ const TodoTemp = (props) => {
           
         },
       };
+
+      // this sets what todolist is currently displayed
+    const onClickList = (e) => {
+      console.log("TODOTEMP: CLICK")
+      console.log(e);
+      props.title.forEach((todolist) => {
+        if(todolist.title == e) {
+          console.log("ID CHECK " + todolist.id);
+          setOnFocus(todolist.id)
+          setCurrentTitle(e)
+        }
+      })
+    }
   return (
     <div>
         {/* button that should be replaced by modal */}
-        <button style={{width:'20rem', height:'5rem'}} onClick={()=>setModalIsOpen(true)}> ADD TODOLIST </button>
-        <Modal isOpen={modalState} style={customStyles} >
+        <Sidebar title={props.title} onClick={onClickList}/>
+        <button data-testid="openModal"  style={{width:'20rem', height:'5rem'}} onClick={()=>setModalIsOpen(true)}> ADD TODOLIST </button>
+        <Modal ariaHideApp={false} isOpen={modalState} style={customStyles} >
             <div style={{justifyContent:'center'}}>
                 <h3 style={{textAlign:'center'}}>
                 Todolist Name
@@ -57,8 +94,18 @@ const TodoTemp = (props) => {
             
         </Modal>
 
-         {/* this is rendering the todolists */}
-        {props.title.length != 0 ? props.id.map((id) => <TodoList title={props.title} id={id} />) : "LOADING" }
+
+        {/* this is rendering the todolists */}
+         <div />
+
+        {/* This is where u put upcoming and current */}
+
+
+        {props.title.length != 0 ? onFocus === undefined ? <div style={{paddingTop:"5em"}}>CHOOSE A TODOLIST</div> : props.id.filter(id => id == onFocus).map((id) => <TodoList title={currentTitle} id={id} />) : "LOADING" }
+
+
+        <UpcomingList title={props.title} id={1000}/>
+
     </div>
   )
 }
