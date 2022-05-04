@@ -246,9 +246,6 @@ client.connect((err) => {
               found = true;
             }
           });
-
-            }
-          });
         } else {
           console.log("Not a user");
         }
@@ -544,11 +541,6 @@ client.connect((err) => {
         }
       });
   });
-
-
-  app.listen(4001);
-  console.log(`Listening on port ${4001}`);
-});
 
 
   app.listen(4001);
