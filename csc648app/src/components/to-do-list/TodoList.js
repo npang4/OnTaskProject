@@ -60,14 +60,10 @@ const TodoList = (props) => {
   // on page load
   useEffect(() => {
     // this is setting the title
-    props.title.forEach((titleCard) => {
-      if (props.id == titleCard.id) {
-        setTitleOfList(titleCard.title);
-      }
       if (props.id == 1000) {
         setTitleOfList("Upcoming List");
       }
-    });
+
   }, []);
 
   const [showForm, setShowForm] = useState(false);
