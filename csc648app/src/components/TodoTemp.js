@@ -15,6 +15,7 @@ import Modal from "react-modal";
 import Sidebar from "./navbar/Sidebar";
 
 import TodaysList from "./to-do-list/TodaysList";
+import UpcomingList from "./to-do-list/UpcomingList";
 
 const TodoTemp = (props) => {
   // local states
@@ -119,6 +120,7 @@ const TodoTemp = (props) => {
       )}
 
       <TodaysList title={props.title} id={1000} task={props.todolist} />
+      <UpcomingList title={props.title} id={1001} task={props.todolist} />
     </div>
   );
 };
