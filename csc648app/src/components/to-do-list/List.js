@@ -14,6 +14,8 @@ const List = (props) => {
   const [input, setInput] = useState("");
 
   const inputRef = useRef(null);
+  //Value that stores the date in ISO format
+  var ISOdate = null;
 
   useEffect(() => {
     inputRef.current.focus();
@@ -25,11 +27,18 @@ const List = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(ISOdate);
     dispatch(addTask(input, props.id, selectedDate));
     console.log(props.id);
     console.log(selectedDate);
     setInput("");
   };
+
+  function dateOnChange(date) {
+    setSelectedDate(date);
+    ISOdate = date.toISOString();
+    console.log(ISOdate);
+  }
 
   return (
     <div>
@@ -46,7 +55,7 @@ const List = (props) => {
         ></input>
         <DatePicker
           selected={selectedDate}
-          onChange={(date) => setSelectedDate(date)}
+          onChange={dateOnChange}
           showTimeSelect
           dateFormat="yyyy/MM/dd hh:mm:ss"
           placeholderText="Due Date"
