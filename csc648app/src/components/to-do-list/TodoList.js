@@ -8,8 +8,7 @@ import Todo from "./Todo";
 
 import { deleteTask } from "../../redux/actions/taskActions";
 
-import UpcomingList from "./UpcomingList";
-
+import TodaysList from "./TodaysList";
 
 const TodoList = (props) => {
   const [todos, setTodos] = useState([]);
@@ -60,10 +59,9 @@ const TodoList = (props) => {
   // on page load
   useEffect(() => {
     // this is setting the title
-      if (props.id == 1000) {
-        setTitleOfList("Upcoming List");
-      }
-
+    if (props.id == 1000) {
+      setTitleOfList("Upcoming List");
+    }
   }, []);
 
   const [showForm, setShowForm] = useState(false);
@@ -77,10 +75,10 @@ const TodoList = (props) => {
   const dispatch = useDispatch();
 
   const onClick = (e) => {
-    console.log("CLICK: REMOVE")
-    console.log("E: " + e)
+    console.log("CLICK: REMOVE");
+    console.log("E: " + e);
     dispatch(deleteTask(e));
-  }
+  };
 
   return (
     <div>
@@ -112,10 +110,14 @@ const TodoList = (props) => {
         ? props.todolist
             .filter((todo) => todo.todolistId == props.id)
             .filter((todo) => todo.title.includes(search))
-            .map((task) => <Todo todos={task.title} id={task._id} onClickParent={onClick}/>)
+            .map((task) => (
+              <Todo todos={task.title} id={task._id} onClickParent={onClick} />
+            ))
         : props.todolist
             .filter((todo) => todo.todolistId == props.id)
-            .map((task) => <Todo todos={task.title} id={task._id} onClickParent={onClick}/>)}
+            .map((task) => (
+              <Todo todos={task.title} id={task._id} onClickParent={onClick} />
+            ))}
       <button onClick={addClicked} className="add-task-btn1">
         <img src={greenAddIcon} />
         Add Task
