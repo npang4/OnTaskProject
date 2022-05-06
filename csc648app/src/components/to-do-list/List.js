@@ -14,8 +14,6 @@ const List = (props) => {
   const [input, setInput] = useState("");
 
   const inputRef = useRef(null);
-  //Value that stores the date in ISO format
-  var ISOdate = null;
 
   useEffect(() => {
     inputRef.current.focus();
@@ -27,7 +25,6 @@ const List = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(ISOdate);
     dispatch(addTask(input, props.id, selectedDate));
     console.log(props.id);
     console.log(selectedDate);
@@ -36,8 +33,7 @@ const List = (props) => {
 
   function dateOnChange(date) {
     setSelectedDate(date);
-    ISOdate = date.toISOString();
-    console.log(ISOdate);
+    console.log(date);
   }
 
   return (
