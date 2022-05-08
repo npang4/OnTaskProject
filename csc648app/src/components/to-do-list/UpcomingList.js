@@ -11,11 +11,14 @@ const UpcomingList = (props) => {
   var options = {
     month: "short",
   };
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
   const today = new Date();
-  const year = today.getFullYear();
-  const month = today.toLocaleString("default", { month: "short" });
-  const day = today.getDate();
-  console.log("hello world");
+  const year = tomorrow.getFullYear();
+  const month = tomorrow.toLocaleString("default", { month: "short" });
+  const day = tomorrow.getDate();
+  const dayR = day + " 2";
+  console.log("hello world" + tomorrow);
   console.log(month);
   console.log(year);
   console.log(day);
@@ -97,7 +100,7 @@ const UpcomingList = (props) => {
             .filter(
               (todo) =>
                 todo.date.includes(year) &&
-                todo.date.includes(day) &&
+                todo.date.includes(dayR) &&
                 todo.date.includes(month)
             )
             .filter((todo) => todo.title.includes(search))
@@ -106,7 +109,7 @@ const UpcomingList = (props) => {
             .filter(
               (todo) =>
                 todo.date.includes(year) &&
-                todo.date.includes(day) &&
+                todo.date.includes(dayR) &&
                 todo.date.includes(month)
             )
             .map((task) => <Todo todos={task.title} />)}

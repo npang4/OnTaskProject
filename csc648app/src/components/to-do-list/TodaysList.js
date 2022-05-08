@@ -10,15 +10,18 @@ import Todo from "./Todo";
 const TodaysList = (props) => {
   var options = {
     month: "short",
+    weekday: "long",
   };
   const today = new Date();
   const year = today.getFullYear();
   const month = today.toLocaleString("default", { month: "short" });
+  const weekday = today.toLocaleString("default", { weekday: "short" });
   const day = today.getDate();
   console.log("hello world");
   console.log(month);
   console.log(year);
   console.log(day);
+  console.log(weekday);
   const [todos, setTodos] = useState([]);
 
   // this is for the search for local state!
@@ -98,7 +101,8 @@ const TodaysList = (props) => {
               (todo) =>
                 todo.date.includes(year) &&
                 todo.date.includes(day) &&
-                todo.date.includes(month)
+                todo.date.includes(month) &&
+                todo.date.includes(weekday)
             )
             .filter((todo) => todo.title.includes(search))
             .map((task) => <Todo todos={task.title} key={task._id} />)
@@ -107,7 +111,8 @@ const TodaysList = (props) => {
               (todo) =>
                 todo.date.includes(year) &&
                 todo.date.includes(day) &&
-                todo.date.includes(month)
+                todo.date.includes(month) &&
+                todo.date.includes(weekday)
             )
             .map((task) => <Todo todos={task.title} />)}
       {/* <button onClick={addClicked} className="add-task-btn1">
