@@ -11,9 +11,7 @@ import { connect } from 'react-redux';
 
 // this is for the side navigation bar
 const Sidebar = (props) => {
-    const [modalState, setModalIsOpen] = useState(false);
-    const [text, setText] = useState("")
-
+    
     const style = {
         width: "12vw",
         height: "100vh",
@@ -21,27 +19,10 @@ const Sidebar = (props) => {
         backgroundColor: '#f9f9f9'
     }
 
-    const customStyles = {
-        content: {
-            width: '30rem',
-            height: '30rem',
-
-        },
-    }
-
     const onClick = (e) => {
         console.log(e.target.innerText)
         props.onClick(e.target.innerText)
     }
-
-
-    const onModalClick = (e) => {
-        e.preventDefault();
-        props.addTodolist(text);
-        setModalIsOpen(false);
-    }
-
-
 
     const [value, onChange] = useState(new Date());
     return (
@@ -70,19 +51,8 @@ const Sidebar = (props) => {
             <div style={{ paddingTop: '5em' }}>
                 <div style={{ color: "green" }}>
                     Todo Lists:
-                    <button id='bsPlus' onClick={() => setModalIsOpen(true)}> <BsPlus size={15} /> </button>
-                    <Modal ariaHideApp={false} isOpen={modalState} style={customStyles} >
-                        <div style={{ justifyContent: 'center' }}>
-                            <h3 style={{ textAlign: 'center' }}>
-                                Todolist Name
-                            </h3>
-                            <input type="text" onChange={(e) => setText(e.target.value)} />
-                            <button onClick={onModalClick}>Submit</button>
-
-                            <button style={{ marginTop: "5rem" }} onClick={() => setModalIsOpen(false)}>Close</button>
-                        </div>
-
-                    </Modal>
+                    <button id='bsPlus' onClick={props.addTodo}> <BsPlus size={15} /> </button>
+                    
                 </div>
                 {console.log(props.title)}
                 {props.title.map((title) => <div onClick={
@@ -94,9 +64,4 @@ const Sidebar = (props) => {
     )
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         addTodolist: (text) => dispatch(addTodolist(text))
-//     }
-// }
 export default Sidebar 
