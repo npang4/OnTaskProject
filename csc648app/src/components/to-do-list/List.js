@@ -31,6 +31,11 @@ const List = (props) => {
     setInput("");
   };
 
+  function dateOnChange(date) {
+    setSelectedDate(date);
+    console.log(date);
+  }
+
   return (
     <div>
       <form className="todo-form" onSubmit={handleSubmit}>
@@ -46,7 +51,7 @@ const List = (props) => {
         ></input>
         <DatePicker
           selected={selectedDate}
-          onChange={(date) => setSelectedDate(date)}
+          onChange={dateOnChange}
           showTimeSelect
           dateFormat="yyyy/MM/dd hh:mm:ss"
           placeholderText="Due Date"

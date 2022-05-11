@@ -29,7 +29,7 @@ const Sidebar = (props) => {
         <div style={style}>
 
             <div style={{ paddingTop: '2em' }}>
-                <button id='work-btn'><FcClock size={40} /> Work Interval </button>
+                <button id='work-btn'><FcClock size={40} onClick={props.openWorkTimer}/> Work Interval </button>
 
             </div>
             {/* // this is where calender is? */}

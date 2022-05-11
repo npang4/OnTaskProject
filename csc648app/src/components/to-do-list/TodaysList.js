@@ -1,16 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { connect, useDispatch } from "react-redux";
+import { RiContactsBookLine } from "react-icons/ri";
+import { connect } from "react-redux";
 import { setTodoList } from "../../redux/actions/todoActions";
-import Collab from "../collab/Collab";
+import Collab from "../collab/Collab.js";
 import greenAddIcon from "./greenAddIcon.png";
 import List from "./List";
 import Todo from "./Todo";
 
-import { deleteTask } from "../../redux/actions/taskActions";
-
-import TodaysList from "./TodaysList";
-
-const TodoList = (props) => {
+const TodaysList = (props) => {
+  var options = {
+    month: "short",
+    weekday: "long",
+  };
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.toLocaleString("default", { month: "short" });
+  const weekday = today.toLocaleString("default", { weekday: "short" });
+  const day = today.getDate();
+  console.log("hello world");
+  console.log(month);
+  console.log(year);
+  console.log(day);
+  console.log(weekday);
   const [todos, setTodos] = useState([]);
 
   // this is for the search for local state!
@@ -18,25 +29,6 @@ const TodoList = (props) => {
 
   // this is the title of the list
   const [titleOfList, setTitleOfList] = useState("");
-
-  // Function to add a task
-  {
-    /*const addTodo = (todo) => {
-    console.log("CHICKED");
-    // Allows user to continue entering text if enter key is pressed in add task field
-    if (!todo.text || /^\s*$/.test(todo.text)) {
-      return;
-    }
-    console.log("CHICKED");
-    const obj = {
-      title: todo.text,
-      index: 0,
-    };
-    const newTodos = [obj, ...todos];
-
-    setTodos(newTodos);
-  };*/
-  }
 
   // Function to complete to task after clicking on it.
   const completeTodo = (id) => {
@@ -60,7 +52,7 @@ const TodoList = (props) => {
   useEffect(() => {
     // this is setting the title
     if (props.id == 1000) {
-      setTitleOfList("Upcoming List");
+      setTitleOfList("Today's List");
     }
   }, []);
 
@@ -72,22 +64,19 @@ const TodoList = (props) => {
   };
   console.log(showForm);
 
-  const dispatch = useDispatch();
-
-  const onClick = (e) => {
-    console.log("CLICK: REMOVE");
-    console.log("E: " + e);
-    dispatch(deleteTask(e));
-  };
-
   return (
     <div>
+      {/* {console.log(
+        array.filter(
+          (todo) =>
+            todo.date.includes(year) &&
+            todo.date.includes(day) &&
+            todo.date.includes(month)
+        )
+      )} */}
       {/* collaborative */}
-      <div>
-        <Collab />
-      </div>
 
-      <h1> {props.title}</h1>
+      <h1> {titleOfList}</h1>
 
       {/* search bar that sets search *local state* */}
       <input
@@ -108,21 +97,29 @@ const TodoList = (props) => {
         ? "LOADING"
         : search
         ? props.todolist
-            .filter((todo) => todo.todolistId == props.id)
+            .filter(
+              (todo) =>
+                todo.date.includes(year) &&
+                todo.date.includes(day) &&
+                todo.date.includes(month) &&
+                todo.date.includes(weekday)
+            )
             .filter((todo) => todo.title.includes(search))
-            .map((task) => (
-              <Todo todos={task.title} id={task._id} onClickParent={onClick} />
-            ))
+            .map((task) => <Todo todos={task.title} key={task._id} />)
         : props.todolist
-            .filter((todo) => todo.todolistId == props.id)
-            .map((task) => (
-              <Todo todos={task.title} id={task._id} onClickParent={onClick} />
-            ))}
-      <button onClick={addClicked} className="add-task-btn1">
+            .filter(
+              (todo) =>
+                todo.date.includes(year) &&
+                todo.date.includes(day) &&
+                todo.date.includes(month) &&
+                todo.date.includes(weekday)
+            )
+            .map((task) => <Todo todos={task.title} />)}
+      {/* <button onClick={addClicked} className="add-task-btn1">
         <img src={greenAddIcon} />
         Add Task
       </button>
-      {showForm ? <List id={props.id} /> : null}
+      {showForm ? <List id={props.id} /> : null} */}
     </div>
   );
 };
@@ -139,4 +136,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
+export default connect(mapStateToProps, mapDispatchToProps)(TodaysList);
