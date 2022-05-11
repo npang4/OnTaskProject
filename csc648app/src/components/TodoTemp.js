@@ -79,14 +79,14 @@ const TodoTemp = (props) => {
     <div>
       {/* button that should be replaced by modal */}
       <Sidebar title={props.title} onClick={onClickList} />
-      <button
+      {/* <button
         data-testid="openModal"
-        style={{ width: "20rem", height: "5rem" }}
+        style={{ width: "10rem", height: "5rem" }}
         onClick={() => setModalIsOpen(true)}
       >
         {" "}
         ADD TODOLIST{" "}
-      </button>
+      </button> */}
       <Modal ariaHideApp={false} isOpen={modalState} style={customStyles}>
         <div style={{ justifyContent: "center" }}>
           <h3 style={{ textAlign: "center" }}>Todolist Name</h3>

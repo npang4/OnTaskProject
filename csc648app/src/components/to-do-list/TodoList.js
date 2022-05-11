@@ -81,24 +81,44 @@ const TodoList = (props) => {
   };
 
   return (
-    <div>
+    <div style={{borderStyle: "solid"}}>
       {/* collaborative */}
-      <div>
+      <div style={{
+                   marginLeft: "60%"}}>
+
         <Collab />
+
       </div>
+     
 
-      <h1> {props.title}</h1>
-
-      {/* search bar that sets search *local state* */}
-      <input
+      <h1 style={{ marginTop:"-10%"}}> {props.title}</h1>
+{/* search bar that sets search *local state* */}
+<input
         type="text"
-        placeholder="Search"
-        style={{ width: "300px" }}
+        placeholder="Search Tasks"
+        style={{ width: "400px" }}
         onChange={(event) => {
           event.preventDefault();
           setSearch(event.target.value);
         }}
       />
+    {/* Today bar = show today's date */}
+      <div style={{
+        background: "#7adfb5",
+        height: "50px",
+        width: "45%",
+        margin:"auto",
+      }}>
+        <div style=
+         {{
+         width: "200px",
+           }}><h1 style={{fontSize: "120%",
+            fontWeight: "bold",
+            textAlign:"left"}}>Today </h1>
+           </div>  
+          </div>
+
+      
 
       {/* <List onSubmit={addTodo} /> */}
 
@@ -118,11 +138,16 @@ const TodoList = (props) => {
             .map((task) => (
               <Todo todos={task.title} id={task._id} onClickParent={onClick} />
             ))}
-      <button onClick={addClicked} className="add-task-btn1">
+
+            
+      <button onClick={addClicked} className="add-task-btn1" style={{marginRight:"20%"}}>
         <img src={greenAddIcon} />
         Add Task
       </button>
       {showForm ? <List id={props.id} /> : null}
+
+
+      
     </div>
   );
 };

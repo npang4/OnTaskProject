@@ -4,23 +4,33 @@ import "./List.css";
 import { addTask } from "../../redux/actions/taskActions";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import greenAddIcon from "./greenAddIcon.png";
+
 
 const List = (props) => {
   //usestate for calendar
   const [selectedDate, setSelectedDate] = useState(null);
   // Returns a reference to dispatch function from Redux
   const dispatch = useDispatch();
-
   const [input, setInput] = useState("");
+  //kim
+  const [Des, setDes] = useState("");
 
   const inputRef = useRef(null);
+ 
+ //kim
+  const DesRef = useRef(null);
 
   useEffect(() => {
     inputRef.current.focus();
-  });
+    DesRef.current.focus();
+  },[]);
 
   const handleChange = (e) => {
     setInput(e.target.value);
+  };
+  const DescptionChange = (e) => {
+    setDes(e.target.value);
   };
 
   const handleSubmit = (e) => {
@@ -30,18 +40,29 @@ const List = (props) => {
     console.log(selectedDate);
     setInput("");
   };
+  const DesSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addTask(Des, props.id, selectedDate));
+    console.log(props.id);
+    console.log(selectedDate);
+    setDes("");
+  };
 
   function dateOnChange(date) {
     setSelectedDate(date);
     console.log(date);
   }
 
+
   return (
     <div>
-      <form className="todo-form" onSubmit={handleSubmit}>
+      <form autocomplete="off" className="todo-form" onSubmit={handleSubmit}>   
+        <div className="subject-form">
+          Subject: 
         <input
+        style={{border: 'none', marginLeft:"10px",width:"90%"}}
           type="text"
-          placeholder="Add a task"
+          placeholder="  "
           value={input}
           name="text"
           id="input"
@@ -49,6 +70,24 @@ const List = (props) => {
           onChange={handleChange}
           ref={inputRef}
         ></input>
+        </div>
+
+
+        <div className="Description-form">
+          Description: 
+        <input
+        style={{border:'none', marginLeft:"10px" ,width:"86%"}}
+          type="text"
+          placeholder="  "
+          value={Des}
+          name="text"
+          id="input"
+          className="todo-input"
+          onChange={DescptionChange}
+           ref={DesRef}
+        ></input>
+        </div>
+<div className="date-picker-container" style={{marginRight:"70%"}}>
         <DatePicker
           selected={selectedDate}
           onChange={dateOnChange}
@@ -58,10 +97,17 @@ const List = (props) => {
           timeIntervals={5}
           format
         />
-        <button id="submit" className="todo-btn">
+        
+
+
+        </div>
+
+        <button id="submit" className="todo-btn"  >
           Add task
         </button>
+
       </form>
+
     </div>
   );
 };

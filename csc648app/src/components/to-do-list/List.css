@@ -36,14 +36,15 @@ h1 {
 }
 
 .todo-btn {
-  padding: 16px;
+  padding: 10px;
   border: none;
-  border-radius: 0 14px 14px 0;
+  margin-left: 50%;
   cursor: pointer;
   outline: none;
   background-color: #7adfb5;
-  color: black;
+  color: white;
   text-transform: capitalize;
+  
 }
 
 .todo-btn:hover {
@@ -71,11 +72,16 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 4px auto;
-  background: lightgray;
+  margin: 3px auto;
+  background: white;
   padding: 16px;
   border-radius: 5px;
-  width: 25%;
+  width: 45%;
+  border: 2px solid rgb(176, 173, 173);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  
 }
 
 .icons {
@@ -104,4 +110,22 @@ h1 {
   background-color: transparent;
   color: black;
   text-transform: capitalize;
+}
+.todo-form{
+  width: 45%;
+  height: 70%;
+  border: black 2px;
+  border-style: solid;
+  border-radius: 10px;
+}
+.subject-form{
+  font-weight: bold;
+}
+.Description-form{
+  font-weight: bold;
+  width: auto;
+  height: 100px;
+  border: black solid 1px;
+  border-right: none;
+  border-left: none;
 }
