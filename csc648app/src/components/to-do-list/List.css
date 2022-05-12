@@ -43,7 +43,7 @@ h1 {
   background-color: #7adfb5;
   color: white;
   text-transform: capitalize;
-  
+  border:#7adfb5 2px solid;
 }
 
 .todo-btn:hover {

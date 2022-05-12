@@ -16,9 +16,7 @@ const List = (props) => {
   const [input, setInput] = useState("");
   //kim
   const [Des, setDes] = useState("");
-
   const inputRef = useRef(null);
- 
  //kim
   const DesRef = useRef(null);
 
@@ -99,9 +97,11 @@ const List = (props) => {
          placeholderText="  Due Date"
          timeIntervals={5}
          format  
-        customInput= {<p1 style={{fontSize: "15px", 
-        border: "solid 2px black", width:"150px",
-        height:"50px",textAlign:"left"}}>
+        customInput= {<p1 style={{fontSize: "15px",fontWeight:"bold", 
+         width:"150px",background: "rgba(230, 222, 222, 0.79)",
+        height:"50px",textAlign:"left",
+        
+        }}>
           <AiOutlineClockCircle/> Due Date</p1>}
        />
 
