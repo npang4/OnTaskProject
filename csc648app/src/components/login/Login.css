@@ -1,44 +1,73 @@
 .container {
-    width: 50% !important;
-    height: 500px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: lightgray;
-    align-items: center;
-    margin-top: 10%;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    border-radius: 35px;
-    
-  }
-  h1 {
-    padding: 30px;
-    color: black;
-    font-size: 50px;
-  }
-  .login-label {
-    color: black;
-  }
-  .login-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  .login-input {
-    width: 80%;
-    margin: 10px;
-    padding: 5px;
-    font-size: 20px;
-  }
-  .login-btn {
-    border: none;
-    width: 80%;
-    padding: 10px;
-  }
-  .login-btn:hover {
-    background: #7ADFB5;
-  }
-  
+  width: 50% !important;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgb(255, 255, 255);
+  align-items: center;
+  margin-top: 10%;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 20px;
+}
+.login-title {
+  font-size: 32px;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  padding-top: none;
+  padding-bottom: 10px;
+}
+.login-label {
+  color: black;
+  text-align: left;
+  align-items: left;
+  margin-left: 10px;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+}
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.login-input {
+  width: 80%;
+  margin: 10px;
+  padding: 5px;
+  font-size: 20px;
+  box-shadow: 1px 1px 3px #888888;
+  border: none;
+  border-radius: 5px;
+}
+.login-btn {
+  border: none;
+  width: 100%;
+  padding: 10px;
+  background-color: #7adfb5;
+  border-radius: 5px;
+  color: white;
+}
+.login-btn:hover {
+  background: #98f1cc;
+}
+
+.redirect-signup {
+  align-items: center;
+}
+.redirect1 {
+  display: inline;
+  font-size: 10px;
+}
+.redirect2 {
+  display: inline;
+  font-size: 10px;
+  color: #7adfb5;
+}
+
+.login-btn-div {
+  padding-right: 40px;
+  padding-left: 10px;
+  padding-top: 10px;
+}
