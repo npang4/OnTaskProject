@@ -5,9 +5,10 @@ import { addTask } from "../../redux/actions/taskActions";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import greenAddIcon from "./greenAddIcon.png";
-
+import { AiOutlineClockCircle } from "react-icons/ai";
 
 const List = (props) => {
+  const clockion = (<AiOutlineClockCircle />);
   //usestate for calendar
   const [selectedDate, setSelectedDate] = useState(null);
   // Returns a reference to dispatch function from Redux
@@ -87,25 +88,28 @@ const List = (props) => {
            ref={DesRef}
         ></input>
         </div>
-<div className="date-picker-container" style={{marginRight:"70%"}}>
-        <DatePicker
-          selected={selectedDate}
-          onChange={dateOnChange}
-          showTimeSelect
-          dateFormat="yyyy/MM/dd hh:mm:ss"
-          placeholderText="Due Date"
-          timeIntervals={5}
-          format
-        />
-        
 
+          <div className="date-picker-container" style={{marginRight:"70%"}}>
+          <DatePicker
+         selected={selectedDate}
+         onChange={dateOnChange}
+         style= {{background: "none"}}
+         showTimeSelect
+         dateFormat="yyyy/MM/dd hh:mm:ss"
+         placeholderText="  Due Date"
+         timeIntervals={5}
+         format  
+        customInput= {<p1 style={{fontSize: "15px", 
+        border: "solid 2px black", width:"150px",
+        height:"50px",textAlign:"left"}}>
+          <AiOutlineClockCircle/> Due Date</p1>}
+       />
 
         </div>
 
         <button id="submit" className="todo-btn"  >
           Add task
         </button>
-
       </form>
 
     </div>

@@ -29,16 +29,15 @@ h1 {
 .todo-input {
   padding: 14px 32px 14px 16px;
   border-radius: 4px;
-  border: 2px solid black;
   outline: none;
   width: 320px;
   background: transparent;
 }
 
 .todo-btn {
-  padding: 10px;
-  border: none;
-  margin-left: 50%;
+  padding: 1px 20px;
+  margin-top:-200px;
+  margin-left: 80%;
   cursor: pointer;
   outline: none;
   background-color: #7adfb5;
@@ -114,7 +113,7 @@ h1 {
 .todo-form{
   width: 45%;
   height: 70%;
-  border: black 2px;
+
   border-style: solid;
   border-radius: 10px;
 }
@@ -129,3 +128,4 @@ h1 {
   border-right: none;
   border-left: none;
 }
+
