@@ -78,7 +78,7 @@ const TodoTemp = (props) => {
   return (
     <div>
       {/* button that should be replaced by modal */}
-      <Sidebar title={props.title} onClick={onClickList} />
+      <Sidebar title={props.title} onClick={onClickList} addTodo={()=>setModalIsOpen(true)} />
       <button
         data-testid="openModal"
         style={{ width: "20rem", height: "5rem" }}
