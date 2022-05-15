@@ -39,11 +39,11 @@ const Sidebar = (props) => {
 
             </div>
 
-            <div style={{ paddingTop: '2em' }}>
+            <div onClick={props.onClickToday} style={{ paddingTop: '2em' }}>
                 <button id='today-btn'> <FcCalendar size={40} /> Today</button>
             </div>
 
-            <div style={{ paddingTop: '2em' }}>
+            <div onClick={props.onClickUp} style={{ paddingTop: '2em' }}>
                 <button id='upcoming-btn'><FcPlanner size={40} /> Upcoming </button>
 
             </div>
