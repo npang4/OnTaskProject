@@ -59,10 +59,38 @@ const TodoTemp = (props) => {
 
   const customStyles = {
     content: {
-      width: "30rem",
-      height: "30rem",
+      width:'30rem',
+      height:'20rem',
+      margin: 'auto',
+      
     },
-  };
+};
+
+const modalInput = {
+  // marginTop: "60px",
+  width: "70%",
+  marginLeft: "70px",
+  height: "30px"
+
+  
+};
+
+const submitButton = {
+  marginTop: "30px",
+  backgroundColor: "#6ccfa5",
+  borderStyle: "none",
+  color: "white",
+  display: "flex",
+  width: "50%",
+  height: "40px",
+  borderRadius: "10px",
+  marginLeft: "auto",
+  marginRight: "auto",
+  textAlign: "center",
+  justifyContent: "center",
+  paddingTop: "7px",
+  fontWeight: "bold"
+}
 
   // this sets what todolist is currently displayed
   const onClickList = (e) => {
@@ -76,10 +104,19 @@ const TodoTemp = (props) => {
       }
     });
   };
+
+  const onClickUp = () => {
+    setOnFocus(333);
+  }
+  const onClickToday = () => {
+    setOnFocus(444);
+  }
   return (
     <div>
       {/* button that should be replaced by modal */}
+
       <Sidebar title={props.title} onClick={onClickList} />
+
       {/* <button
         data-testid="openModal"
         style={{ width: "10rem", height: "5rem" }}
@@ -109,9 +146,12 @@ const TodoTemp = (props) => {
       {/* This is where u put upcoming and current */}
 
       {props.title.length != 0 ? (
-        onFocus === undefined ? (
-          <div style={{ paddingTop: "5em" }}>CHOOSE A TODOLIST</div>
-        ) : (
+        onFocus === undefined || onFocus == 444 ? 
+          <TodaysList title={props.title} id={1000} task={props.todolist} />
+        : onFocus == 333 ?
+        <UpcomingList title={props.title} id={1001} task={props.todolist} />
+        :
+        (
           props.id
             .filter((id) => id == onFocus)
             .map((id) => <TodoList title={currentTitle} id={id} daet = {currentDate}/>)
@@ -120,8 +160,8 @@ const TodoTemp = (props) => {
         "LOADING"
       )}
 
-      <TodaysList title={props.title} id={1000} task={props.todolist} />
-      <UpcomingList title={props.title} id={1001} task={props.todolist} />
+      {/* <TodaysList title={props.title} id={1000} task={props.todolist} />
+      <UpcomingList title={props.title} id={1001} task={props.todolist} /> */}
     </div>
   );
 };
