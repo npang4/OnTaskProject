@@ -24,6 +24,7 @@ const TodoTemp = (props) => {
   // this is used for todolist setting
   const [onFocus, setOnFocus] = useState("");
   const [currentTitle, setCurrentTitle] = useState("");
+  const [currentDate, setCurrentDate] = useState("no due");
 
   const [modalState, setModalIsOpen] = useState(false);
   // setting all the default things
@@ -113,10 +114,12 @@ const submitButton = {
   return (
     <div>
       {/* button that should be replaced by modal */}
-      <Sidebar title={props.title} onClick={onClickList} addTodo={()=>setModalIsOpen(true)} onClickUp={onClickUp} onClickToday={onClickToday}/>
+
+      <Sidebar title={props.title} onClick={onClickList} />
+
       {/* <button
         data-testid="openModal"
-        style={{ width: "20rem", height: "5rem" }}
+        style={{ width: "10rem", height: "5rem" }}
         onClick={() => setModalIsOpen(true)}
       >
         {" "}
@@ -151,7 +154,7 @@ const submitButton = {
         (
           props.id
             .filter((id) => id == onFocus)
-            .map((id) => <TodoList title={currentTitle} id={id} />)
+            .map((id) => <TodoList title={currentTitle} id={id} daet = {currentDate}/>)
         )
       ) : (
         "LOADING"
