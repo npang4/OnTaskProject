@@ -14,23 +14,24 @@ const Home = (props) => {
     return(
       <>
 
-<div className="background-container">
-{/* {if logged in ? <header> : <otherheader> */}
-{/* <h1>is {loggedIn ?<HomeNav/> :<Navbar />}</h1> */}
-{props.logIn ? <Navbar/> : <HomeNav/>}
-    <div className="inside-container">
+        <div className="background-container">
+        {/* {if logged in ? <header> : <otherheader> */}
+        {/* <h1>is {loggedIn ?<HomeNav/> :<Navbar />}</h1> */}
+        {props.logIn ? <Navbar/> : <HomeNav/>}
+            <div className="inside-container">
 
-        <h1> Start getting productive with OnTask </h1>
-          <div className="getStarted-button">
-          <ul>
-            <li>
-              <Link to="/login">Get Started </Link>
-            </li>
-          </ul>
-          </div>
-    </div>
-</div>
-</>
+                <h1> Start getting productive with OnTask </h1>
+                  <div>
+                  {/* <ul>
+                    <li>
+                      <Link to="/login">Get Started </Link>
+                    </li>
+                  </ul> */}
+                  <a href="/login"><button className="button-homepage">Get Started</button></a>
+                  </div>
+            </div>
+        </div>
+        </>
     )
     };
 
