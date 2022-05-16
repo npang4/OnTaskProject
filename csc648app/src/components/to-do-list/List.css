@@ -67,10 +67,10 @@ h1 {
 }
 
 .todo-row {
-  top: -150px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  /* top: -150px; */
+  /* display: flex; */
+  /* justify-content: space-between; */
+  /* align-items: center; */
   margin: 3px auto;
   background: white;
   padding: 16px;

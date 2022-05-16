@@ -8,7 +8,7 @@ import greenAddIcon from "./greenAddIcon.png";
 import { AiOutlineClockCircle } from "react-icons/ai";
 
 const List = (props) => {
-  const clockion = (<AiOutlineClockCircle />);
+
   //usestate for calendar
   const [selectedDate, setSelectedDate] = useState(null);
   // Returns a reference to dispatch function from Redux
@@ -38,12 +38,6 @@ const List = (props) => {
     console.log(props.id);
     console.log(selectedDate);
     setInput("");
-  };
-  const DesSubmit = (e) => {
-    e.preventDefault();
-    dispatch(addTask(Des, props.id, selectedDate));
-    console.log(props.id);
-    console.log(selectedDate);
     setDes("");
   };
 
@@ -87,19 +81,20 @@ const List = (props) => {
         ></input>
         </div>
 
-          <div className="date-picker-container" style={{marginRight:"70%"}}>
+          <div className="date-picker-container" style={{marginBottom: "-3%",marginRight:"70%"}}>
           <DatePicker
          selected={selectedDate}
          onChange={dateOnChange}
+         value = {selectedDate}
          style= {{background: "none"}}
          showTimeSelect
          dateFormat="yyyy/MM/dd hh:mm:ss"
          placeholderText="  Due Date"
          timeIntervals={5}
          format  
-        customInput= {<p1 style={{fontSize: "15px",fontWeight:"bold", 
-         width:"150px",background: "rgba(230, 222, 222, 0.79)",
-        height:"50px",textAlign:"left",
+        customInput= {<p1 style={{fontSize: "18px",fontWeight:"bold", 
+         width:"200px",background: "rgba(230, 222, 222, 0.79)",
+        height:"100px",textAlign:"left",marginLeft:"-30%"
         
         }}>
           <AiOutlineClockCircle/> Due Date</p1>}

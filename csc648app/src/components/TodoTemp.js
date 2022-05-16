@@ -24,6 +24,7 @@ const TodoTemp = (props) => {
   // this is used for todolist setting
   const [onFocus, setOnFocus] = useState("");
   const [currentTitle, setCurrentTitle] = useState("");
+  const [currentDate, setCurrentDate] = useState("no due");
 
   const [modalState, setModalIsOpen] = useState(false);
   // setting all the default things
@@ -113,7 +114,7 @@ const TodoTemp = (props) => {
         ) : (
           props.id
             .filter((id) => id == onFocus)
-            .map((id) => <TodoList title={currentTitle} id={id} />)
+            .map((id) => <TodoList title={currentTitle} id={id} daet = {currentDate}/>)
         )
       ) : (
         "LOADING"

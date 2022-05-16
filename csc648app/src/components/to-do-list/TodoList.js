@@ -70,6 +70,7 @@ const TodoList = (props) => {
       setShowForm(false);
     } else setShowForm(true);
   };
+
   console.log(showForm);
 
   const dispatch = useDispatch();
@@ -79,6 +80,7 @@ const TodoList = (props) => {
     console.log("E: " + e);
     dispatch(deleteTask(e));
   };
+
 
   return (
     <div style={{borderStyle: "solid"}}>
@@ -131,12 +133,12 @@ const TodoList = (props) => {
             .filter((todo) => todo.todolistId == props.id)
             .filter((todo) => todo.title.includes(search))
             .map((task) => (
-              <Todo todos={task.title} id={task._id} onClickParent={onClick} />
+              <Todo todos={task.title} id={task._id} date ={task.date} onClickParent={onClick} />
             ))
         : props.todolist
             .filter((todo) => todo.todolistId == props.id)
             .map((task) => (
-              <Todo todos={task.title} id={task._id} onClickParent={onClick} />
+              <Todo todos={task.title} id={task._id} date ={task.date} onClickParent={onClick} />
             ))}
 
             
@@ -145,6 +147,7 @@ const TodoList = (props) => {
         Add Task
       </button>
       {showForm ? <List id={props.id} /> : null}
+
 
 
       
