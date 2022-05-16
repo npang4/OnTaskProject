@@ -75,18 +75,25 @@ const TodoTemp = (props) => {
       }
     });
   };
+
+  const onClickUp = () => {
+    setOnFocus(333);
+  }
+  const onClickToday = () => {
+    setOnFocus(444);
+  }
   return (
     <div>
       {/* button that should be replaced by modal */}
-      <Sidebar title={props.title} onClick={onClickList} addTodo={()=>setModalIsOpen(true)} />
-      <button
+      <Sidebar title={props.title} onClick={onClickList} addTodo={()=>setModalIsOpen(true)} onClickUp={onClickUp} onClickToday={onClickToday}/>
+      {/* <button
         data-testid="openModal"
         style={{ width: "20rem", height: "5rem" }}
         onClick={() => setModalIsOpen(true)}
       >
         {" "}
         ADD TODOLIST{" "}
-      </button>
+      </button> */}
       <Modal ariaHideApp={false} isOpen={modalState} style={customStyles}>
         <div style={{ justifyContent: "center" }}>
           <h3 style={{ textAlign: "center" }}>Todolist Name</h3>
@@ -108,9 +115,12 @@ const TodoTemp = (props) => {
       {/* This is where u put upcoming and current */}
 
       {props.title.length != 0 ? (
-        onFocus === undefined ? (
-          <div style={{ paddingTop: "5em" }}>CHOOSE A TODOLIST</div>
-        ) : (
+        onFocus === undefined || onFocus == 444 ? 
+          <TodaysList title={props.title} id={1000} task={props.todolist} />
+        : onFocus == 333 ?
+        <UpcomingList title={props.title} id={1001} task={props.todolist} />
+        :
+        (
           props.id
             .filter((id) => id == onFocus)
             .map((id) => <TodoList title={currentTitle} id={id} />)
@@ -119,8 +129,8 @@ const TodoTemp = (props) => {
         "LOADING"
       )}
 
-      <TodaysList title={props.title} id={1000} task={props.todolist} />
-      <UpcomingList title={props.title} id={1001} task={props.todolist} />
+      {/* <TodaysList title={props.title} id={1000} task={props.todolist} />
+      <UpcomingList title={props.title} id={1001} task={props.todolist} /> */}
     </div>
   );
 };
