@@ -16,6 +16,8 @@ import Sidebar from "./navbar/Sidebar";
 
 import TodaysList from "./to-do-list/TodaysList";
 import UpcomingList from "./to-do-list/UpcomingList";
+import WorkIntervals from "./work-intervals/work-intervals";
+import SetTimers from "./work-intervals/SetTimers";
 
 const TodoTemp = (props) => {
   // local states
@@ -110,10 +112,14 @@ const submitButton = {
   const onClickToday = () => {
     setOnFocus(444);
   }
+
+  const onClickWork = () => {
+    setOnFocus(555);
+  }
   return (
     <div>
       {/* button that should be replaced by modal */}
-      <Sidebar title={props.title} onClick={onClickList} addTodo={()=>setModalIsOpen(true)} onClickUp={onClickUp} onClickToday={onClickToday}/>
+      <Sidebar title={props.title} onClick={onClickList} addTodo={()=>setModalIsOpen(true)} onClickUp={onClickUp} onClickToday={onClickToday} onClickWork={onClickWork}/>
       {/* <button
         data-testid="openModal"
         style={{ width: "20rem", height: "5rem" }}
@@ -147,6 +153,8 @@ const submitButton = {
           <TodaysList title={props.title} id={1000} task={props.todolist} />
         : onFocus == 333 ?
         <UpcomingList title={props.title} id={1001} task={props.todolist} />
+        : onFocus == 555 ?
+        <SetTimers />
         :
         (
           props.id
