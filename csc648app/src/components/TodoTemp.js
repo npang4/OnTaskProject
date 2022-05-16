@@ -61,38 +61,38 @@ const TodoTemp = (props) => {
 
   const customStyles = {
     content: {
-      width:'30rem',
-      height:'20rem',
+      width: '30rem',
+      height: '20rem',
       margin: 'auto',
-      
+
     },
-};
+  };
 
-const modalInput = {
-  // marginTop: "60px",
-  width: "70%",
-  marginLeft: "70px",
-  height: "30px"
+  const modalInput = {
+    // marginTop: "60px",
+    width: "70%",
+    marginLeft: "70px",
+    height: "30px"
 
-  
-};
 
-const submitButton = {
-  marginTop: "30px",
-  backgroundColor: "#6ccfa5",
-  borderStyle: "none",
-  color: "white",
-  display: "flex",
-  width: "50%",
-  height: "40px",
-  borderRadius: "10px",
-  marginLeft: "auto",
-  marginRight: "auto",
-  textAlign: "center",
-  justifyContent: "center",
-  paddingTop: "7px",
-  fontWeight: "bold"
-}
+  };
+
+  const submitButton = {
+    marginTop: "30px",
+    backgroundColor: "#6ccfa5",
+    borderStyle: "none",
+    color: "white",
+    display: "flex",
+    width: "50%",
+    height: "40px",
+    borderRadius: "10px",
+    marginLeft: "auto",
+    marginRight: "auto",
+    textAlign: "center",
+    justifyContent: "center",
+    paddingTop: "7px",
+    fontWeight: "bold"
+  }
 
   // this sets what todolist is currently displayed
   const onClickList = (e) => {
@@ -118,10 +118,10 @@ const submitButton = {
     setOnFocus(555);
   }
   return (
-    <div>
+    <div >
       {/* button that should be replaced by modal */}
 
-      <Sidebar title={props.title} onClick={onClickList} addTodo={()=>setModalIsOpen(true)} onClickUp={onClickUp} onClickToday={onClickToday} onClickWork={onClickWork}/>
+      <Sidebar title={props.title} onClick={onClickList} addTodo={() => setModalIsOpen(true)} onClickUp={onClickUp} onClickToday={onClickToday} onClickWork={onClickWork} />
 
       {/* <button
         data-testid="openModal"
@@ -150,23 +150,25 @@ const submitButton = {
       <div />
 
       {/* This is where u put upcoming and current */}
+      <div style={{ paddingTop: '5em' }}>
+        {props.title.length != 0 ? (
+          onFocus === undefined || onFocus == 444 ?
+            <TodaysList title={props.title} id={1000} task={props.todolist} />
+            : onFocus == 333 ?
+              <UpcomingList title={props.title} id={1001} task={props.todolist} />
+              : onFocus == 555 ?
+                <SetTimers />
+                :
+                (
+                  props.id
+                    .filter((id) => id == onFocus)
+                    .map((id) => <TodoList title={currentTitle} id={id} daet={currentDate} />)
+                )
+        ) : (
+          "LOADING"
+        )}
+      </div>
 
-      {props.title.length != 0 ? (
-        onFocus === undefined || onFocus == 444 ? 
-          <TodaysList title={props.title} id={1000} task={props.todolist} />
-        : onFocus == 333 ?
-        <UpcomingList title={props.title} id={1001} task={props.todolist} />
-        : onFocus == 555 ?
-        <SetTimers />
-        :
-        (
-          props.id
-            .filter((id) => id == onFocus)
-            .map((id) => <TodoList title={currentTitle} id={id} daet = {currentDate}/>)
-        )
-      ) : (
-        "LOADING"
-      )}
 
       {/* <TodaysList title={props.title} id={1000} task={props.todolist} />
       <UpcomingList title={props.title} id={1001} task={props.todolist} /> */}

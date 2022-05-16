@@ -92,7 +92,7 @@ const TodoList = (props) => {
 
 
   return (
-    <div style={{borderStyle: "solid"}}>
+    <div >
       {/* collaborative */}
       <div style={{
                    marginLeft: "60%"}}>
