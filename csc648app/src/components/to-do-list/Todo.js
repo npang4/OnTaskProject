@@ -43,9 +43,8 @@ const Todo = ({ todos, completeTodo, removeTodo, updateTodo,onClickParent,id,dat
                 </>
                 <div onClick={onClick}><BsXLg/></div>
         </div>
-
             
-            <div style={{color: "grey"}}>Due Date: {date}</div>
+            <div style={{color: "grey",fontSize:"14px",textAlign:"left"}}>Due Date: {date}</div>
             {/* <div key={todo.id} onClick={() => completeTodo(todo.id)}>
                 {todo.title}
             </div>

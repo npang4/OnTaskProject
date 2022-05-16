@@ -6,9 +6,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import greenAddIcon from "./greenAddIcon.png";
 import { AiOutlineClockCircle } from "react-icons/ai";
+import {RiFlag2Fill} from "react-icons/ri";
 
 const List = (props) => {
-
+  const prioIcon = <AiOutlineClockCircle/>
   //usestate for calendar
   const [selectedDate, setSelectedDate] = useState(null);
   // Returns a reference to dispatch function from Redux
@@ -16,13 +17,22 @@ const List = (props) => {
   const [input, setInput] = useState("");
   //kim
   const [Des, setDes] = useState("");
+  const [prior,setpriority] = useState("");
   const inputRef = useRef(null);
  //kim
   const DesRef = useRef(null);
+  const priorityRef = useRef(null);
+  const [showForm, setShowForm] = useState(false);
+  const addpriority = () => {
+    if (showForm) {
+      setShowForm(false);
+    } else setShowForm(true);
+  };
 
   useEffect(() => {
     inputRef.current.focus();
     DesRef.current.focus();
+    // priorityRef.current.focus();
   },[]);
 
   const handleChange = (e) => {
@@ -31,6 +41,9 @@ const List = (props) => {
   const DescptionChange = (e) => {
     setDes(e.target.value);
   };
+  const priorityChange = (e)=>{
+    setpriority(e.target.value);
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -81,11 +94,10 @@ const List = (props) => {
         ></input>
         </div>
 
-          <div className="date-picker-container" style={{marginBottom: "-3%",marginRight:"70%"}}>
+          <div className="date-picker-container" style={{marginBottom: "-3%",marginRight:"70%",}}>
           <DatePicker
          selected={selectedDate}
          onChange={dateOnChange}
-         value = {selectedDate}
          style= {{background: "none"}}
          showTimeSelect
          dateFormat="yyyy/MM/dd hh:mm:ss"
@@ -99,13 +111,33 @@ const List = (props) => {
         }}>
           <AiOutlineClockCircle/> Due Date</p1>}
        />
-
+{/* <div style={{marginRight:"50%"}}>
+        <button onClick={addpriority} className="priority-btn" 
+        style={{width:"100px",height:"30px",fontSize: "18px",fontWeight:"bold"
+        ,background: "rgba(230, 222, 222, 0.79)",marginLeft:"300px",marginBottom:"-100px"}} >
+        <RiFlag2Fill/>prioirty
+       
+        </button>
         </div>
+          {showForm ? 
+            <input
+            type="number"
+            placeholder="  "
+            value={prior}
+            className="todo-prioirty-input"
+            onChange={priorityChange}
+             ref={priorityRef}
+            > 
+            </input> :null} */}
+        </div>
+        
 
         <button id="submit" className="todo-btn"  >
           Add task
         </button>
+
       </form>
+
 
     </div>
   );

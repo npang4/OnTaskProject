@@ -65,11 +65,20 @@ const TodoList = (props) => {
   }, []);
 
   const [showForm, setShowForm] = useState(false);
+  const [showButton, setShowButton] = useState(false);
   const addClicked = () => {
     if (showForm) {
       setShowForm(false);
-    } else setShowForm(true);
+      setShowButton(false);
+    } else {setShowForm(true);
+      setShowButton(true);}
   };
+  const closebtn =()=>{
+
+      setShowForm(false);
+      setShowButton(false);
+
+  }
 
   console.log(showForm);
 
@@ -146,9 +155,14 @@ const TodoList = (props) => {
         <img src={greenAddIcon} />
         Add Task
       </button>
-      {showForm ? <List id={props.id} /> : null}
 
-
+      {showForm ? <List id={props.id} close={closebtn} /> : null}
+      {showButton?
+      <button onClick={closebtn} className="close" style={{background:"rgba(198, 193, 193, 0.868)",
+       border:"none",marginLeft:"36%",width:"107px"}}>
+      
+        Cancel
+      </button> : null}
 
       
     </div>
