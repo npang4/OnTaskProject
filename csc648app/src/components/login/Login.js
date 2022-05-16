@@ -52,7 +52,9 @@ const Login = () => {
         </div>
         <div className="redirect-signup">
           <h6 className="redirect1">Don't have an account? </h6>
-          <h6 className="redirect2">Sign up</h6>
+          <a href="register" className="redirect2">
+            Sign up
+          </a>
         </div>
       </form>
     </div>
