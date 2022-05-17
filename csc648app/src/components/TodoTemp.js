@@ -61,12 +61,38 @@ const TodoTemp = (props) => {
 
   const customStyles = {
     content: {
-      width: '30rem',
-      height: '20rem',
+      width:'30rem',
+      height:'20rem',
       margin: 'auto',
-
+      
     },
-  };
+};
+
+const modalInput = {
+  // marginTop: "60px",
+  width: "70%",
+  marginLeft: "70px",
+  height: "30px"
+
+  
+};
+
+const submitButton = {
+  marginTop: "30px",
+  backgroundColor: "#6ccfa5",
+  borderStyle: "none",
+  color: "white",
+  display: "flex",
+  width: "50%",
+  height: "40px",
+  borderRadius: "10px",
+  marginLeft: "auto",
+  marginRight: "auto",
+  textAlign: "center",
+  justifyContent: "center",
+  paddingTop: "7px",
+  fontWeight: "bold"
+}
 
   const modalInput = {
     // marginTop: "60px",
@@ -131,19 +157,15 @@ const TodoTemp = (props) => {
         {" "}
         ADD TODOLIST{" "}
       </button> */}
-      <Modal ariaHideApp={false} isOpen={modalState} style={customStyles}>
-        <div style={{ justifyContent: "center" }}>
-          <h3 style={{ textAlign: "center" }}>Todolist Name</h3>
-          <input type="text" onChange={(e) => setText(e.target.value)} />
-          <button onClick={onClick}>submit</button>
-
-          <button
-            style={{ marginTop: "5rem" }}
-            onClick={() => setModalIsOpen(false)}
-          >
-            close modal
-          </button>
-        </div>
+      <Modal ariaHideApp={false} isOpen={modalState} style={customStyles} onRequestClose={() => setModalIsOpen(false)}>
+            <div style={{justifyContent:'center'}}>
+                <h3 style={{textAlign:'center', fontWeight: 'bold', marginTop: '30px'}}>Add a to-do list</h3>
+                <div style={{textAlign: 'left', marginTop: '50px', marginLeft: '70px', fontWeight:'bold'}}>Name of List:</div>
+                <input style={modalInput} type="text" value={text} onChange={(e)=> setText(e.target.value)}/>
+                <br/>
+                <button style={submitButton} onClick={onClick}>SUBMIT</button>
+            {/* <button style={{marginTop:"5rem"}}onClick={()=> setModalIsOpen(false)}>close modal</button> */}
+            </div>
       </Modal>
 
       {/* this is rendering the todolists */}
