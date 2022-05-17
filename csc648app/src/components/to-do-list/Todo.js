@@ -4,7 +4,7 @@ import List from './List';
 import {BsXLg} from 'react-icons/bs'
 
 
-const Todo = ({ todos, completeTodo, removeTodo, updateTodo,onClickParent,id }) => {
+const Todo = ({ todos, completeTodo, removeTodo, updateTodo,onClickParent,id,date }) => {
 
     const [edit, setEdit] = useState({
         id: null,
@@ -32,11 +32,19 @@ const Todo = ({ todos, completeTodo, removeTodo, updateTodo,onClickParent,id }) 
     // Displays the tasks with a checkbox and delete icon
     // return todos.map((todo, index) => (
         return (
-        <div className={!todos ? 'todo-row complete' : 'todo-row'} style={{display:'flex',justifyContent:'space-between'}}>
-            <>{todos}</>
-            <div onClick={onClick}><BsXLg/></div>
+            <>
+            {/* style={{display:"flex",justifyContent:'space-between'}} */}
+        <div className={!todos ? 'todo-row complete' : 'todo-row' }
+         >
+            <div className="title-and-delete" style={{display:"flex",justifyContent:'space-between'}}>
+                
+            <>{todos}
+
+                </>
+                <div onClick={onClick}><BsXLg/></div>
+        </div>
             
-            
+            <div style={{color: "grey",fontSize:"14px",textAlign:"left"}}>Due Date: {date}</div>
             {/* <div key={todo.id} onClick={() => completeTodo(todo.id)}>
                 {todo.title}
             </div>
@@ -45,6 +53,8 @@ const Todo = ({ todos, completeTodo, removeTodo, updateTodo,onClickParent,id }) 
                 <RiCloseCircleLine onClick={() => removeTodo(todo.id)} className="delete-icon" />
             </div> */}
         </div>
+        <p1></p1>
+        </>
     )
 
 

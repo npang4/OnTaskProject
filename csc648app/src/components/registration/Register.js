@@ -146,7 +146,9 @@ const Register = () => {
         </button>
         <div className="redirect-signup">
           <h6 className="redirect1">Already have an account? </h6>
-          <h6 className="redirect2">Sign in</h6>
+          <a href="login" className="redirect2">
+            Sign in
+          </a>
         </div>
       </form>
     </div>

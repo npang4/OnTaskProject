@@ -28,8 +28,8 @@ const Sidebar = (props) => {
     return (
         <div style={style}>
 
-            <div style={{ paddingTop: '2em' }}>
-                <button id='work-btn'><FcClock size={40} onClick={props.openWorkTimer}/> Work Interval </button>
+            <div style={{ paddingTop: '2em' }} onClick={props.onClickWork}>
+                <button id='work-btn'><FcClock size={40}/> Work Interval </button>
 
             </div>
             {/* // this is where calender is? */}
@@ -39,11 +39,11 @@ const Sidebar = (props) => {
 
             </div>
 
-            <div onClick={props.onClickToday} style={{ paddingTop: '2em' }}>
+            <div style={{ paddingTop: '2em' }} onClick={props.onClickToday}>
                 <button id='today-btn'> <FcCalendar size={40} /> Today</button>
             </div>
 
-            <div onClick={props.onClickUp} style={{ paddingTop: '2em' }}>
+            <div style={{ paddingTop: '2em' }} onClick={props.onClickUp}>
                 <button id='upcoming-btn'><FcPlanner size={40} /> Upcoming </button>
 
             </div>

@@ -29,21 +29,21 @@ h1 {
 .todo-input {
   padding: 14px 32px 14px 16px;
   border-radius: 4px;
-  border: 2px solid black;
   outline: none;
   width: 320px;
   background: transparent;
 }
 
 .todo-btn {
-  padding: 16px;
-  border: none;
-  border-radius: 0 14px 14px 0;
+  padding: 1px 20px;
+  margin-top:-200px;
+  margin-left: 80%;
   cursor: pointer;
   outline: none;
   background-color: #7adfb5;
-  color: black;
+  color: white;
   text-transform: capitalize;
+  border:#7adfb5 2px solid;
 }
 
 .todo-btn:hover {
@@ -67,15 +67,20 @@ h1 {
 }
 
 .todo-row {
-  top: -150px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 4px auto;
-  background: lightgray;
+  /* top: -150px; */
+  /* display: flex; */
+  /* justify-content: space-between; */
+  /* align-items: center; */
+  margin: 3px auto;
+  background: white;
   padding: 16px;
   border-radius: 5px;
-  width: 25%;
+  width: 45%;
+  border: 2px solid rgb(176, 173, 173);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  
 }
 
 .icons {
@@ -105,3 +110,22 @@ h1 {
   color: black;
   text-transform: capitalize;
 }
+.todo-form{
+  width: 45%;
+  height: 70%;
+
+  border-style: solid;
+  border-radius: 10px;
+}
+.subject-form{
+  font-weight: bold;
+}
+.Description-form{
+  font-weight: bold;
+  width: auto;
+  height: 100px;
+  border: black solid 1px;
+  border-right: none;
+  border-left: none;
+}
+

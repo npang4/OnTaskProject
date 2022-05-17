@@ -64,6 +64,13 @@
   display: inline;
   font-size: 10px;
   color: #7adfb5;
+  text-decoration: none;
+}
+
+.redirect2:hover {
+  color: #a0f6d2;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .login-btn-div {
