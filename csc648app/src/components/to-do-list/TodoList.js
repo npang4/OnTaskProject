@@ -94,25 +94,6 @@ const TodoList = (props) => {
   return (
     <div >
       {/* collaborative */}
-      <div style={{
-                   marginLeft: "60%"}}>
-
-        <Collab />
-
-      </div>
-     
-
-      <h1 style={{ marginTop:"-10%"}}> {props.title}</h1>
-{/* search bar that sets search *local state* */}
-<input
-        type="text"
-        placeholder="Search Tasks"
-        style={{ width: "400px" }}
-        onChange={(event) => {
-          event.preventDefault();
-          setSearch(event.target.value);
-        }}
-      />
     {/* Today bar = show today's date */}
       <div style={{
         background: "#7adfb5",
@@ -124,10 +105,24 @@ const TodoList = (props) => {
          {{
          width: "200px",
            }}><h1 style={{fontSize: "120%",
-            fontWeight: "bold",
-            textAlign:"left"}}>Today </h1>
+            fontWeight: "bolder",
+            textAlign:"left", marginLeft: "10px"}}>{props.title}</h1>
+            
            </div>  
-          </div>
+
+           </div>
+
+           <div><Collab/></div>
+          <input
+        type="text"
+        placeholder="Search Tasks"
+        style={{ width: "400px" }}
+        onChange={(event) => {
+          event.preventDefault();
+          setSearch(event.target.value);
+        }}
+      />
+        
 
       
 

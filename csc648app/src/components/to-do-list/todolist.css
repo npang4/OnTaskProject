@@ -1,0 +1,97 @@
+.title-list {
+    margin-top: 45px !important;
+    margin-bottom: 15px !important;
+    display: flex;
+    width: 60% !important;
+    height: 45px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: left;
+    justify-content: center;
+    background-color: #6ccfa5;
+    flex-direction: column;
+    /*padding-top: 10px !important;
+    padding-bottom: 10px;
+    padding-left: 25px;
+    font-family: Arial, Helvetica, sans-serif !important; */
+}
+
+.bold {
+    font-weight: 900 !important;
+}
+
+.column {
+    float: left;
+    width: 50%;
+}
+  
+/* Clear floats after the columns */
+.row:after {
+content: "";
+display: table;
+clear: both;
+}
+
+.bottom {
+    margin-top: 10px;
+}
+
+.checkbox {
+    border-radius: 50% !important;
+    width: 35px !important;
+}
+
+/* Create three equal columns that floats next to each other */
+.column-checkbox {
+    float: left;
+    width: 5%;
+    /* padding: 10px; */
+}
+
+/* .checkbox :checked + #check-task #check-date {
+    text-decoration: line-through !important;
+} */
+
+.column-3 {
+    /* margin-left: -100px; */
+    display: flex;
+    align-content: left;
+    width: 100%;
+    /* padding: 10px; */
+}
+.column-x {
+    display: flex;
+    align-content: left;
+    width: 5%;
+    /* padding: 10px; */
+}
+  
+/* Clear floats after the columns */
+.row:after {
+    width: 99%;
+    content: "";
+    display: flex;
+    clear: both;
+}
+
+.width-line {
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 1px !important;
+    /* background-color: black !important; */
+    border: none !important;
+}
+
+.small-bold {
+    font-weight: 600 !important;
+}
+
+.clear {
+    clear: both;
+}
+
+.title-size {
+    font-size: 18px;
+}
+
