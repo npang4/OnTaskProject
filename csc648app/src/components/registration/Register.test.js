@@ -30,6 +30,7 @@ test("Testing submit button with no user data", () => {
   expect(onSubmit).toHaveBeenCalledTimes(0);
 })
 
+//Testing for name value is the correct name value sent to the database
 test("Name should have correct value", () => {
   const store = createStore(rootReducer, applyMiddleware(thunk));
   const onSubmit = jest.fn();
@@ -46,6 +47,7 @@ test("Name should have correct value", () => {
 
 })
 
+//Testing for email value is the correct email value sent to the database
 test("Email should have correct value", () => {
   const store = createStore(rootReducer, applyMiddleware(thunk));
   const onSubmit = jest.fn();
@@ -62,6 +64,7 @@ test("Email should have correct value", () => {
 
 })
 
+//Testing for password value is the correct password value sent to the database
 test("Password should have correct value", () => {
   const store = createStore(rootReducer, applyMiddleware(thunk));
   const onSubmit = jest.fn();
@@ -78,6 +81,7 @@ test("Password should have correct value", () => {
 
 })
 
+// Checking the registration function with user data
 test("Checking registration function", async () => {
   const store = createStore(rootReducer, applyMiddleware(thunk));
   const onSubmit = jest.fn();
