@@ -1,5 +1,7 @@
 import axios from "axios";
 
+// Function to validate registration by dispatching the
+// name, email, and password to the database
 const validateRegister = (name, email, password) => async dispatch => {
     console.log("ACTION: REGISTER");
     console.log(name);

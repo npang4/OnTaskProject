@@ -68,32 +68,6 @@ const TodoTemp = (props) => {
     },
 };
 
-const modalInput = {
-  // marginTop: "60px",
-  width: "70%",
-  marginLeft: "70px",
-  height: "30px"
-
-  
-};
-
-const submitButton = {
-  marginTop: "30px",
-  backgroundColor: "#6ccfa5",
-  borderStyle: "none",
-  color: "white",
-  display: "flex",
-  width: "50%",
-  height: "40px",
-  borderRadius: "10px",
-  marginLeft: "auto",
-  marginRight: "auto",
-  textAlign: "center",
-  justifyContent: "center",
-  paddingTop: "7px",
-  fontWeight: "bold"
-}
-
   const modalInput = {
     // marginTop: "60px",
     width: "70%",

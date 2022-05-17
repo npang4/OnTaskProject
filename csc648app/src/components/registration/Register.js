@@ -5,6 +5,7 @@ import { validateRegister } from "../../redux/actions/registerActions";
 import { useNavigate } from "react-router-dom";
 import "./Register.css";
 
+// Registration page component 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -42,6 +43,8 @@ const Register = () => {
     return isValid;
   };
 
+  // Handles the submit for the registration form 
+  // and dispatches the user info to the backend
   const handleSubmit = (e) => {
     e.preventDefault();
     const isValid = formValidation();
