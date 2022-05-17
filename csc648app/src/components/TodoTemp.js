@@ -18,6 +18,7 @@ import TodaysList from "./to-do-list/TodaysList";
 import UpcomingList from "./to-do-list/UpcomingList";
 import WorkIntervals from "./work-intervals/work-intervals";
 import SetTimers from "./work-intervals/SetTimers";
+import WorkSwitch from "./work-intervals/WorkSwitch";
 
 const TodoTemp = (props) => {
   // local states
@@ -153,7 +154,7 @@ const TodoTemp = (props) => {
             : onFocus == 333 ?
               <UpcomingList title={props.title} id={1001} task={props.todolist} />
               : onFocus == 555 ?
-                <SetTimers />
+                <WorkSwitch />
                 :
                 (
                   props.id
