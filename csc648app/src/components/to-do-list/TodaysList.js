@@ -6,6 +6,7 @@ import Collab from "../collab/Collab.js";
 import greenAddIcon from "./greenAddIcon.png";
 import List from "./List";
 import Todo from "./Todo";
+import './todolist.css';
 
 const TodaysList = (props) => {
   var options = {
@@ -57,37 +58,42 @@ const TodaysList = (props) => {
   }, []);
 
   const [showForm, setShowForm] = useState(false);
+  const [showButton, setShowButton] = useState(false);
   const addClicked = () => {
     if (showForm) {
       setShowForm(false);
-    } else setShowForm(true);
+      setShowButton(false);
+    } else {setShowForm(true);
+      setShowButton(true);}
   };
+  const closebtn =()=>{
+
+      setShowForm(false);
+      setShowButton(false);
+
+  }
+
   console.log(showForm);
 
   return (
-    <div>
-      {/* {console.log(
-        array.filter(
-          (todo) =>
-            todo.date.includes(year) &&
-            todo.date.includes(day) &&
-            todo.date.includes(month)
-        )
-      )} */}
+    <div >
       {/* collaborative */}
+    {/* Today bar = show today's date */}
+      <div style={{background: "#7adfb5",height: "50px",width: "45%",margin:"auto"}}>
+        <div style={{width: "200px",}}>
+          <h1 style={{fontSize: "120%", fontWeight: "bolder", textAlign:"left", marginLeft: "10px"}}>{titleOfList}</h1>    
+        </div>  
+      </div>
 
-      <h1> {titleOfList}</h1>
-
-      {/* search bar that sets search *local state* */}
-      <input
-        type="text"
-        placeholder="Search"
-        style={{ width: "300px" }}
-        onChange={(event) => {
+      <div><Collab/></div>
+      <input type="text" placeholder="Search Tasks" style={{ width: "400px" }} onChange={(event) => {
           event.preventDefault();
           setSearch(event.target.value);
         }}
       />
+        
+
+      
 
       {/* <List onSubmit={addTodo} /> */}
 
@@ -105,7 +111,7 @@ const TodaysList = (props) => {
                 todo.date.includes(weekday)
             )
             .filter((todo) => todo.title.includes(search))
-            .map((task) => <Todo todos={task.title} key={task._id} />)
+            .map((task) => <Todo todos={task.title} key={task._id} date={task.date}/>)
         : props.todolist
             .filter(
               (todo) =>
@@ -114,13 +120,26 @@ const TodaysList = (props) => {
                 todo.date.includes(month) &&
                 todo.date.includes(weekday)
             )
-            .map((task) => <Todo todos={task.title} />)}
-      {/* <button onClick={addClicked} className="add-task-btn1">
+            .map((task) => <Todo todos={task.title} date={task.date}/>)}
+
+
+            
+      <button onClick={addClicked} className="add-task-btn1" style={{marginRight:"20%"}}>
         <img src={greenAddIcon} />
         Add Task
       </button>
-      {showForm ? <List id={props.id} /> : null} */}
+
+      {showForm ? <List id={props.id} close={closebtn} /> : null}
+      {showButton?
+      <button onClick={closebtn} className="close" style={{background:"rgba(198, 193, 193, 0.868)",
+       border:"none",marginLeft:"36%",width:"107px"}}>
+      
+        Cancel
+      </button> : null}
+
+      
     </div>
+
   );
 };
 
