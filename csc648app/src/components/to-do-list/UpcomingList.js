@@ -84,7 +84,6 @@ const UpcomingList = (props) => {
         </div>  
       </div>
 
-      <div><Collab/></div>
       <input type="text" placeholder="Search Tasks" style={{ width: "400px" }} onChange={(event) => {
           event.preventDefault();
           setSearch(event.target.value);
