@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import { setTodoList,setTodoId, setTodoTitle } from "./todoActions"
 
 const validateLogin = (email, password) => async dispatch => {
     console.log("ACTION: LOGIN");
@@ -17,6 +17,10 @@ const validateLogin = (email, password) => async dispatch => {
                 type: 'login',
                 payload: email
             })
+            // recall all of these 
+            await dispatch(setTodoTitle());
+            await dispatch(setTodoId());
+            await dispatch(setTodoList());
         }
         else{
             dispatch({

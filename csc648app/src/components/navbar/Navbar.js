@@ -5,8 +5,9 @@ import OnTask from "./OnTask-Logo.png";
 import ProfileIcon from "./profileicon.png";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../redux/actions/loginActions";
+import { connect } from "react-redux";
 
-const Navbar = () => {
+const Navbar = (props) => {
   const dispatch = useDispatch();
   return (
     <div className="nav">
@@ -25,11 +26,11 @@ const Navbar = () => {
           
         </li>
       </ul>
-      <ul>
+      {props.email.length == 0 ?  (<ul>
         <li>
-          <Link to="/register">Sign-up</Link>
+        {props.email.length == 0 ?  <Link to="/register">Sign-up</Link> : ""}
         </li>
-      </ul>
+      </ul>) : ""}
       <div>
         {/* On Click, this will log out the user */}
         <img
@@ -44,4 +45,11 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+// mapping state to props
+const mapStateToProps = (state) => {
+  return { email: state.login.email };
+};
+
+
+
+export default connect(mapStateToProps)(Navbar);

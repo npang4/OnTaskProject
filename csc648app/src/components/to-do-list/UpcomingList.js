@@ -6,8 +6,12 @@ import Collab from "../collab/Collab.js";
 import greenAddIcon from "./greenAddIcon.png";
 import List from "./List";
 import Todo from "./Todo";
+import { deleteTask } from "../../redux/actions/taskActions";
+import { useDispatch } from "react-redux";
 
 const UpcomingList = (props) => {
+  const dispatch = useDispatch();
+
   var options = {
     month: "short",
   };
@@ -72,6 +76,12 @@ const UpcomingList = (props) => {
 
   }
 
+    const onClick = (e) => {
+    console.log("CLICK: REMOVE");
+    console.log("E: " + e);
+    dispatch(deleteTask(e));
+  };
+
   console.log(showForm);
 
   return (
@@ -83,14 +93,14 @@ const UpcomingList = (props) => {
           <h1 style={{fontSize: "120%", fontWeight: "bolder", textAlign:"left", marginLeft: "10px"}}>{titleOfList}</h1>    
         </div>  
       </div>
-
+      <br/>
       <input type="text" placeholder="Search Tasks" style={{ width: "400px" }} onChange={(event) => {
           event.preventDefault();
           setSearch(event.target.value);
         }}
       />
         
-
+        <br/>
       
 
       {/* <List onSubmit={addTodo} /> */}
@@ -108,13 +118,8 @@ const UpcomingList = (props) => {
                 todo.date.includes(month)
             )
             .filter((todo) => todo.title.includes(search))
-<<<<<<< HEAD
-            .map((task) => (
-              <Todo todos={task.title} key={task._id} date={task.date} />
-            ))
-=======
-            .map((task) => <Todo todos={task.title} key={task._id} date={task.date}/>)
->>>>>>> 14530355da965bb9946c9ca16489769d91614314
+            .map((task) => <Todo todos={task.title} key={task._id} date={task.date} id={task._id} onClickParent={onClick}                 complete={task.complete}
+            />)
         : props.todolist
             .filter(
               (todo) =>
@@ -122,17 +127,13 @@ const UpcomingList = (props) => {
                 todo.date.includes(dayR) &&
                 todo.date.includes(month)
             )
-<<<<<<< HEAD
-            .map((task) => <Todo todos={task.title} date={task.date} />)}
-      {/* <button onClick={addClicked} className="add-task-btn1">
-=======
-            .map((task) => <Todo todos={task.title} date={task.date}/>)}
+            .map((task) => <Todo todos={task.title} date={task.date} id={task._id} onClickParent={onClick}                 complete={task.complete}
+            />)}
 
 
 
             
       <button onClick={addClicked} className="add-task-btn1" style={{marginRight:"20%"}}>
->>>>>>> 14530355da965bb9946c9ca16489769d91614314
         <img src={greenAddIcon} />
         Add Task
       </button>

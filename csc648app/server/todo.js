@@ -9,6 +9,21 @@ const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+const express = require("express");
+
+const app = express();
+const sessions = require("express-session");
+var session
+const oneDay = 1000 * 60 * 60 * 24;
+app.use(
+  sessions({
+    secret: "csc648secretkey",
+    saveUninitialized: true,
+    cookie: { maxAge: oneDay },
+    resave: false,
+  })
+);
+app.use(express.json());
 
 // start of the todo backend
 client.connect((err) => {
@@ -19,25 +34,16 @@ client.connect((err) => {
 
   // all of the required things
   var bcrypt = require("bcrypt");
-  const express = require("express");
-
-  const app = express();
 
   // use this instead of body-parser, its easier @RJ
-  app.use(express.json());
+
 
   // ************************************************
   // ADD SESSION HERE
-  const session = require("express-session");
-  const oneDay = 1000 * 60 * 60 * 24;
-  app.use(
-    session({
-      secret: "csc648secretkey",
-      saveUninitialized: true,
-      cookie: { maxAge: oneDay },
-      resave: false,
-    })
-  );
+  // var session = require('express-session');
+  // app.use(session({secret: 'your secret', saveUninitialized: true, resave: false}))
+
+
 
   // ************************************************
   // START OF THE LOGIN APIS --> RJ PART!
@@ -66,6 +72,7 @@ client.connect((err) => {
         email: req.query.email,
         password: hashedPass,
         userid: Math.floor(Math.random() * 100) + 1,
+        todolistId: []
       });
       user
         .then((data) => {
@@ -98,11 +105,13 @@ client.connect((err) => {
               // res.json({message: "password doesn't match"})
               res.send(false);
             } else {
+              console.log(user.userid)
               console.log("LOGIN WORKS");
+              console.log(result)
               // res.json({message: "you're logged in!"})
-              sessions = req.session;
-              sessions.userid = req.query.userid;
-              console.log(req.session);
+              session = req.session;
+              session.userid = user.userid;
+              // console.log(req.session);
               res.send(true);
             }
           });
@@ -143,7 +152,7 @@ client.connect((err) => {
     // db.collection('todolist').aggregate([{ $match: { "id": 0 }}]).toArray(function (err, result) {
     //     // get the todolist id, then search the tasks for the todolist
     db.collection("tasks")
-      .aggregate([{ $match: { userId: 0 } }])
+      .aggregate([{ $match: { userId: session.userid } }])
       .toArray(function (err, result) {
         // send back to the frontend
         console.log(result);
@@ -158,14 +167,14 @@ client.connect((err) => {
   // Backend todo: implement
   app.get("/api/getUserTodo", (req, res) => {
     // return ALL todolists belonging to the user, use session variable to query the todolist in mongodb for user id
-    console.log("BACKEND getUserTodoId: ");
-
+    console.log("BACKEND getUserTodoId: " + req.session.userid);
+    session=req.session;
     // CHANGE 0 TO SESSION VARIABLE
     db.collection("user-list")
-      .aggregate([{ $match: { userid: 0 } }])
+      .aggregate([{ $match: { userid: session.userid } }])
       .toArray(function (err, result) {
         if (result.length > 0) {
-          console.log(result[0].todolistId);
+          console.log(result[0]);
 
           // send back the arraylist of ids
           res.send(result[0].todolistId);
@@ -178,11 +187,11 @@ client.connect((err) => {
   // get the todolist titles
   app.get("/api/getTodoTitle", (req, res) => {
     // return ALL todolists belonging to the user, use session variable to query the todolist in mongodb for user id
-    console.log("BACKEND getUserTodoTitle: ");
-
+    console.log("BACKEND getUserTodoTitle: " + req.session.userid);
+    session=req.session;
     // CHANGE 0 TO SESSION VARIABLE
     db.collection("todolist")
-      .aggregate([{ $match: { userId: 0 } }])
+      .aggregate([{ $match: { userId: session.userid } }])
       .toArray(function (err, result) {
         // send back to the frontend
         console.log(result);
@@ -191,164 +200,25 @@ client.connect((err) => {
   });
 
   // add a todolist
-  app.post("/api/addTodolist", (req, res) => {
+app.post("/api/addTodolist", (req, res) => {
     // return ALL todolists belonging to the user, use session variable to query the todolist in mongodb for user id
     console.log("BACKEND addtodolist: ");
     const id = Math.floor(Math.random() * 100) + 1;
     // adding the todolist
     db.collection("todolist")
-      .insertOne({ id: id, title: req.query.title, userId: 0 })
+      .insertOne({ id: id, title: req.query.title, userId: req.session.userid })
       .then((result) => {
         // adding the todolist id to the user
         db.collection("user-list")
-          .aggregate([{ $match: { userid: 0 } }])
+          .aggregate([{ $match: { userid:  req.session.userid } }])
           .toArray(function (err, result) {
             // send back to the frontend
-            console.log(result[0].todolistId);
+            console.log(result[0]);
             const temp = result[0].todolistId;
             temp.push(id);
             console.log(temp);
             db.collection("user-list")
-              .updateOne({ userid: 0 }, { $set: { todolistId: temp } })
-              .then((result) => {
-                // send back to the frontend
-
-                res.send(result);
-              });
-          });
-      });
-  });
-
-  // API call for adding person to todolist
-  // REQUIRED QUERIES: email, todolistId
-  // Recieving: Boolean (Whether it worked or not)
-  // Backend todo: implement
-  app.get("/api/addUser", (req, res) => {
-    // implement by verifying user input, then adding the id to the todolist
-    console.log("BACKEND addUser: ");
-
-    // confirm user input
-    console.log(req.query.email);
-    console.log(req.query.todolistId);
-    // find the email match to id
-    db.collection("user-list")
-      .aggregate([{ $match: { email: req.query.email } }])
-      .toArray(function (err, result) {
-        // check if email exists is correct
-        if (result.length > 0) {
-          const newState = result[0].todolistId;
-
-          // checking if email is already in the todolist
-          let found = false;
-          newState.forEach((x) => {
-            if (x == req.query.todolistId) {
-              found = true;
-            }
-          });
-        } else {
-          console.log("Not a user");
-        }
-      });
-  });
-
-  // API call for logging out
-  // REQUIRED QUERIES: NONE
-  // Recieving: NONE
-  // Backend todo: implement, destory session variable
-  app.get("/api/logout", (req, res) => {
-    // implement
-    req.session.destroy((err) => {
-      if (err) {
-        console.log("session couldn't be destroyed");
-      } else {
-        console.log("session was destroyed");
-      }
-    });
-  });
-
-  // ************************************************
-  // START OF THE TODO APIS --> Chris PART!
-  // ************************************************
-
-  // API call for getting ALL user tasks
-  // REQUIRED QUERIES: NONE (should only be called if user is logged in!!!! or will cause error)
-  // Recieving: Array of ALL tasks that belong to the user
-  // Backend todo: implement usage of session variable!
-  app.get("/api/getAllTasks", (req, res) => {
-    console.log("BACKEND getAllTasks: ");
-
-    // currently the search is hardcoded to match id 0, but should later be changed get the userid session variable
-    // should also just send back ALL tasks matching user id
-    // db.collection('todolist').aggregate([{ $match: { "id": 0 }}]).toArray(function (err, result) {
-    //     // get the todolist id, then search the tasks for the todolist
-    db.collection("tasks")
-      .aggregate([{ $match: { userId: 0 } }])
-      .toArray(function (err, result) {
-        // send back to the frontend
-        console.log(result);
-        res.send(result);
-      });
-    // })
-  });
-
-  // API call for getting specific user todolist
-  // REQUIRED QUERIES: NONE (should only be called if user is logged in!!!! or will cause error)
-  // Recieving: Array of ALL todolist ids belonging to users, (you should then use this to filter through the tasks (from getalltasks) for the specific tasks per todolist)
-  // Backend todo: implement
-  app.get("/api/getUserTodo", (req, res) => {
-    // return ALL todolists belonging to the user, use session variable to query the todolist in mongodb for user id
-    console.log("BACKEND getUserTodoId: ");
-
-    // CHANGE 0 TO SESSION VARIABLE
-    db.collection("user-list")
-      .aggregate([{ $match: { userid: 0 } }])
-      .toArray(function (err, result) {
-        if (result.length > 0) {
-          console.log(result[0].todolistId);
-
-          // send back the arraylist of ids
-          res.send(result[0].todolistId);
-        } else {
-          res.send(false);
-        }
-      });
-  });
-
-  // get the todolist titles
-  app.get("/api/getTodoTitle", (req, res) => {
-    // return ALL todolists belonging to the user, use session variable to query the todolist in mongodb for user id
-    console.log("BACKEND getUserTodoTitle: ");
-
-    // CHANGE 0 TO SESSION VARIABLE
-    db.collection("todolist")
-      .aggregate([{ $match: { userId: 0 } }])
-      .toArray(function (err, result) {
-        // send back to the frontend
-        console.log(result);
-        res.send(result);
-      });
-  });
-
-  // add a todolist
-  app.post("/api/addTodolist", (req, res) => {
-    // return ALL todolists belonging to the user, use session variable to query the todolist in mongodb for user id
-    console.log("BACKEND addtodolist: ");
-    const id = Math.floor(Math.random() * 100) + 1;
-    // adding the todolist
-    db.collection("todolist")
-      .insertOne({ id: id, title: req.query.title, userId: 0 })
-      .then((result) => {
-        // adding the todolist id to the user
-        db.collection("user-list")
-          .aggregate([{ $match: { userid: 0 } }])
-          .toArray(function (err, result) {
-            // send back to the frontend
-            console.log(result[0].todolistId);
-            const temp = result[0].todolistId;
-            temp.push(id);
-            console.log(temp);
-            db.collection("user-list")
-              .updateOne({ userid: 0 }, { $set: { todolistId: temp } })
+              .updateOne({ userid:  req.session.userid }, { $set: { todolistId: temp } })
               .then((result) => {
                 // send back to the frontend
 
@@ -424,12 +294,17 @@ client.connect((err) => {
     console.log(req.query.todolistId);
     console.log(req.query.date);
     const todolistId = parseInt(req.query.todolistId);
+    session=req.session;
     //check todolist id
+    console.log(session.userid)
     db.collection("todolist")
-      .aggregate([{ $match: { id: 0 } }])
+      .aggregate([{ $match: { userId: session.userid } }])
       .toArray(function (err, result) {
         // if todolist id is not null, add task on the todolist
+        console.log("RESULT: ")
+        console.log(result)
         if (result.length > 0) {
+          console.log("Adding Works")
           db.collection("tasks")
             .aggregate([{ $match: { todolistId: result[0].id } }])
             .toArray(function (err, result) {
@@ -437,7 +312,7 @@ client.connect((err) => {
                 title: req.query.title,
                 complete: false,
                 todolistId: todolistId,
-                userId: 0,
+                userId: session.userid,
                 date: req.query.date,
                 priority: req.query.priority,
               });
@@ -488,17 +363,29 @@ client.connect((err) => {
   // REQUIRED QUERIES: title
   // Recieving: Boolean (Whether it worked or not)
   // Backend todo: implement
-  app.post("/api/completeTask", (req, res) => {
+  app.post("/api/markComplete", (req, res) => {
     // change complete status of the task!
     // basically just change true or false
+    var ObjectId = require("mongodb").ObjectId;
+    var id = req.query.id;
+    var o_id = new ObjectId(id);
+
     db.collection("tasks")
-      .aggregate([{ $match: { id: req.query.id } }])
+      .aggregate([{ $match: { _id: o_id } }])
       .toArray(function (err, result) {
         if (result.length > 0) {
+          var bool = false;
+          if (result[0].complete) {
+            bool = false
+          } else {
+            bool = true
+          }
+
+          console.log(result[0])
           db.collection("tasks")
             .updateOne(
-              { id: req.query.id, complete: false },
-              { $set: { complete: true } }
+              { _id: o_id },
+              { $set: { complete: bool } }
             )
             .then(() => {
               console.log(" uncompleted task to completed task");
@@ -535,6 +422,8 @@ client.connect((err) => {
       });
   });
 
-  app.listen(4001);
-  console.log(`Listening on port ${4001}`);
+
 });
+
+app.listen(4001);
+console.log(`Listening on port ${4001}`);

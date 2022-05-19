@@ -47,5 +47,29 @@ const deleteTask = (id) => async (dispatch) => {
   }
 };
 
+const markComplete = (id) => async (dispatch) => {
+  console.log("ACTION: deleteTask");
+  try {
+    //CALL Backend when we want to delete task by id
+    const res = await axios.post(`/api/markComplete?id=${id}`);
+    console.log(res.data);
+    if (res.data) {
+      console.log("SUCCESSFUL Complete")
+      // recall all of these 
+      // await dispatch(setTodoTitle());
+      // await dispatch(setTodoId());
+      await dispatch(setTodoList());
+
+    } else {
+      console.log("INSUCCESSFUL")
+    }
+  } catch (e) {
+    console.log("THERE WAS AN ERROR");
+    console.log(e);
+  }
+};
+
+
 export { addTask };
 export { deleteTask };
+export {markComplete}

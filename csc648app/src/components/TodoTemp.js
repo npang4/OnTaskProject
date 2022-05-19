@@ -19,6 +19,7 @@ import UpcomingList from "./to-do-list/UpcomingList";
 import WorkIntervals from "./work-intervals/work-intervals";
 import SetTimers from "./work-intervals/SetTimers";
 import WorkSwitch from "./work-intervals/WorkSwitch";
+import Add from "./Add";
 
 const TodoTemp = (props) => {
   // local states
@@ -149,8 +150,8 @@ const TodoTemp = (props) => {
       {/* This is where u put upcoming and current */}
       <div style={{ paddingTop: '5em' }}>
         {props.title.length != 0 ? (
-          onFocus === undefined || onFocus == 444 ?
-            <TodaysList title={props.title} id={1000} task={props.todolist} />
+          onFocus === "" || onFocus == 444 ?
+            <TodaysList title={"Today's List"} id={1000} task={props.todolist} />
             : onFocus == 333 ?
               <UpcomingList title={props.title} id={1001} task={props.todolist} />
               : onFocus == 555 ?
@@ -162,7 +163,7 @@ const TodoTemp = (props) => {
                     .map((id) => <TodoList title={currentTitle} id={id} daet={currentDate} />)
                 )
         ) : (
-          "LOADING"
+          <Add/>
         )}
       </div>
 

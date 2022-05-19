@@ -7,8 +7,12 @@ import greenAddIcon from "./greenAddIcon.png";
 import List from "./List";
 import Todo from "./Todo";
 import './todolist.css';
+import { deleteTask } from "../../redux/actions/taskActions";
+import { useDispatch } from "react-redux";
 
 const TodaysList = (props) => {
+  const dispatch = useDispatch();
+
   var options = {
     month: "short",
     weekday: "long",
@@ -73,6 +77,12 @@ const TodaysList = (props) => {
 
   }
 
+  const onClick = (e) => {
+    console.log("CLICK: REMOVE");
+    console.log("E: " + e);
+    dispatch(deleteTask(e));
+  };
+
   console.log(showForm);
 
   return (
@@ -81,17 +91,17 @@ const TodaysList = (props) => {
     {/* Today bar = show today's date */}
       <div style={{background: "#7adfb5",height: "50px",width: "45%",margin:"auto"}}>
         <div style={{width: "200px",}}>
-          <h1 style={{fontSize: "120%", fontWeight: "bolder", textAlign:"left", marginLeft: "10px"}}>{titleOfList}</h1>    
+          <h1 style={{fontSize: "120%", fontWeight: "bolder", textAlign:"left", marginLeft: "10px"}}>Today's List</h1>    
         </div>  
       </div>
-
+      <br/>
       <input type="text" placeholder="Search Tasks" style={{ width: "400px" }} onChange={(event) => {
           event.preventDefault();
           setSearch(event.target.value);
         }}
       />
         
-
+        <br/>
       
 
       {/* <List onSubmit={addTodo} /> */}
@@ -110,13 +120,8 @@ const TodaysList = (props) => {
                 todo.date.includes(weekday)
             )
             .filter((todo) => todo.title.includes(search))
-<<<<<<< HEAD
-            .map((task) => (
-              <Todo todos={task.title} key={task._id} date={task.date} />
-            ))
-=======
-            .map((task) => <Todo todos={task.title} key={task._id} date={task.date}/>)
->>>>>>> 14530355da965bb9946c9ca16489769d91614314
+            .map((task) => <Todo todos={task.title} key={task._id} date={task.date} id={task._id} onClickParent={onClick}                 complete={task.complete}
+            />)
         : props.todolist
             .filter(
               (todo) =>
@@ -125,17 +130,8 @@ const TodaysList = (props) => {
                 todo.date.includes(month) &&
                 todo.date.includes(weekday)
             )
-<<<<<<< HEAD
-            .map((task) => <Todo todos={task.title} date={task.date} />)}
-      <div>
-        <button onClick={addClicked} className="add-task-btn1">
-          <img src={greenAddIcon} />
-          Add Task
-        </button>
-      </div>
-      {showForm ? <List id={props.id} /> : null}
-=======
-            .map((task) => <Todo todos={task.title} date={task.date}/>)}
+            .map((task) => <Todo todos={task.title} date={task.date} id={task._id} onClickParent={onClick}                 complete={task.complete}
+            />)}
 
 
             
@@ -153,7 +149,6 @@ const TodaysList = (props) => {
       </button> : null}
 
       
->>>>>>> 14530355da965bb9946c9ca16489769d91614314
     </div>
 
   );

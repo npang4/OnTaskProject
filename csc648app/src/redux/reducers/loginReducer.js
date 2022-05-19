@@ -25,7 +25,7 @@ const loginReducer = (state = INITIAL_STATE, action) => {
             console.log("REDUCER: LOGGIN OUT")
             const logOut = false;
             return {
-                ...state, loggedIn: logOut
+                ...state, loggedIn: logOut, email: ""
             }    
         default:
             return state;
