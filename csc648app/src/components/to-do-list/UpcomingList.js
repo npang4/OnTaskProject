@@ -104,7 +104,9 @@ const UpcomingList = (props) => {
                 todo.date.includes(month)
             )
             .filter((todo) => todo.title.includes(search))
-            .map((task) => <Todo todos={task.title} key={task._id} />)
+            .map((task) => (
+              <Todo todos={task.title} key={task._id} date={task.date} />
+            ))
         : props.todolist
             .filter(
               (todo) =>
@@ -112,7 +114,7 @@ const UpcomingList = (props) => {
                 todo.date.includes(dayR) &&
                 todo.date.includes(month)
             )
-            .map((task) => <Todo todos={task.title} />)}
+            .map((task) => <Todo todos={task.title} date={task.date} />)}
       {/* <button onClick={addClicked} className="add-task-btn1">
         <img src={greenAddIcon} />
         Add Task

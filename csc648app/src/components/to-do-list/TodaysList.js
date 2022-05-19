@@ -105,7 +105,9 @@ const TodaysList = (props) => {
                 todo.date.includes(weekday)
             )
             .filter((todo) => todo.title.includes(search))
-            .map((task) => <Todo todos={task.title} key={task._id} />)
+            .map((task) => (
+              <Todo todos={task.title} key={task._id} date={task.date} />
+            ))
         : props.todolist
             .filter(
               (todo) =>
@@ -114,12 +116,14 @@ const TodaysList = (props) => {
                 todo.date.includes(month) &&
                 todo.date.includes(weekday)
             )
-            .map((task) => <Todo todos={task.title} />)}
-      {/* <button onClick={addClicked} className="add-task-btn1">
-        <img src={greenAddIcon} />
-        Add Task
-      </button>
-      {showForm ? <List id={props.id} /> : null} */}
+            .map((task) => <Todo todos={task.title} date={task.date} />)}
+      <div>
+        <button onClick={addClicked} className="add-task-btn1">
+          <img src={greenAddIcon} />
+          Add Task
+        </button>
+      </div>
+      {showForm ? <List id={props.id} /> : null}
     </div>
   );
 };

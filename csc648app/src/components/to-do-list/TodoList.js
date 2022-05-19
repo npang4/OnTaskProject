@@ -70,15 +70,15 @@ const TodoList = (props) => {
     if (showForm) {
       setShowForm(false);
       setShowButton(false);
-    } else {setShowForm(true);
-      setShowButton(true);}
+    } else {
+      setShowForm(true);
+      setShowButton(true);
+    }
   };
-  const closebtn =()=>{
-
-      setShowForm(false);
-      setShowButton(false);
-
-  }
+  const closebtn = () => {
+    setShowForm(false);
+    setShowButton(false);
+  };
 
   console.log(showForm);
 
@@ -90,21 +90,20 @@ const TodoList = (props) => {
     dispatch(deleteTask(e));
   };
 
-
   return (
-    <div >
+    <div>
       {/* collaborative */}
-      <div style={{
-                   marginLeft: "60%"}}>
-
+      <div
+        style={{
+          marginLeft: "60%",
+        }}
+      >
         <Collab />
-
       </div>
-     
 
-      <h1 style={{ marginTop:"-10%"}}> {props.title}</h1>
-{/* search bar that sets search *local state* */}
-<input
+      <h1 style={{ marginTop: "-10%" }}> {props.title}</h1>
+      {/* search bar that sets search *local state* */}
+      <input
         type="text"
         placeholder="Search Tasks"
         style={{ width: "400px" }}
@@ -113,23 +112,27 @@ const TodoList = (props) => {
           setSearch(event.target.value);
         }}
       />
-    {/* Today bar = show today's date */}
-      <div style={{
-        background: "#7adfb5",
-        height: "50px",
-        width: "45%",
-        margin:"auto",
-      }}>
-        <div style=
-         {{
-         width: "200px",
-           }}><h1 style={{fontSize: "120%",
-            fontWeight: "bold",
-            textAlign:"left"}}>Today </h1>
-           </div>  
-          </div>
-
-      
+      {/* Today bar = show today's date */}
+      <div
+        style={{
+          background: "#7adfb5",
+          height: "50px",
+          width: "45%",
+          margin: "auto",
+        }}
+      >
+        <div
+          style={{
+            width: "200px",
+          }}
+        >
+          <h1
+            style={{ fontSize: "120%", fontWeight: "bold", textAlign: "left" }}
+          >
+            Today{" "}
+          </h1>
+        </div>
+      </div>
 
       {/* <List onSubmit={addTodo} /> */}
 
@@ -142,29 +145,48 @@ const TodoList = (props) => {
             .filter((todo) => todo.todolistId == props.id)
             .filter((todo) => todo.title.includes(search))
             .map((task) => (
-              <Todo todos={task.title} id={task._id} date ={task.date} onClickParent={onClick} />
+              <Todo
+                todos={task.title}
+                id={task._id}
+                date={task.date}
+                onClickParent={onClick}
+              />
             ))
         : props.todolist
             .filter((todo) => todo.todolistId == props.id)
             .map((task) => (
-              <Todo todos={task.title} id={task._id} date ={task.date} onClickParent={onClick} />
+              <Todo
+                todos={task.title}
+                id={task._id}
+                date={task.date}
+                onClickParent={onClick}
+              />
             ))}
 
-            
-      <button onClick={addClicked} className="add-task-btn1" style={{marginRight:"20%"}}>
+      <button
+        onClick={addClicked}
+        className="add-task-btn1"
+        style={{ marginRight: "20%" }}
+      >
         <img src={greenAddIcon} />
         Add Task
       </button>
 
       {showForm ? <List id={props.id} close={closebtn} /> : null}
-      {showButton?
-      <button onClick={closebtn} className="close" style={{background:"rgba(198, 193, 193, 0.868)",
-       border:"none",marginLeft:"36%",width:"107px"}}>
-      
-        Cancel
-      </button> : null}
-
-      
+      {showButton ? (
+        <button
+          onClick={closebtn}
+          className="close"
+          style={{
+            background: "rgba(198, 193, 193, 0.868)",
+            border: "none",
+            marginLeft: "36%",
+            width: "107px",
+          }}
+        >
+          Cancel
+        </button>
+      ) : null}
     </div>
   );
 };
