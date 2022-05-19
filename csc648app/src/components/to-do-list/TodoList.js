@@ -93,6 +93,7 @@ const TodoList = (props) => {
   return (
     <div>
       {/* collaborative */}
+<<<<<<< HEAD
       <div
         style={{
           marginLeft: "60%",
@@ -108,10 +109,22 @@ const TodoList = (props) => {
         placeholder="Search Tasks"
         style={{ width: "400px" }}
         onChange={(event) => {
+=======
+    {/* Today bar = show today's date */}
+      <div style={{background: "#7adfb5",height: "50px",width: "45%",margin:"auto"}}>
+        <div style={{width: "200px",}}>
+          <h1 style={{fontSize: "120%", fontWeight: "bolder", textAlign:"left", marginLeft: "10px"}}>{props.title}</h1>    
+        </div>  
+      </div>
+
+      <div><Collab/></div>
+      <input type="text" placeholder="Search Tasks" style={{ width: "400px" }} onChange={(event) => {
+>>>>>>> 14530355da965bb9946c9ca16489769d91614314
           event.preventDefault();
           setSearch(event.target.value);
         }}
       />
+<<<<<<< HEAD
       {/* Today bar = show today's date */}
       <div
         style={{
@@ -133,6 +146,11 @@ const TodoList = (props) => {
           </h1>
         </div>
       </div>
+=======
+        
+
+      
+>>>>>>> 14530355da965bb9946c9ca16489769d91614314
 
       {/* <List onSubmit={addTodo} /> */}
 

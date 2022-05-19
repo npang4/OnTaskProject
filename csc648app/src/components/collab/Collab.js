@@ -7,7 +7,6 @@ import email from "./userInfo/email";
 
 /*to define app element on our Modal import*/
 //Modal.setAppElement("#root");
-
 function Collab() {
   {
     /*Function for mapping out data from .js file*/
@@ -34,9 +33,15 @@ function Collab() {
   }
   const errorMsg = "Hello?";
   function handleAdd(event) {
-    var error = document.getElementById("error");
-    error.textContent = "User not found";
-    error.style.color = "red";
+    var error = document.getElementById("email-search");
+    var addError = document.getElementById("error");
+    if (error.value.includes("nelson@gmail.com")) {
+      addError.textContent = "Registered user invited!";
+      addError.style.color = "green";
+    } else {
+      addError.textContent = "User not found";
+      addError.style.color = "red";
+    }
   }
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [searchEmail, setSearchEmail] = useState("");
@@ -76,6 +81,7 @@ function Collab() {
             type="text"
             placeholder="Enter email"
             alt="search"
+            id="email-search"
             onChange={handleChange}
           />
           <button
