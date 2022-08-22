@@ -1,9 +1,20 @@
-# CSC648-spring22-04-team05 Repository
+# OnTask
 
 ## Application URL: http://18.218.8.124:4000/
 
+### Description
+A task management application that aims to spark productivity by finishing tasks in a timely manner and measuring productivity through proper working periods and break periods.
 
-### Team Members
+#### Frontend
+- React
+
+##### Backend
+- MongoDB
+- Express.js
+- Node.js
+
+
+###### Team Members
 
 | Rhoanna Jo Perez | rperez12@mail.sfsu.edu | rhoannajo | Team Lead
 
